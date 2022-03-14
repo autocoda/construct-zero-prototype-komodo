@@ -1,4 +1,4 @@
-# project-pay-calculator
+# Project Pay Carbon Calculator
 
 ## Project setup
 ```
