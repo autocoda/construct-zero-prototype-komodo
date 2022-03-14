@@ -9,8 +9,8 @@
     "test:e2e": "vue-cli-service test:e2e",
     "lint:js": "vue-cli-service lint",
     "lint:js:fix": "vue-cli-service lint",
-    "lint:scss": "stylelint ./src/**/*.{vue,scss}",
-    "lint:scss:fix": "stylelint ./src/**/*.{vue,scss} --fix"
+    "lint:scss": "stylelint ./src/**/{**/*,*}.{scss,vue}",
+    "lint:scss:fix": "stylelint ./src/**/{**/*,*}.{scss,vue} --fix"
   },
   "dependencies": {
     "bootstrap": "^5.1.3",
