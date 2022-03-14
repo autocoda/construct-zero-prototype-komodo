@@ -18,10 +18,10 @@ jobs:
           check-latest: true
 
       - name: Install Dependencies
-      - run: npm install
+        run: npm install
 
       - name: Run JavaScript linter
-      - run: npm run lint:js
+        run: npm run lint:js
 
       - name: Run Stylelint linter
-      - run: npm run lint:scss
+        run: npm run lint:scss
