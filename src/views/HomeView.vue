@@ -3,11 +3,11 @@
     <FormEntryPointCard
       v-if="isFormEntryPoint"
       @displayCarbonCalculator="displayCarbonCalculator"
-      :title="entryPointTitle"
-      :sub-title="entryPointSubTitle"
-      :paragraph="entryPointParagraph"
-      :image="entryPointImage"
-      :button="entryPointButton"
+      :title="formEntryPointTitle"
+      :sub-title="formEntryPointSubTitle"
+      :paragraph="formEntryPointParagraph"
+      :image="formEntryPointImage"
+      :button="formEntryPointButton"
     >
     </FormEntryPointCard>
     <div v-else>
