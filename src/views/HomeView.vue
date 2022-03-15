@@ -8,8 +8,7 @@
       :paragraph="formEntryPointParagraph"
       :image="formEntryPointImage"
       :button="formEntryPointButton"
-    >
-    </FormEntryPointCard>
+    />
     <div v-else>
       TEST
     </div>

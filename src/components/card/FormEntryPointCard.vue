@@ -5,8 +5,8 @@
       v-if="image.length !== 0"
       class="img-fluid mx-auto my-2"
       loading="lazy"
-      :width="image.width ?? ''"
-      :height="image.height ?? ''"
+      :width="image.width"
+      :height="image.height"
       :src="image.src"
       :alt="image.alt"
     >
@@ -27,8 +27,8 @@ export default defineComponent({
     title: {type: String, required: false},
     subTitle: {type: String, required: false},
     paragraph: {type: String, required: false},
-    image: {type: Array, required: false},
-    button: {type: Array, required: false}
+    image: {type: Object, required: false},
+    button: {type: Object, required: false}
   },
   methods: {
     displayCarbonCalculator() {
