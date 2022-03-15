@@ -5,7 +5,7 @@
       v-if="image.length !== 0"
       class="img-fluid mx-auto my-2"
       loading="lazy"
-      :width="image.width ?? '' "
+      :width="image.width ?? ''"
       :height="image.height ?? ''"
       :src="image.src"
       :alt="image.alt"
@@ -22,7 +22,7 @@
 import {defineComponent} from 'vue'
 
 export default defineComponent({
-  name: 'FormEntryCard',
+  name: 'FormEntryPointCard',
   props: {
     title: {type: String, required: false},
     subTitle: {type: String, required: false},

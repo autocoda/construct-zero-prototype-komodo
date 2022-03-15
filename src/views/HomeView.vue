@@ -1,15 +1,15 @@
 <template>
   <div class="calculator-home">
-    <FormEntryCard
-      @displayCarbonCalculator="displayCarbonCalculator"
+    <FormEntryPointCard
       v-if="isFormEntryPoint"
-      :title="splashTitle"
-      :sub-title="splashSubTitle"
-      :paragraph="splashParagraph"
-      :image="splashImage"
-      :button="splashButton"
+      @displayCarbonCalculator="displayCarbonCalculator"
+      :title="entryPointTitle"
+      :sub-title="entryPointSubTitle"
+      :paragraph="entryPointParagraph"
+      :image="entryPointImage"
+      :button="entryPointButton"
     >
-    </FormEntryCard>
+    </FormEntryPointCard>
     <div v-else>
       TEST
     </div>
@@ -18,25 +18,25 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import FormEntryCard from '@/components/card/FormEntryCard.vue';
+import FormEntryPointCard from '@/components/card/FormEntryPointCard.vue';
 
 @Options({
   components: {
-    FormEntryCard,
+    FormEntryPointCard,
   },
   data() {
     return {
       isFormEntryPoint: true,
-      splashTitle: '',
-      splashSubTitle: '',
-      splashParagraph: '',
-      splashImage: {
+      formEntryPointTitle: '',
+      formEntryPointSubTitle: '',
+      formEntryPointParagraph: '',
+      formEntryPointImage: {
         src: '',
         alt: '',
         width: '',
         height: '',
       },
-      splashButton: {
+      formEntryPointButton: {
         href: '',
         text: ''
       },
@@ -44,26 +44,25 @@ import FormEntryCard from '@/components/card/FormEntryCard.vue';
   },
   methods: {
     displayCarbonCalculator() {
-      console.log("enlarging text");
       this.isFormEntryPoint = false;
     },
-    getCalculatorSplashContent() {
-      this.splashTitle = 'Carbon Emissions Calculator';
-      this.splashSubTitle = 'Use this calculator to help you understand your carbon usage';
-      this.splashParagraph = 'Nam cursus facilisis commodo. In et ex lacinia, hendrerit nisl et, semper tortor. Proin ac dolor non ante fringilla rhoncus a nec ante.';
-      this.splashImage = {
+    getFormEntryPointCardContent() {
+      this.formEntryPointTitle = 'Carbon Emissions Calculator';
+      this.formEntryPointSubTitle = 'Use this calculator to help you understand your carbon usage';
+      this.formEntryPointParagraph = 'Nam cursus facilisis commodo. In et ex lacinia, hendrerit nisl et, semper tortor. Proin ac dolor non ante fringilla rhoncus a nec ante.';
+      this.formEntryPointImage = {
         src: require("@/assets/images/calculator/calculator.png"),
         alt: 'Calculator',
         width: '96',
         height: '89',
       };
-      this.splashButton = {
+      this.formEntryPointButton = {
         text: 'Start Calculator'
       };
     }
   },
   mounted() {
-    this.getCalculatorSplashContent()
+    this.getFormEntryPointCardContent()
   }
 })
 
