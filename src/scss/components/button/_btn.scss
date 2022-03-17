@@ -1,0 +1,21 @@
+.button-navigation {
+  .btn {
+    width: 120px;
+  }
+  .next {
+    color: $white;
+  }
+}
+
+.btn-add-row {
+  background-color: #5b6972;
+  color: $white;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 5px 20px;
+
+  &:focus {
+    box-shadow: none;
+  }
+}

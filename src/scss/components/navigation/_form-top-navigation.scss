@@ -1,0 +1,53 @@
+.form-top {
+
+  &-navigation {
+
+    &::before {
+      content: "\200C";
+      position: absolute;
+      height: 1px;
+      background-color: rgba(0, 0, 0, .12);
+      width: calc(100% - 1.5rem);
+    }
+
+    .form-step {
+      background-color: $body-bg;
+      z-index: 1;
+      padding: 0 20px;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 20px;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .badge {
+      height: 24px;
+      width: 24px;
+      color: rgba(0, 0, 0, .20);
+      background-color: rgba(0, 0, 0, .12);
+      transition: all .5s ease-in-out;
+    }
+  }
+
+  &-anchor {
+    transition: all .5s ease-in-out;
+
+    &.active,
+    &:focus,
+    &:hover {
+
+      .badge {
+        color: $white;
+        background-color: $primary;
+      }
+    }
+  }
+}

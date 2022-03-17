@@ -1,0 +1,28 @@
+.equipment-table {
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+
+  > :not(caption) > * > * {
+    border-bottom: 0;
+  }
+  > :not(:first-child) {
+    border: 0;
+  }
+
+  .thead {
+    background-color: #5b6972;
+    color: $white;
+    th {
+      vertical-align: top;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+  .tbody {
+    background-color: $white;
+  }
+  .tfoot {
+    border: 1px dashed rgba(0,0,0, .2);
+  }
+}

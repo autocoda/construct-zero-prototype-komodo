@@ -14,7 +14,7 @@
     <div class="content my-3 text-center">
       {{ paragraph }}
     </div>
-    <button class="btn btn-primary btn-form mx-auto" v-on:click="displayCarbonCalculator">{{ button.text }}</button>
+    <button class="btn btn-primary btn-form mx-auto" @click="displayCarbonCalculator">{{ button.text }}</button>
   </div>
 </template>
 

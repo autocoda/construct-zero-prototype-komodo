@@ -1,0 +1,58 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: textfield;
+}
+
+.input-type-container {
+  display: flex;
+  align-items: center;
+
+  &::after {
+    position: absolute;
+    right: 10px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .form-control {
+    text-align: right;
+    background-color: white;
+  }
+}
+
+.mortar-weight {
+  &::after {
+    content: "kg";
+  }
+
+  .form-control {
+    padding-right: 30px;
+  }
+}
+
+.bricks-count {
+  &::after {
+    content: "bricks";
+  }
+
+  .form-control {
+    padding-right: 55px;
+  }
+}
+
+.miles-travelled {
+
+  &::after {
+    content: "miles";
+  }
+
+  .form-control {
+    padding-right: 50px;
+  }
+}
