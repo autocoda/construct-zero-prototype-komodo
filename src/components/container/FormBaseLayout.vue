@@ -1,16 +1,18 @@
 <template>
-  <FormTopNavigation />
-  <div class="col-12">
-    <router-view :key="$route.fullPath" />
+  <div class="calculator-form-container">
+    <FormTopNavigation />
+    <div class="col-12">
+      <router-view :key="$route.fullPath" />
+    </div>
+    <FormBottomNavigation
+      :back="['materials', 'equipment', 'personnel', 'personnel-compact' , 'personnel-detailed', 'summary'].includes(step)"
+      :next="['equipment', 'personnel', 'personnel-compact' , 'personnel-detailed'].includes(step)"
+      :disable-next="step === 'summary' || step === 'personnel'"
+      :disable-back="step === 'materials'"
+      @back="back"
+      @next="next"
+    />
   </div>
-  <FormBottomNavigation
-    :back="['materials', 'equipment', 'personnel', 'personnel-compact' , 'personnel-detailed', 'summary'].includes(step)"
-    :next="['equipment', 'personnel', 'personnel-compact' , 'personnel-detailed'].includes(step)"
-    :disable-next="step === 'summary' || step === 'personnel'"
-    :disable-back="step === 'materials'"
-    @back="back"
-    @next="next"
-  />
 </template>
 <script>
 import {defineComponent} from 'vue'

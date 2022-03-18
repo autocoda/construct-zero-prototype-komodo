@@ -3,7 +3,8 @@
     <div :class="[
       {'justify-content-end': disableBack},
       {'justify-content-between': !disableBack && !disableNext},
-      'd-flex button-navigation mt-3']"
+      'd-flex button-navigation mt-3'
+    ]"
     >
       <button
         v-if="!disableBack"
