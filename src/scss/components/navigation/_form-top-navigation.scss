@@ -1,6 +1,8 @@
 .form-top {
 
   &-navigation {
+    margin-top: 64px;
+    margin-bottom: 64px;
 
     &::before {
       content: "\200C";

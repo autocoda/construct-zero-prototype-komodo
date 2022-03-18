@@ -1,5 +1,5 @@
 <template>
-  <div class="form-top-navigation position-relative d-flex flex-row justify-content-between align-items-center col-auto col-12 mt-3 mb-3">
+  <div class="form-top-navigation position-relative d-flex flex-row justify-content-between align-items-center col-auto col-12">
     <a
       :class="[anchorClass, {'active': isActiveStep('materials')}]"
       @click="switchTab({name: 'calculator-steps', params: {step: 'materials'}})"
