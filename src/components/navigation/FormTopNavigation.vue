@@ -13,7 +13,12 @@
       <span :class="[badgeDefaultClass]">2</span> Equipment
     </a>
     <a
-      :class="[anchorClass, {'active': isActiveStep('personnel')}]"
+      :class="[
+        anchorClass,
+        {'active': isActiveStep('personnel')},
+        {'active': isActiveStep('personnel-compact')},
+        {'active': isActiveStep('personnel-detailed')}
+      ]"
       @click="switchTab({name: 'calculator-steps', params: {step: 'personnel'}})"
     >
       <span :class="[badgeDefaultClass,]">3</span> Personnel

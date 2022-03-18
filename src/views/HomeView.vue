@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import {Options, Vue} from 'vue-class-component';
 import FormEntryPointCard from '@/components/card/FormEntryPointCard.vue';
 import FormBaseLayout from "@/components/container/FormBaseLayout.vue";
 

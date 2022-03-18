@@ -1,19 +1,23 @@
 <template>
   <div class="col-12">
-    <div class="d-flex justify-content-between button-navigation mt-3">
+    <div :class="[
+      {'justify-content-end': disableBack},
+      {'justify-content-between': !disableBack && !disableNext},
+      'd-flex button-navigation mt-3']"
+    >
       <button
         v-if="!disableBack"
         class="btn btn-outline-dark"
         @click="$emit('back')"
       >
-        Previous
+        <img src="@/assets/images/calculator/navigation/v-icon-right.svg" alt="Previous Icon"> Previous
       </button>
       <button
         v-if="!disableNext"
         class="btn btn-primary"
         @click="$emit('next')"
       >
-        Next <img src="@/assets/images/calculator/navigation/v-icon-left.svg">
+        Next <img src="@/assets/images/calculator/navigation/v-icon-left.svg" alt="Next Icon">
       </button>
     </div>
   </div>
