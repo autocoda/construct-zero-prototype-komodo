@@ -1,26 +1,26 @@
 <template>
   <MaterialsStep
-    v-if="step === 'materials'"
+    v-if="isActiveStep('materials')"
     ref="materials"
   />
   <EquipmentStep
-    v-else-if="step === 'equipment'"
+    v-else-if="isActiveStep('equipment')"
     ref="equipment"
   />
   <PersonnelStep
-    v-else-if="step === 'personnel'"
+    v-else-if="isActiveStep('personnel')"
     ref="personnel"
   />
   <PersonnelCompactStep
-    v-else-if="step === 'personnel-compact'"
+    v-else-if="isActiveStep('personnel-compact')"
     ref="personnel-compact"
   />
   <PersonnelDetailedStep
-    v-else-if="step === 'personnel-detailed'"
+    v-else-if="isActiveStep('personnel-detailed')"
     ref="personnel-detailed"
   />
   <SummaryStep
-    v-else-if="step === 'summary'"
+    v-else-if="isActiveStep('summary')"
     ref="summary"
   />
 </template>
@@ -41,6 +41,11 @@ import SummaryStep from "@/components/form/calculator-steps/Summary.vue";
   computed: {
     step: function () {
       return (this.$route.params.step) ?? 'materials'
+    }
+  },
+  methods: {
+    isActiveStep(expectedStep: string) {
+      return this.step === expectedStep;
     }
   }
 })
