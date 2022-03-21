@@ -4,6 +4,11 @@
     justify-content: center;
     display: flex;
     align-items: center;
+
+    &:hover,
+    &:focus {
+      box-shadow: none;
+    }
   }
 
   .next {
@@ -15,13 +20,15 @@
   }
 
   .back {
-
     .icon {
       margin-right: 5px;
     }
 
     &:hover,
     &:focus {
+      background-color: $black;
+      color: $white;
+
       .path {
         fill: $white;
       }
@@ -30,18 +37,20 @@
 }
 
 .btn-add-row {
-  background-color: #5b6972;
+  background-color: $btn-add-row;
   color: $white;
   border-radius: 4px;
   font-size: 14px;
   font-weight: 400;
   padding: 5px 20px;
 
-  &:focus {
+  &:focus,
+  &:hover {
     box-shadow: none;
+    color: $white;
+  }
 
-    img {
-      fill: red;
-    }
+  &:hover {
+    background-color: rgba($btn-add-row, .7);
   }
 }
