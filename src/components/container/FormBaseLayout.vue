@@ -58,9 +58,6 @@ export default defineComponent({
     step: function () {
       return this.$route.params.step ?? 'materials'
     },
-    stepIsIncluded: function (array) {
-      return array.includes(this.step)
-    },
   },
   methods: {
     switchTab: function (route) {
