@@ -5,10 +5,10 @@
       <router-view :key="$route.fullPath" />
     </div>
     <FormBottomNavigation
-      :back="['materials', 'equipment', 'personnel', 'personnel-compact' , 'personnel-detailed', 'summary'].includes(step)"
-      :next="['equipment', 'personnel', 'personnel-compact' , 'personnel-detailed'].includes(step)"
-      :disable-next="step === 'summary' || step === 'personnel'"
-      :disable-back="step === 'materials'"
+      :back="arrayWithBackButton.includes(step)"
+      :next="arrayWithNextButton.includes(step)"
+      :disable-next="arrayWithNextDisabled.includes(step)"
+      :disable-back="arrayWithBackDisabled.includes(step)"
       @back="back"
       @next="next"
     />
@@ -25,6 +25,10 @@ export default defineComponent({
   data() {
     return {
       isClean: true,
+      arrayWithBackButton: ['materials', 'equipment', 'personnel', 'personnel-compact' , 'personnel-detailed', 'summary'],
+      arrayWithBackDisabled: ['materials'],
+      arrayWithNextButton: ['materials', 'equipment', 'personnel', 'personnel-compact' , 'personnel-detailed', 'summary'],
+      arrayWithNextDisabled: ['personnel', 'summary'],
       stepOrder: {
         "materials": {
           "next": "equipment"
@@ -53,7 +57,10 @@ export default defineComponent({
   computed: {
     step: function () {
       return this.$route.params.step ?? 'materials'
-    }
+    },
+    stepIsIncluded: function (array) {
+      return array.includes(this.step)
+    },
   },
   methods: {
     switchTab: function (route) {
