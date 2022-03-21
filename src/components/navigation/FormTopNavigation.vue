@@ -21,12 +21,12 @@
       ]"
       @click="switchTab({name: 'calculator-steps', params: {step: 'personnel'}})"
     >
-      <span :class="[badgeDefaultClass,]">3</span> Personnel
+      <span :class="[badgeDefaultClass]">3</span> Personnel
     </a>
     <a :class="[anchorClass, {'active': isActiveStep('summary') }]"
        @click="switchTab({name: 'calculator-steps', params: {step: 'summary'}})"
     >
-      <span :class="[badgeDefaultClass, ]">4</span> Summary
+      <span :class="[badgeDefaultClass]">4</span> Summary
     </a>
   </div>
 </template>
