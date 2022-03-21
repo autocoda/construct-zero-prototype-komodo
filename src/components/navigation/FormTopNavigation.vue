@@ -4,7 +4,7 @@
       :class="[anchorClass, {'active': isActiveStep('materials')}]"
       @click="switchTab({name: 'calculator-steps', params: {step: 'materials'}})"
     >
-      <span :class="[badgeDefaultClass] ">1</span> Materials
+      <span :class="[badgeDefaultClass]">1</span> Materials
     </a>
     <a
       :class="[anchorClass, {'active': isActiveStep('equipment') }]"
