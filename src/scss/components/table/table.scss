@@ -2,9 +2,14 @@
   overflow: hidden;
   border-radius: 10px 10px 0 0;
 
+  /* stylelint-disable selector-max-universal */
+
   > :not(caption) > * > * {
     border-bottom: 0;
   }
+
+  /* stylelint-enable selector-max-universal */
+
   > :not(:first-child) {
     border: 0;
   }
