@@ -5,57 +5,63 @@
     :info-block-content="infoBlockContent"
     :info-block-help-text="infoBlockHelpText"
   />
-  <div class="row">
-    <table class="table table-responsive equipment-table">
-      <thead class="thead">
-        <tr>
-          <th>Person(s)</th>
-          <th>Model of transportation</th>
-          <th>Powered by</th>
-          <th>Total distance covered (miles)</th>
-          <th>&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody class="tbody">
-        <tr v-for="(item, index) in personnelDetailed" :key="index">
-          <td>
-            <input class="form-control" type="text" v-model="item.persons">
-          </td>
-          <td>
-            <select id="vehicles-types-used" class="form-select" v-model="item['transport-mode']">
-              <option selected>Please Select</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </td>
-          <td>
-            <select id="powered-by" class="form-select" v-model="item['powered-by']">
-              <option selected>Please Select</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </td>
-          <td>
-            <input class="form-control" type="text" v-model="item['distance-covered']">
-          </td>
-          <td>
-            <img class="vertical-align" width="9" height="12" alt="Remove row" src="@/assets/images/calculator/steps/delete.svg" @click="removeRowItem(index)">
-          </td>
-        </tr>
-      </tbody>
-      <tfoot class="tfoot">
-        <tr>
-          <td colspan="7">
-            <button class="btn btn-add-row float-end d-flex align-items-center" @click="addRowItem()">
-              <img class="me-1" width="9" height="12" alt="Remove row" src="@/assets/images/calculator/table/icon-plus.svg"> Add row
-            </button>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-  </div>
+  <table class="table table-responsive equipment-table">
+    <thead class="thead">
+      <tr>
+        <th class="first-column">Person(s)</th>
+        <th>Model of transportation</th>
+        <th>Powered by</th>
+        <th>Total distance covered (miles)</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody class="tbody">
+      <tr v-for="(item, index) in personnelDetailed" :key="index">
+        <td class="first-column">
+          <input class="form-control" type="text" v-model="item.persons">
+        </td>
+        <td>
+          <select id="vehicles-types-used" class="form-select" v-model="item['transport-mode']">
+            <option selected>Please Select</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </td>
+        <td>
+          <select id="powered-by" class="form-select" v-model="item['powered-by']">
+            <option selected>Please Select</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </td>
+        <td>
+          <input class="form-control" type="text" v-model="item['distance-covered']">
+        </td>
+        <td>
+          <img
+            class="vertical-align remove-row cursor-pointer"
+            width="9"
+            height="12"
+            title="Remove row"
+            alt="Bin icon"
+            src="@/assets/images/calculator/steps/delete.svg"
+            @click="removeRowItem(index)"
+          >
+        </td>
+      </tr>
+    </tbody>
+    <tfoot class="tfoot">
+      <tr>
+        <td colspan="7">
+          <button class="btn btn-add-row float-end d-flex align-items-center" @click="addRowItem()">
+            <img class="me-1" width="9" height="12" alt="Remove row" src="@/assets/images/calculator/table/icon-plus.svg"> Add row
+          </button>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
 </template>
 <script>
 import {defineComponent} from 'vue'
