@@ -1,6 +1,7 @@
 {
   "extends": [
     "stylelint-config-standard-scss",
+    "stylelint-config-twbs-bootstrap",
     "stylelint-config-standard-vue/scss"
   ],
   "plugins": [
@@ -13,6 +14,8 @@
     "no-duplicate-selectors": true,
     "color-hex-case": "lower",
     "color-hex-length": "long",
+    "color-function-notation": "modern",
+    "alpha-value-notation": "number",
     "selector-no-qualifying-type": true,
     "selector-combinator-space-after": "always",
     "selector-attribute-quotes": "always",
@@ -38,7 +41,6 @@
       "custom-properties",
       "declarations"
     ],
-    "order/properties-alphabetical-order": true,
     "scss/selector-no-redundant-nesting-selector": true
   }
 }

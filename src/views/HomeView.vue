@@ -1,5 +1,5 @@
 <template>
-  <div class="calculator-home">
+  <div class="row">
     <FormEntryPointCard
       v-if="isFormEntryPoint"
       @displayCarbonCalculator="displayCarbonCalculator"
@@ -9,18 +9,18 @@
       :image="formEntryPointImage"
       :button="formEntryPointButton"
     />
-    <div v-else>
-      TEST
-    </div>
+    <FormBaseLayout v-else />
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import {Options, Vue} from 'vue-class-component';
 import FormEntryPointCard from '@/components/card/FormEntryPointCard.vue';
+import FormBaseLayout from "@/components/container/FormBaseLayout.vue";
 
 @Options({
   components: {
+    FormBaseLayout,
     FormEntryPointCard,
   },
   data() {
@@ -44,6 +44,7 @@ import FormEntryPointCard from '@/components/card/FormEntryPointCard.vue';
   methods: {
     displayCarbonCalculator() {
       this.isFormEntryPoint = false;
+      this.$router.push({'name': 'calculator-steps', 'params': {step: 'materials'}});
     },
     getFormEntryPointCardContent() {
       this.formEntryPointTitle = 'Carbon Emissions Calculator';
