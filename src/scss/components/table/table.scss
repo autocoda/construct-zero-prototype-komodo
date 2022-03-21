@@ -10,13 +10,14 @@
   }
 
   .thead {
-    background-color: #5b6972;
     color: $white;
+    background-color: #5b6972;
+
     th {
-      vertical-align: top;
-      font-weight: 300;
       font-size: 16px;
+      font-weight: 300;
       line-height: 24px;
+      vertical-align: top;
     }
   }
 

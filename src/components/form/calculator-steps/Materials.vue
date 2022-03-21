@@ -11,13 +11,13 @@
       <div class="col-6 mb-3">
         <label for="mortar-weight" class="form-label">Approximately how many kilograms of mortar will be used in this project?</label>
         <span class="mortar-weight input-type-container position-relative">
-          <input type="number" class="form-control" id="mortar-weight" required v-model="materials.mortar">
+          <input type="number" class="input-number form-control" id="mortar-weight" required v-model="materials.mortar">
         </span>
       </div>
       <div class="col-6 mb-3">
         <label for="bricks-count" class="form-label">Approximately how many standard bricks will be used in this project?</label>
         <span class="bricks-count input-type-container position-relative">
-          <input type="number" class="form-control" id="bricks-count" required v-model="materials.bricks">
+          <input type="number" class="input-number form-control" id="bricks-count" required v-model="materials.bricks">
         </span>
       </div>
       <div class="col-6 mb-3">
@@ -32,7 +32,7 @@
       <div class="col-6 mb-3">
         <label for="miles-travelled" class="form-label">Approximately how many miles in total will you travel during this project?</label>
         <span class="miles-travelled input-type-container position-relative">
-          <input type="number" class="form-control travel-distance" id="miles-travelled" required v-model="materials['travel-total']">
+          <input type="number" class="input-number form-control travel-distance" id="miles-travelled" required v-model="materials['travel-total']">
         </span>
       </div>
       <div class="col-12 my-3">

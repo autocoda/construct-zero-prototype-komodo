@@ -5,17 +5,17 @@
     margin-bottom: 64px;
 
     &::before {
+      position: absolute;
       width: calc(100% - 1.5rem);
       height: 1px;
-      position: absolute;
       content: "\200C";
       background-color: rgba(0 0 0 / .12);
     }
 
     .form-step {
-      background-color: $body-bg;
       z-index: 1;
       padding: 0 20px;
+      background-color: $body-bg;
 
       &:first-child {
         padding-left: 0;
@@ -31,9 +31,9 @@
     }
 
     .badge {
-      height: 24px;
       width: 24px;
-      color: rgba(0 0 0 / .20);
+      height: 24px;
+      color: rgba(0 0 0 / .2);
       background-color: rgba(0 0 0 / .12);
       transition: all .5s ease-in-out;
     }
