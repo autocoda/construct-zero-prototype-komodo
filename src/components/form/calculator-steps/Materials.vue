@@ -7,20 +7,20 @@
   />
   <div class="card bg-white p-4">
     <div class="row">
-      <div class="col-12"><h2 class="fw-lighter text-uppercase">Materials</h2></div>
-      <div class="col-6">
+      <div class="col-12"><h2 class="fw-lighter text-uppercase step-heading">Materials</h2></div>
+      <div class="col-6 mb-3">
         <label for="mortar-weight" class="form-label">Approximately how many kilograms of mortar will be used in this project?</label>
         <span class="mortar-weight input-type-container position-relative">
           <input type="number" class="form-control" id="mortar-weight" required v-model="materials.mortar">
         </span>
       </div>
-      <div class="col-6">
+      <div class="col-6 mb-3">
         <label for="bricks-count" class="form-label">Approximately how many standard bricks will be used in this project?</label>
         <span class="bricks-count input-type-container position-relative">
           <input type="number" class="form-control" id="bricks-count" required v-model="materials.bricks">
         </span>
       </div>
-      <div class="col-6">
+      <div class="col-6 mb-3">
         <label for="vehicles-types-used" class="form-label">What type of vehicle will you be primarily using to travel to and from site?</label>
         <select id="vehicles-types-used" class="form-select" v-model="materials['travel-vehicle']">
           <option selected>Please Select</option>
@@ -29,7 +29,7 @@
           <option value="3">Three</option>
         </select>
       </div>
-      <div class="col-6">
+      <div class="col-6 mb-3">
         <label for="miles-travelled" class="form-label">Approximately how many miles in total will you travel during this project?</label>
         <span class="miles-travelled input-type-container position-relative">
           <input type="number" class="form-control travel-distance" id="miles-travelled" required v-model="materials['travel-total']">
@@ -39,17 +39,19 @@
         <hr>
       </div>
       <div class="col-12">
-        <h2 class="fw-lighter text-uppercase">Emissions</h2>
+        <h2 class="fw-lighter text-uppercase step-heading">Emissions</h2>
       </div>
       <div class="col-6">
-        <div class="">from Mortar <span class="fw-bold">--kg</span></div>
-        <div class="">from Bricks  <span class="fw-bold">--kg</span></div>
-        <div class="">from Vehicles  <span class="fw-bold">--kg</span></div>
+        <div class="row">
+          <div class="col-6">from Mortar</div><div class="fw-bold col-6">--kg</div>
+          <div class="col-6">from Bricks</div><div class="fw-bold col-6">--kg</div>
+          <div class="col-6">from Vehicles</div> <div class="fw-bold col-6">--kg</div>
+        </div>
       </div>
       <div class="col-6">
         <div class="row">
           <div class="col-6">Total</div>
-          <div class="col-6 fw-bold">-- tonnes</div>
+          <div class="col-6 fw-bold text-end">-- tonnes</div>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@
   <table class="table table-responsive equipment-table">
     <thead class="thead">
       <tr>
-        <th>Equipment</th>
+        <th class="first-column">Equipment</th>
         <th>Powered By</th>
         <th>Unit</th>
         <th>Total Value</th>
@@ -20,7 +20,7 @@
     </thead>
     <tbody class="tbody">
       <tr v-for="(item, index) in items" :key="index">
-        <td>
+        <td class="first-column">
           <input class="form-control" type="text" v-model="item.equipment">
         </td>
         <td>
@@ -49,7 +49,15 @@
           </select>
         </td>
         <td>
-          <img class="vertical-align" width="9" height="12" alt="Remove row" src="@/assets/images/calculator/steps/delete.svg" @click="removeRowItem(index)">
+          <img
+            class="vertical-align remove-row cursor-pointer"
+            width="9"
+            height="12"
+            title="Remove row"
+            alt="Bin icon"
+            src="@/assets/images/calculator/steps/delete.svg"
+            @click="removeRowItem(index)"
+          >
         </td>
       </tr>
     </tbody>

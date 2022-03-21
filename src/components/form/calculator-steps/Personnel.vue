@@ -7,7 +7,7 @@
   />
   <div class="row">
     <div class="col-12 col-sm-6">
-      <div class="card bg-white p-3">
+      <div class="card card-personnel bg-white p-3">
         <div class="card-body d-flex">
           <div class="card-text">
             <h2>Option 1</h2>
@@ -20,26 +20,26 @@
         <div class="card-footer bg-white border-0">
           <button
             @click="this.$router.push({'name': 'calculator-steps', params: {step: 'personnel-compact'}})"
-            class="btn btn-primary float-end"
+            class="btn btn-primary text-white float-end"
           >Select</button>
         </div>
       </div>
     </div>
     <div class="col-12 col-sm-6">
-      <div class="card bg-white p-3">
+      <div class="card card-personnel bg-white p-3">
         <div class="card-body d-flex">
           <div class="card-text">
             <h2>Option 2</h2>
             <p>This form requires more detail and takes more time to complete, however it is more accurate and cost effective.</p>
           </div>
           <div class="card-icon">
-            <img src="@/assets/images/calculator/steps/personnel/option-2.svg" alt="Personell Detailed">
+            <img src="@/assets/images/calculator/steps/personnel/option-2.svg" alt="Personnel Detailed">
           </div>
         </div>
         <div class="card-footer bg-white border-0">
           <button
             @click="this.$router.push({'name': 'calculator-steps', params: {step: 'personnel-detailed'}})"
-            class="btn btn-primary float-end"
+            class="btn btn-primary text-white float-end"
           >Select</button>
         </div>
       </div>
