@@ -44,6 +44,7 @@ import FormBaseLayout from "@/components/container/FormBaseLayout.vue";
   methods: {
     displayCarbonCalculator() {
       this.isFormEntryPoint = false;
+      this.$router.push({'name': 'calculator-steps', 'params': {step: 'materials'}});
     },
     getFormEntryPointCardContent() {
       this.formEntryPointTitle = 'Carbon Emissions Calculator';
