@@ -19,10 +19,20 @@
       line-height: 24px;
     }
   }
+
   .tbody {
     background-color: $white;
   }
+
   .tfoot {
-    border: 1px dashed rgba(0,0,0, .2);
+    border: 1px dashed rgba(0, 0, 0, .2);
+  }
+
+  .first-column {
+    padding-left: 24px;
+  }
+
+  .remove-row {
+    margin: 11px 7px 11px 2px;
   }
 }
