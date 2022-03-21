@@ -40,8 +40,8 @@ export default defineComponent({
   props: {
     'disableNext': {type: Boolean, required: false},
     'disableBack': {type: Boolean, required: false},
-    'back': {type: Function},
-    'next': {type: Function}
+    'back': {type: Boolean},
+    'next': {type: Boolean}
   },
   emits: ["next", "back"]
 })
