@@ -1,9 +1,31 @@
 .button-navigation {
   .btn {
     width: 120px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
   }
+
   .next {
     color: $white;
+
+    .icon {
+      margin-left: 5px;
+    }
+  }
+
+  .back {
+
+    .icon {
+      margin-right: 5px;
+    }
+
+    &:hover,
+    &:focus {
+      .path {
+        fill: $white;
+      }
+    }
   }
 }
 
@@ -17,5 +39,9 @@
 
   &:focus {
     box-shadow: none;
+
+    img {
+      fill: red;
+    }
   }
 }
