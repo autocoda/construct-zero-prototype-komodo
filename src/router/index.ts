@@ -9,11 +9,6 @@ const routes: Array<RouteRecordRaw> = [
     component: HomeView,
     children: [
       {
-        path: '',
-        name: 'calculator-steps-0',
-        component: CalculatorSteps
-      },
-      {
         path: ':step',
         name: 'calculator-steps',
         component: CalculatorSteps
