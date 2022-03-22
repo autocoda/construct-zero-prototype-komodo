@@ -1,0 +1,717 @@
+{
+  "quarried-material": [
+    {
+      "material": "Quarried aggregate",
+      "density": "2.0 tonnes/m3",
+      "tco2e": 0.005
+    },
+    {
+      "material": "Recycled aggregate",
+      "density": "2.0 tonnes/m3",
+      "tco2e": 0.005
+    },
+    {
+      "material": "Marine aggregate",
+      "density": "2.0 tonnes/m3",
+      "tco2e": 0.008
+    },
+    {
+      "material": "Asphalt, 4% (bitumen) binder content (by mass)",
+      "density": "1.7 tonnes/m3",
+      "tco2e": 0.066
+    },
+    {
+      "material": "Asphalt, 5% (bitumen) binder content",
+      "density": "1.7 tonnes/m3",
+      "tco2e": 0.071
+    },
+    {
+      "material": "Asphalt, 6% (bitumen) binder content",
+      "density": "1.7 tonnes/m3",
+      "tco2e": 0.076
+    },
+    {
+      "material": "Asphalt, 7% (bitumen) binder content",
+      "density": "1.7 tonnes/m3",
+      "tco2e": 0.081
+    },
+    {
+      "material": "Asphalt, 8% (bitumen) binder content",
+      "density": "1.7 tonnes/m3",
+      "tco2e": 0.086
+    },
+    {
+      "material": "Bitumen",
+      "density": "2.4 tonnes/m3",
+      "tco2e": 0.49
+    },
+    {
+      "material": "Bricks",
+      "density": "1.9 tonnes/m3",
+      "tco2e": 0.24
+    },
+    {
+      "material": "Clay: general (simple baked products)",
+      "density": "1.9 tonnes/m3",
+      "tco2e": 0.24
+    },
+    {
+      "material": "Clay tile",
+      "density": "2.4 tonnes/m3",
+      "tco2e": 0.48
+    },
+    {
+      "material": "Vitrified clay pipe DN 100 & DN 150",
+      "density": "2.4 tonnes/m3",
+      "tco2e": 0.46
+    },
+    {
+      "material": "Vitrified clay pipe DN 200 & DN 300",
+      "density": "2.4 tonnes/m3",
+      "tco2e": 0.5
+    },
+    {
+      "material": "Vitrified clay pipe DN 500",
+      "density": "2.4 tonnes/m3",
+      "tco2e": 0.55
+    },
+    {
+      "material": "Ceramics: general",
+      "density": "1.9 tonnes/m3",
+      "tco2e": 0.7
+    },
+    {
+      "material": "Ceramics: Tiles and Cladding Panels",
+      "density": "2.2 tonnes/m3",
+      "tco2e": 0.78
+    },
+    {
+      "material": "Sand",
+      "density": "1.2 tonnes/m3",
+      "tco2e": 0.005
+    },
+    {
+      "material": "Lime",
+      "density": "1.2 tonnes/m3",
+      "tco2e": 0.78
+    },
+    {
+      "material": "Soil - general / rammed soil",
+      "density": "1.7 tonnes/m3",
+      "tco2e": 0.024
+    },
+    {
+      "material": "Stone: general",
+      "density": "2.0 tonnes/m3",
+      "tco2e": 0.079
+    },
+    {
+      "material": "Granite",
+      "density": "2.9 tonnes/m3",
+      "tco2e": 0.7
+    },
+    {
+      "material": "Limestone",
+      "density": "2.2 tonnes/m3",
+      "tco2e": 0.09
+    },
+    {
+      "material": "Sandstone",
+      "density": "2.2 tonnes/m3",
+      "tco2e": 0.06
+    },
+    {
+      "material": "Shale",
+      "density": "2.7 tonnes/m3",
+      "tco2e": 0.002
+    },
+    {
+      "material": "Slate",
+      "density": "2.7 tonnes/m3",
+      "tco2e": 0.035
+    }
+  ],
+  "timber": [
+    {
+      "material": "Timber: general",
+      "density": "0.5 tonnes/m3",
+      "tco2e": 0.31
+    },
+    {
+      "material": "Glue laminated timber",
+      "density": "0.5 tonnes/m3",
+      "tco2e": 0.42
+    },
+    {
+      "material": "Hardboard",
+      "density": "26.0 kg/m2*20mm",
+      "tco2e": 0.58
+    },
+    {
+      "material": "MDF",
+      "density": "14 kg/m2*20mm",
+      "tco2e": 0.39
+    },
+    {
+      "material": "Oriented Strand Board (OSB)",
+      "density": "1 tonnes/m3",
+      "tco2e": 0.45
+    },
+    {
+      "material": "Particle Board",
+      "density": "6 kg/m2*20mm",
+      "tco2e": 0.54
+    },
+    {
+      "material": "Plywood",
+      "density": "11 kg/m2*20mm",
+      "tco2e": 0.45
+    },
+    {
+      "material": "Reclaimed timber",
+      "density": "1 tonnes/m3",
+      "tco2e": 0.031
+    },
+    {
+      "material": "Sawn Hardwood",
+      "density": "0.6 tonnes/m3",
+      "tco2e": 0.24
+    },
+    {
+      "material": "Sawn Softwood",
+      "density": "0.5 tonnes/m3",
+      "tco2e": 0.2
+    }
+  ],
+  "metals": [
+    {
+      "material": "Copper: EU Tube & Sheet",
+      "density": "8.9 tonnes/m3",
+      "tco2e": 2.71
+    },
+    {
+      "material": "Copper: Reused copper",
+      "density": "8.9 tonnes/m3",
+      "tco2e": 0.27
+    },
+    {
+      "material": "Iron",
+      "density": "7.87 tonnes/m3",
+      "tco2e": 2.03
+    },
+    {
+      "material": "Lead",
+      "density": "11.34 tonnes/m3",
+      "tco2e": 1.67
+    },
+    {
+      "material": "Steel: General - UK (EU) Average Recycled Content",
+      "density": "7.8 tonnes/m3",
+      "tco2e": 1.46
+    },
+    {
+      "material": "Steel: Bar & rod - UK (EU) Average Recycled Content",
+      "density": "7.8 tonnes/m3",
+      "tco2e": 1.4
+    },
+    {
+      "material": "Steel: Coil (Sheet), Galvanised - UK (EU) Average Recycled Content",
+      "density": "7.8 tonnes/m3",
+      "tco2e": 1.54
+    },
+    {
+      "material": "Steel: Engineering steel - Recycled",
+      "density": "7.8 tonnes/m3",
+      "tco2e": 0.72
+    },
+    {
+      "material": "Steel: Pipe- UK (EU) Average Recycled Content",
+      "density": "7.8 tonnes/m3",
+      "tco2e": 1.45
+    },
+    {
+      "material": "Steel: Plate- UK (EU) Average Recycled Content",
+      "density": "7.8 tonnes/m3",
+      "tco2e": 1.66
+    },
+    {
+      "material": "Steel: Sections - UK (EU) Average Recycled Content",
+      "density": "7.8 tonnes/m3",
+      "tco2e": 1.53
+    },
+    {
+      "material": "Steel: Wire - Virgin",
+      "density": "7.8 tonnes/m3",
+      "tco2e": 3.02
+    },
+    {
+      "material": "Steel: Stainless",
+      "density": "8 tonnes/m3",
+      "tco2e": 6.15
+    },
+    {
+      "material": "Steel: Reused steel",
+      "density": "7.8 tonnes/m3",
+      "tco2e": 0.15
+    },
+    {
+      "material": "Aluminium: General",
+      "density": "2.7 tonnes/m3",
+      "tco2e": 9.16
+    },
+    {
+      "material": "Aluminium: Extruded",
+      "density": "2.7 tonnes/m3",
+      "tco2e": 9.08
+    },
+    {
+      "material": "Aluminium: Rolled",
+      "density": "2.7 tonnes/m3",
+      "tco2e": 9.18
+    },
+    {
+      "material": "Handrail: galvanised with fittings",
+      "density": "0.0115 tonnes/m",
+      "tco2e": 0.02
+    },
+    {
+      "material": "Handrail: stainless steel with fittings",
+      "density": "0.0115 tonnes/m",
+      "tco2e": 0.09
+    },
+    {
+      "material": "Handrail: stainless steel welded",
+      "density": "0.0105 tonnes/m",
+      "tco2e": 0.08
+    },
+    {
+      "material": "Sheet piling: light use",
+      "density": "0.1 tonnes/m2",
+      "tco2e": 0.12
+    },
+    {
+      "material": "Sheet piling: medium use",
+      "density": "0.13 tonnes/m2",
+      "tco2e": 0.15
+    },
+    {
+      "material": "Sheet piling: heavy use",
+      "density": "0.19 tonnes/m2",
+      "tco2e": 0.2
+    },
+    {
+      "material": "Flap valves: DN 100 & DN 150",
+      "density": "0.008 tonnes/1",
+      "tco2e": 0.01
+    },
+    {
+      "material": "Flap valves: DN 200 & DN 300",
+      "density": "0.02 tonnes/1",
+      "tco2e": 0.02
+    },
+    {
+      "material": "Flap valves: DN 500",
+      "density": "0.06 tonnes/1",
+      "tco2e": 0.06
+    }
+  ],
+  "plastics": [
+    {
+      "material": "Plastics: general",
+      "density": "0.96 tonnes/m3",
+      "tco2e": 3.31
+    },
+    {
+      "material": "Polyethylene: general",
+      "density": "1.05 tonnes/m3",
+      "tco2e": 2.54
+    },
+    {
+      "material": "High Density Polyethylene (HDPE) Resin",
+      "density": "1.05 tonnes/m3",
+      "tco2e": 1.93
+    },
+    {
+      "material": "HDPE Pipe",
+      "density": "1.05 tonnes/m3",
+      "tco2e": 2.52
+    },
+    {
+      "material": "Expanded Polystyrene",
+      "density": "1.05 tonnes/m3",
+      "tco2e": 3.29
+    },
+    {
+      "material": "General Purpose Polystyrene",
+      "density": "1.38 tonnes/m3",
+      "tco2e": 3.43
+    },
+    {
+      "material": "High Impact Polystyrene",
+      "density": "1.41 tonnes/m3",
+      "tco2e": 3.42
+    },
+    {
+      "material": "PVC: general",
+      "density": "0 tonnes/m3",
+      "tco2e": 3.1
+    },
+    {
+      "material": "PVC pipe",
+      "density": "0.83 tonnes/m3",
+      "tco2e": 3.23
+    }
+  ],
+  "glass": [
+    {
+      "material": "Primary glass",
+      "density": "2.5 tonnes/m3",
+      "tco2e": 0.91
+    },
+    {
+      "material": "Secondary glass",
+      "density": "2.5 tonnes/m3",
+      "tco2e": 0.59
+    },
+    {
+      "material": "Fibreglass (glasswool)",
+      "density": "0.024 tonnes/m3",
+      "tco2e": 1.54
+    },
+    {
+      "material": "Toughened glass",
+      "density": "2.5 tonnes/m3",
+      "tco2e": 1.35
+    }
+  ],
+  "coatings": [
+    {
+      "material": "Paint: general",
+      "density": "1.225 tonnes/m3",
+      "tco2e": 2.91
+    },
+    {
+      "material": "Waterborne paint",
+      "density": "1.25 tonnes/m3",
+      "tco2e": 2.54
+    },
+    {
+      "material": "Solventborne paint",
+      "density": "1.2 tonnes/m3",
+      "tco2e": 3.76
+    },
+    {
+      "material": "Epoxide resin",
+      "density": "1.19 tonnes/m3",
+      "tco2e": 5.7
+    }
+  ],
+  "miscellaneous": [
+    {
+      "material": "Damp Proof Course/Membrane",
+      "density": "0.0009 tonnes/m2",
+      "tco2e": 4.2
+    },
+    {
+      "material": "Rubber",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 2.85
+    },
+    {
+      "material": "Grit",
+      "density": "2 tonnes/m3",
+      "tco2e": 0.01
+    },
+    {
+      "material": "Ground limestone",
+      "density": "0.945089338796644 tonnes/m3",
+      "tco2e": 0.03
+    },
+    {
+      "material": "Glass Reinforced Plastic - GRP - Fibreglass",
+      "density": "1.74 tonnes/m3",
+      "tco2e": 8.1
+    },
+    {
+      "material": "Insulation: general",
+      "density": "0.04 tonnes/m3",
+      "tco2e": 1.86
+    },
+    {
+      "material": "Insulation: fibreglass (glasswool)",
+      "density": "0.045 tonnes/m3",
+      "tco2e": 1.35
+    },
+    {
+      "material": "Insulation: polystyrene",
+      "density": "0.037 tonnes/m3",
+      "tco2e": 3.43
+    },
+    {
+      "material": "Insulation: polyurethane",
+      "density": "0.03 tonnes/m3",
+      "tco2e": 4.84
+    },
+    {
+      "material": "Plaster: general (Gypsum)",
+      "density": "1.3 tonnes/m3",
+      "tco2e": 0.13
+    },
+    {
+      "material": "Plasterboard",
+      "density": "0.92 tonnes/m3",
+      "tco2e": 0.39
+    }
+  ],
+  "concrete-blocks": [
+    {
+      "material": "Block - 8MPa Compressive Strength",
+      "density": "1.05 tonnes/m3",
+      "tco2e": 0.06
+    },
+    {
+      "material": "Block - 10 Mpa Compressive Strength",
+      "density": "1.15 tonnes/m3",
+      "tco2e": 0.08
+    },
+    {
+      "material": "Block - 12 Mpa Compressive Strength",
+      "density": "1.25 tonnes/m3",
+      "tco2e": 0.09
+    },
+    {
+      "material": "Block - 13 Mpa Compressive Strength",
+      "density": "1.35 tonnes/m3",
+      "tco2e": 0.11
+    },
+    {
+      "material": "Autoclaved Aerated Blocks (AACs)",
+      "density": "0.8 tonnes/m3",
+      "tco2e": 0.31
+    }
+  ],
+  "mortar": [
+    {
+      "material": "Mortar (1:3 cement:sand mix)",
+      "density": "2.2 tonnes/m3",
+      "tco2e": 0.22
+    },
+    {
+      "material": "Mortar (1:4 cement:sand mix)",
+      "density": "2.2 tonnes/m3",
+      "tco2e": 0.18
+    },
+    {
+      "material": "Mortar (1:5 cement:sand mix)",
+      "density": "2.2 tonnes/m3",
+      "tco2e": 0.16
+    },
+    {
+      "material": "Mortar (1:6 cement:sand mix)",
+      "density": "2.2 tonnes/m3",
+      "tco2e": 0.14
+    },
+    {
+      "material": "Mortar (1:½:4½ cement:lime:sand mix)",
+      "density": "2.2 tonnes/m3",
+      "tco2e": 0.21
+    },
+    {
+      "material": "Mortar (1:1:6 cement:lime:sand mix)",
+      "density": "2.2 tonnes/m3",
+      "tco2e": 0.17
+    },
+    {
+      "material": "Mortar (1:2:9 cement:lime:sand mix)",
+      "density": "2.2 tonnes/m3",
+      "tco2e": 0.16
+    }
+  ],
+  "cements": [
+    {
+      "material": "Average CEM I Portland Cement, 94% Clinker",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.95
+    },
+    {
+      "material": "Ground Granulated Blastfurnace Slag (GGBS)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.08
+    },
+    {
+      "material": "Fly Ash",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.01
+    },
+    {
+      "material": "Cement: unknown type",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.88
+    },
+    {
+      "material": "Portland Limestone Cement, CEM II/A-LL or L (20% limestone)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.75
+    },
+    {
+      "material": "Portland Limestone Cement, CEM II/A-LL or L (13% limestone)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.82
+    },
+    {
+      "material": "Portland Limestone Cement, CEM II/A-LL or L (6% limestone)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.88
+    },
+    {
+      "material": "Portland Fly Ash Cement, CEM II/A-V (20% Fly Ash)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.75
+    },
+    {
+      "material": "Portland Fly Ash Cement, CEM II/A-V (13% Fly Ash)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.81
+    },
+    {
+      "material": "Portland Fly Ash Cement, CEM II/A-V (6% Fly Ash)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.87
+    },
+    {
+      "material": "Portland Fly Ash Cement, CEM II/B-V (35% Fly Ash)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.61
+    },
+    {
+      "material": "Portland Fly Ash Cement, CEM II/B-V (28% Fly Ash)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.67
+    },
+    {
+      "material": "Portland Fly Ash Cement, CEM II/B-V (21% Fly Ash)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.73
+    },
+    {
+      "material": "Portland Slag Cement, CEM II/B-S (35% GGBS)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.62
+    },
+    {
+      "material": "Portland Slag Cement, CEM II/B-S (28% GGBS)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.68
+    },
+    {
+      "material": "Portland Slag Cement, CEM II/B-S (21% GGBS)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.74
+    },
+    {
+      "material": "Blastfurnace Cement, CEM III/A (65% GGBS)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.36
+    },
+    {
+      "material": "Blastfurnace Cement, CEM III/A (50.5% GGBS)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.48
+    },
+    {
+      "material": "Blastfurnace Cement, CEM III/A (36% GGBS)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.61
+    },
+    {
+      "material": "Blastfurnace Cement, CEM III/B (80% GGBS)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.23
+    },
+    {
+      "material": "Blastfurnace Cement, CEM III/B (73% GGBS)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.29
+    },
+    {
+      "material": "Blastfurnace Cement, CEM III/B (66% GGBS)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.34
+    },
+    {
+      "material": "Pozzolanic (Siliceous Fly Ash) Cement, CEM IV/B-V (55% GGBS)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.42
+    },
+    {
+      "material": "Pozzolanic (Siliceous Fly Ash) Cement, CEM IV/B-V (45.5% GGBS)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.51
+    },
+    {
+      "material": "Pozzolanic (Siliceous Fly Ash) Cement, CEM IV/B-V (36% GGBS)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.59
+    },
+    {
+      "material": "Cement: General",
+      "density": "1.86 tonnes/m3",
+      "tco2e": 0.74
+    },
+    {
+      "material": "6-20% Fly Ash (CEM II/A-V)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.83
+    },
+    {
+      "material": "21-35% Fly Ash (CEM II/B-V)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.69
+    },
+    {
+      "material": "21-35% GGBS (CEM II/B-S)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.71
+    },
+    {
+      "material": "36-65% GGBS (CEM III/A)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.52
+    },
+    {
+      "material": "66-80% GGBS (CEM III/B)",
+      "density": "1.5 tonnes/m3",
+      "tco2e": 0.32
+    },
+    {
+      "material": "Fibre Cement Panels - Uncoated",
+      "density": "1.8 tonnes/m3",
+      "tco2e": 1.09
+    },
+    {
+      "material": "Fibre Cement Panels - (Colour) Coated",
+      "density": "1.8 tonnes/m3",
+      "tco2e": 1.28
+    },
+    {
+      "material": "Cement stabilised soil @ 5%",
+      "density": "1.46 tonnes/m3",
+      "tco2e": 0.06
+    },
+    {
+      "material": "Cement stabilised soil @ 8%",
+      "density": "1.46 tonnes/m3",
+      "tco2e": 0.08
+    },
+    {
+      "material": "GGBS stabilised soil",
+      "density": "1.46 tonnes/m3",
+      "tco2e": 0.05
+    },
+    {
+      "material": "Fly ash stabilised soil",
+      "density": "1.46 tonnes/m3",
+      "tco2e": 0.04
+    }
+  ]
+}
