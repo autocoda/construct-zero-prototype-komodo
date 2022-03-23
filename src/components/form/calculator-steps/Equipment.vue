@@ -27,11 +27,9 @@
         <td>
           <select class="form-select" v-model="item.poweredBy" @change="getEquipmentUnitValue(index, $event)">
             <option selected disabled="disabled">Please select fuel type</option>
-            <option v-for="(key) in poweredBy"
-                    :key="key.fuelType"
-                    :value="key.tco2e"
-                    :name="key.inputUnit"
-            >{{ key.fuelType }}</option>
+            <option v-for="(key) in poweredBy" :key="key.fuelType" :value="key.tco2e" :name="key.inputUnit">
+              {{ key.fuelType }}
+            </option>
           </select>
         </td>
         <td>
@@ -78,6 +76,7 @@
 import {defineComponent} from 'vue'
 import StepInformationCard from "@/components/card/StepInformationCard.vue";
 import {get} from "axios";
+import {roundValue} from "@/imports/util/roundValue";
 
 export default defineComponent({
   name: 'EquipmentStep',
@@ -108,6 +107,7 @@ export default defineComponent({
   methods: {
     commitValueChange: function (index, payload) {
       this.$store.commit('updateSingleEquipmentByKey', [index, payload]);
+      this.getEquipmentEmissionsData();
     },
     getEquipmentUnitValue: function (index, event) {
       let options = event.target.options;
@@ -115,6 +115,31 @@ export default defineComponent({
         let name = options[options.selectedIndex].getAttribute('name');
         this.$store.commit('updateUsedEquipmentUnitName', {index, name});
       }
+    },
+    getEquipmentEmissionsData: function () {
+      const savedEquipment = this.equipment;
+      let totalEquipmentEmissions = 0;
+
+      savedEquipment.forEach(equipment => {
+        const baseEmissionsByPowerType = equipment.poweredBy;
+        const baseEmissionsByModeOfTransportation = equipment.modeOfTransportation;
+        const totalValue = equipment.totalValue;
+        const distanceTravelled = equipment.distanceTravelled;
+
+        if (
+          (baseEmissionsByPowerType && !Number.isNaN(baseEmissionsByPowerType) )
+          && (baseEmissionsByModeOfTransportation && !Number.isNaN(baseEmissionsByModeOfTransportation))
+          && (totalValue && !Number.isNaN(totalValue) )
+          && (distanceTravelled && !Number.isNaN(distanceTravelled))
+        ) {
+          const vehicleEmissions = (baseEmissionsByModeOfTransportation * distanceTravelled) / 0.62137;
+          const equipmentEmission = baseEmissionsByPowerType * totalValue;
+          const equipmentEmissions = (vehicleEmissions + equipmentEmission) / 1000;
+          totalEquipmentEmissions += equipmentEmissions;
+        }
+      });
+
+      this.$store.commit('updateEquipmentStepEmissions', totalEquipmentEmissions);
     },
     getInformationCardData: function () {
       this.infoBlockIcon = require('@/assets/images/calculator/steps/wrench.svg');
@@ -141,12 +166,12 @@ export default defineComponent({
     },
     addRowItem: function() {
       this.$store.commit('updateUsedEquipment', {
-        "equipmentName": '',
-        "poweredBy": '',
-        "unitType": '',
-        "totalValue": '',
-        "distanceTravelled": '',
-        "modeOfTransportation": ''
+        "equipmentName": null,
+        "poweredBy": null,
+        "unitType": null,
+        "totalValue": null,
+        "distanceTravelled": null,
+        "modeOfTransportation": null
       });
     },
     removeRowItem: function(index) {

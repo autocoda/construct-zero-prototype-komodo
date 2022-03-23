@@ -10,14 +10,15 @@ const store = createStore({
     projectTotalTravel: null,
     usedVehicleEmissions: '--',
     materialsStepEmissions: '--',
+    equipmentStepEmissions: null,
     usedEquipment: [
       {
-        "equipmentName": '',
-        "poweredBy": '',
-        "unitType": '',
-        "totalValue": '',
-        "distanceTravelled": '',
-        "modeOfTransportation": ''
+        "equipmentName": null,
+        "poweredBy": null,
+        "unitType": null,
+        "totalValue": null,
+        "distanceTravelled": null,
+        "modeOfTransportation": null
       }
     ],
     stepsCompleted: {
@@ -53,6 +54,9 @@ const store = createStore({
     getMaterialsStepEmissions(state) {
       return state.materialsStepEmissions
     },
+    getEquipmentStepEmissions(state) {
+      return state.equipmentStepEmissions
+    },
     getUsedEquipment(state) {
       return state.usedEquipment
     },
@@ -84,6 +88,9 @@ const store = createStore({
     },
     updateMaterialsStepEmissions(state, payload) {
       state.materialsStepEmissions = payload;
+    },
+    updateEquipmentStepEmissions(state, payload) {
+      state.equipmentStepEmissions = payload;
     },
     updateUsedEquipment(state, payload) {
       state.usedEquipment.push(payload);
