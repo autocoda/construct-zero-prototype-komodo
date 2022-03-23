@@ -17,8 +17,8 @@ const store = createStore({
         "poweredBy": null,
         "unitType": null,
         "totalValue": null,
-        "distanceTravelled": null,
-        "modeOfTransportation": null
+        "transportDistance": null,
+        "transportMode": null
       }
     ],
     stepsCompleted: {

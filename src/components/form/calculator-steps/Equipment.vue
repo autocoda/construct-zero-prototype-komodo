@@ -39,11 +39,11 @@
           <input class="form-control" type="number" v-model="item.totalValue" @input="commitValueChange(index, item)">
         </td>
         <td>
-          <input class="form-control" type="number" v-model="item.distanceTravelled" @input="commitValueChange(index, item)">
+          <input class="form-control" type="number" v-model="item.transportDistance" @input="commitValueChange(index, item)">
         </td>
         <td>
-          <select id="transport-mode" class="form-select" v-model="item.modeOfTransportation" @change="commitValueChange(index, item)">
-            <option selected>Please Select</option>
+          <select id="transport-mode" class="form-select" v-model="item.transportMode" @change="commitValueChange(index, item)">
+            <option selected disabled="disabled">Please select transport mode</option>
             <option v-for="(value, key) in transportMethod" :key="key" :value="value">{{ key }}</option>
           </select>
         </td>
@@ -70,13 +70,11 @@
       </tr>
     </tfoot>
   </table>
-
 </template>
 <script>
 import {defineComponent} from 'vue'
 import StepInformationCard from "@/components/card/StepInformationCard.vue";
 import {get} from "axios";
-import {roundValue} from "@/imports/util/roundValue";
 
 export default defineComponent({
   name: 'EquipmentStep',
@@ -122,17 +120,17 @@ export default defineComponent({
 
       savedEquipment.forEach(equipment => {
         const baseEmissionsByPowerType = equipment.poweredBy;
-        const baseEmissionsByModeOfTransportation = equipment.modeOfTransportation;
+        const baseEmissionsByTransportMode = equipment.transportMode;
         const totalValue = equipment.totalValue;
-        const distanceTravelled = equipment.distanceTravelled;
+        const transportDistance = equipment.transportDistance;
 
         if (
           (baseEmissionsByPowerType && !Number.isNaN(baseEmissionsByPowerType) )
-          && (baseEmissionsByModeOfTransportation && !Number.isNaN(baseEmissionsByModeOfTransportation))
+          && (baseEmissionsByTransportMode && !Number.isNaN(baseEmissionsByTransportMode))
           && (totalValue && !Number.isNaN(totalValue) )
-          && (distanceTravelled && !Number.isNaN(distanceTravelled))
+          && (transportDistance && !Number.isNaN(transportDistance))
         ) {
-          const vehicleEmissions = (baseEmissionsByModeOfTransportation * distanceTravelled) / 0.62137;
+          const vehicleEmissions = (baseEmissionsByTransportMode * transportDistance) / 0.62137;
           const equipmentEmission = baseEmissionsByPowerType * totalValue;
           const equipmentEmissions = (vehicleEmissions + equipmentEmission) / 1000;
           totalEquipmentEmissions += equipmentEmissions;
@@ -170,8 +168,8 @@ export default defineComponent({
         "poweredBy": null,
         "unitType": null,
         "totalValue": null,
-        "distanceTravelled": null,
-        "modeOfTransportation": null
+        "transportDistance": null,
+        "transportMode": null
       });
     },
     removeRowItem: function(index) {
