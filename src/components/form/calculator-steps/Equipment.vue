@@ -173,7 +173,8 @@ export default defineComponent({
       });
     },
     removeRowItem: function(index) {
-      this.$store.commit('removeSingleEquipmentByKey', index)
+      this.$store.commit('removeSingleEquipmentByKey', index);
+      this.getEquipmentEmissionsData();
     }
   },
   mounted() {
