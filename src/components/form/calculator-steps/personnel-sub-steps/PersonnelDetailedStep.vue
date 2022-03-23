@@ -6,6 +6,7 @@
     :info-block-help-text="infoBlockHelpText"
   />
   <table class="table table-responsive equipment-table">
+    <caption class="visually-hidden">Detailed Personnel Table</caption>
     <thead class="thead">
       <tr>
         <th class="first-column">Person(s)</th>

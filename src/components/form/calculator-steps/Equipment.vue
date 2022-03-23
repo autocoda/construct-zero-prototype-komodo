@@ -7,6 +7,7 @@
   />
 
   <table class="table table-responsive equipment-table">
+    <caption class="visually-hidden">Equipment Table</caption>
     <thead class="thead">
       <tr>
         <th class="first-column">Equipment</th>
