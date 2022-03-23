@@ -96,7 +96,10 @@ const store = createStore({
     updatedCompletedSteps(state, payload) {
       state.materialsStepEmissions = payload;
     },
-    removeUsedEquipmentByKey(state, payload) {
+    updateSingleEquipmentByKey(state, [index, value]) {
+      state.usedEquipment[index] = value;
+    },
+    removeSingleEquipmentByKey(state, payload) {
       state.usedEquipment.splice(payload, 1);
     },
   },

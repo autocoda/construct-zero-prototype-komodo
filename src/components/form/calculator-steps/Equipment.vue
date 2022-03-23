@@ -22,25 +22,29 @@
     <tbody class="tbody">
       <tr v-for="(item, index) in equipment" :key="index">
         <td class="first-column">
-          <input class="form-control" type="text" v-model="item.equipmentName">
+          <input class="form-control" type="text" v-model="item.equipmentName" @input="commitValueChange(index, item)">
         </td>
         <td>
           <select class="form-select" v-model="item.poweredBy" @change="getEquipmentUnitValue(index, $event)">
             <option selected disabled="disabled">Please select fuel type</option>
-            <option v-for="(key) in poweredBy" :key="key.fuelType" :value="key.tco2e" :name="key.inputUnit">{{ key.fuelType }}</option>
+            <option v-for="(key) in poweredBy"
+                    :key="key.fuelType"
+                    :value="key.tco2e"
+                    :name="key.inputUnit"
+            >{{ key.fuelType }}</option>
           </select>
         </td>
         <td>
           <input class="form-control readonly" type="text" v-model="item.unitType" disabled>
         </td>
         <td>
-          <input class="form-control" type="number" v-model="item.totalValue">
+          <input class="form-control" type="number" v-model="item.totalValue" @input="commitValueChange(index, item)">
         </td>
         <td>
-          <input class="form-control" type="number" v-model="item.distanceTravelled">
+          <input class="form-control" type="number" v-model="item.distanceTravelled" @input="commitValueChange(index, item)">
         </td>
         <td>
-          <select id="transport-mode" class="form-select" v-model="item.modeOfTransportation">
+          <select id="transport-mode" class="form-select" v-model="item.modeOfTransportation" @change="commitValueChange(index, item)">
             <option selected>Please Select</option>
             <option v-for="(value, key) in transportMethod" :key="key" :value="value">{{ key }}</option>
           </select>
@@ -102,6 +106,9 @@ export default defineComponent({
     }
   },
   methods: {
+    commitValueChange: function (index, payload) {
+      this.$store.commit('updateSingleEquipmentByKey', [index, payload]);
+    },
     getEquipmentUnitValue: function (index, event) {
       let options = event.target.options;
       if (options.selectedIndex > -1) {
@@ -143,7 +150,7 @@ export default defineComponent({
       });
     },
     removeRowItem: function(index) {
-      this.$store.commit('removeUsedEquipmentByKey', index)
+      this.$store.commit('removeSingleEquipmentByKey', index)
     }
   },
   mounted() {
