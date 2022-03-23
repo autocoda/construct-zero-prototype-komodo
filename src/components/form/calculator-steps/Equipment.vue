@@ -20,33 +20,29 @@
       </tr>
     </thead>
     <tbody class="tbody">
-      <tr v-for="(item, index) in items" :key="index">
+      <tr v-for="(item, index) in equipment" :key="index">
         <td class="first-column">
-          <input class="form-control" type="text" v-model="item.equipment">
+          <input class="form-control" type="text" v-model="item.equipmentName">
         </td>
         <td>
-          <select id="vehicles-types-used" class="form-select" v-model="item.powered">
-            <option selected>Please Select</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <select class="form-select" v-model="item.poweredBy" @change="getEquipmentUnitValue(index, $event)">
+            <option selected disabled="disabled">Please select fuel type</option>
+            <option v-for="(key) in poweredBy" :key="key.fuelType" :value="key.tco2e" :name="key.inputUnit">{{ key.fuelType }}</option>
           </select>
         </td>
         <td>
-          <input class="form-control" type="text" v-model="item.unit">
+          <input class="form-control readonly" type="text" v-model="item.unitType" disabled>
         </td>
         <td>
-          <input class="form-control" type="text" v-model="item['total-value']">
+          <input class="form-control" type="number" v-model="item.totalValue">
         </td>
         <td>
-          <input class="form-control" type="text" v-model="item['distance-travelled']">
+          <input class="form-control" type="number" v-model="item.distanceTravelled">
         </td>
         <td>
-          <select id="transport-mode" class="form-select" v-model="item['transport-mode']">
+          <select id="transport-mode" class="form-select" v-model="item.modeOfTransportation">
             <option selected>Please Select</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option v-for="(value, key) in transportMethod" :key="key" :value="value">{{ key }}</option>
           </select>
         </td>
         <td>
@@ -77,22 +73,15 @@
 <script>
 import {defineComponent} from 'vue'
 import StepInformationCard from "@/components/card/StepInformationCard.vue";
+import {get} from "axios";
 
 export default defineComponent({
   name: 'EquipmentStep',
   components: {StepInformationCard},
   data() {
     return {
-      items: [
-        {
-          "equipment": '',
-          "powered": '',
-          "unit": '',
-          "total-value": '',
-          "distance-travelled": '',
-          "travel-mode": ''
-        }
-      ],
+      poweredBy: '',
+      transportMethod: '',
       infoBlockContent: '',
       infoBlockTitle: '',
       infoBlockIcon: '',
@@ -100,32 +89,67 @@ export default defineComponent({
     }
   },
   computed: {
+    equipment: {
+      get() {
+        return this.$store.getters.getUsedEquipment
+      },
+      set(value) {
+        this.$store.commit('updateUsedEquipment', value);
+      }
+    },
     step: function () {
-      return (this.$route.params.step) ?? 'equipment'
+      return (this.$route.params.step) ?? 'equipment';
     }
   },
   methods: {
-    getInformationCardData() {
+    getEquipmentUnitValue: function (index, event) {
+      let options = event.target.options;
+      if (options.selectedIndex > -1) {
+        let name = options[options.selectedIndex].getAttribute('name');
+        this.$store.commit('updateUsedEquipmentUnitName', {index, name});
+      }
+    },
+    getInformationCardData: function () {
       this.infoBlockIcon = require('@/assets/images/calculator/steps/wrench.svg');
       this.infoBlockTitle = 'Equipment used for works';
       this.infoBlockContent = 'List any materials you will directly use to complete your works for this project.';
     },
-    addRowItem() {
-      this.items.push({
-        "equipment": '',
-        "powered": '',
-        "unit": '',
-        "total-value": '',
-        "distance-travelled": '',
-        "travel-mode": ''
-      })
+    getFuelTypeData: function () {
+      return get('/static/fuel-emissions-input-data.json', {baseURL: window.location.origin})
+        .then((response) => {
+          this.poweredBy = response.data;
+        })
+        .catch((error) => {
+          throw error.response.data;
+        });
     },
-    removeRowItem(index) {
-      this.items.splice(index, 1)
+    getTransportModeTypeData: function () {
+      return get('/static/transport-mode-input-data.json', {baseURL: window.location.origin})
+        .then((response) => {
+          this.transportMethod = response.data;
+        })
+        .catch((error) => {
+          throw error.response.data;
+        });
+    },
+    addRowItem: function() {
+      this.$store.commit('updateUsedEquipment', {
+        "equipmentName": '',
+        "poweredBy": '',
+        "unitType": '',
+        "totalValue": '',
+        "distanceTravelled": '',
+        "modeOfTransportation": ''
+      });
+    },
+    removeRowItem: function(index) {
+      this.$store.commit('removeUsedEquipmentByKey', index)
     }
   },
   mounted() {
     this.getInformationCardData();
+    this.getFuelTypeData();
+    this.getTransportModeTypeData();
   },
 })
 </script>
