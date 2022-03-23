@@ -23,7 +23,7 @@
       <div class="col-6 mb-3">
         <label for="vehicles-types-used" class="form-label">What type of vehicle will you be primarily using to travel to and from site?</label>
         <select id="vehicles-types-used" class="form-select" v-model="vehicle">
-          <option selected>Please select vehicle type</option>
+          <option selected disabled="disabled">Please select vehicle type</option>
           <option v-for="(value, key) in vehicleDropdownList" :key="key" :value="value">{{ key }}</option>
         </select>
       </div>
