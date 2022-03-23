@@ -1,0 +1,38 @@
+[
+  {
+    "fuelType": "Diesel",
+    "inputUnit": "litres",
+    "tco2e": 0.003176,
+    "canTrackDistance": true
+  },
+  {
+    "fuelType": "Biodiesel",
+    "inputUnit": "litres",
+    "tco2e": 0.001367,
+    "canTrackDistance": true
+  },
+  {
+    "fuelType": "Gas oil",
+    "inputUnit": "litres",
+    "tco2e": 0.003587,
+    "canTrackDistance": true
+  },
+  {
+    "fuelType": "Grid electricity",
+    "inputUnit": "kWh",
+    "tco2e": 0.000594,
+    "canTrackDistance": false
+  },
+  {
+    "fuelType": "Gas",
+    "inputUnit": "m3",
+    "tco2e": 0.002217,
+    "canTrackDistance": false
+  },
+  {
+    "fuelType": "Water",
+    "inputUnit": "litres",
+    "tco2e": 0.00000034,
+    "canTrackDistance": false
+  }
+]
