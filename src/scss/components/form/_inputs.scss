@@ -58,3 +58,10 @@ input::-webkit-inner-spin-button {
     padding-right: 50px;
   }
 }
+
+.form-control {
+
+  &.readonly {
+    background-color: $white;
+  }
+}

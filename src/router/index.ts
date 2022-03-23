@@ -14,6 +14,11 @@ const routes: Array<RouteRecordRaw> = [
         component: CalculatorSteps
       }
     ]
+  },
+  {
+    path: "/:catchAll(.*)",
+    name: "NotFound",
+    component: HomeView,
   }
 ]
 

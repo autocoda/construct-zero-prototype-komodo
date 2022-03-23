@@ -10,6 +10,17 @@ const store = createStore({
     projectTotalTravel: null,
     usedVehicleEmissions: '--',
     materialsStepEmissions: '--',
+    equipmentStepEmissions: null,
+    usedEquipment: [
+      {
+        "equipmentName": null,
+        "poweredBy": null,
+        "unitType": null,
+        "totalValue": null,
+        "transportDistance": null,
+        "transportMode": null
+      }
+    ],
     stepsCompleted: {
       'landing': false,
       'materials': false,
@@ -43,6 +54,12 @@ const store = createStore({
     getMaterialsStepEmissions(state) {
       return state.materialsStepEmissions
     },
+    getEquipmentStepEmissions(state) {
+      return state.equipmentStepEmissions
+    },
+    getUsedEquipment(state) {
+      return state.usedEquipment
+    },
     getStepsCompleted(state) {
       return state.stepsCompleted
     }
@@ -72,9 +89,26 @@ const store = createStore({
     updateMaterialsStepEmissions(state, payload) {
       state.materialsStepEmissions = payload;
     },
+    updateEquipmentStepEmissions(state, payload) {
+      state.equipmentStepEmissions = payload;
+    },
+    updateUsedEquipment(state, payload) {
+      state.usedEquipment.push(payload);
+    },
+    updateUsedEquipmentUnitName(state, payload) {
+      const {index, name} = payload;
+
+      state.usedEquipment[index]['unitType'] = name;
+    },
     updatedCompletedSteps(state, payload) {
       state.materialsStepEmissions = payload;
-    }
+    },
+    updateSingleEquipmentByKey(state, [index, value]) {
+      state.usedEquipment[index] = value;
+    },
+    removeSingleEquipmentByKey(state, payload) {
+      state.usedEquipment.splice(payload, 1);
+    },
   },
 })
 
