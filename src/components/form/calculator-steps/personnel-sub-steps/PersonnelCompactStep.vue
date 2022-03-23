@@ -11,10 +11,8 @@
       <div class="col-6">
         <label for="personnel-count" class="form-label">How many workers will you have on site?</label>
         <select id="personnel-count" class="form-select" v-model="personnel.count">
-          <option selected>Please Select</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option selected disabled="disabled">Please Select</option>
+          <option v-for="(value, key) in personnelDropdown" :key="key" :value="value">{{ key }}</option>
         </select>
       </div>
       <div class="col-12 my-3">
@@ -39,15 +37,17 @@
 
   </div>
 </template>
-<script lang="ts">
+<script>
 import {defineComponent} from 'vue'
 import StepInformationCard from "@/components/card/StepInformationCard.vue";
+import {get} from "axios";
 
 export default defineComponent({
   name: 'PersonnelCompactStep',
   components: {StepInformationCard},
   data() {
     return {
+      personnelDropdown: '',
       infoBlockContent: '',
       infoBlockTitle: '',
       infoBlockIcon: '',
@@ -68,9 +68,19 @@ export default defineComponent({
       this.infoBlockTitle = 'Personnel user for works';
       this.infoBlockContent = 'Enter the details of the personnel that will be involved in this project.';
     },
+    getTransportModeTypeData: function () {
+      return get('/static/personnel-input-data.json', {baseURL: window.location.origin})
+        .then((response) => {
+          this.personnelDropdown = response.data;
+        })
+        .catch((error) => {
+          throw error.response.data;
+        });
+    },
   },
   mounted() {
     this.getInformationCardData();
+    this.getTransportModeTypeData();
   }
 })
 </script>

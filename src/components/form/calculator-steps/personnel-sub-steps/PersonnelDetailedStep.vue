@@ -23,18 +23,14 @@
         </td>
         <td>
           <select id="vehicles-types-used" class="form-select" v-model="item['transport-mode']">
-            <option selected>Please Select</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option selected disabled="disabled">Please select transport mode</option>
+            <option v-for="(value, key) in transportMethod" :key="key" :value="value">{{ key }}</option>
           </select>
         </td>
         <td>
           <select id="powered-by" class="form-select" v-model="item['powered-by']">
-            <option selected>Please Select</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option selected disabled="disabled">Please Select</option>
+            <option v-for="(value, key) in vehicleDropdownList" :key="key" :value="value">{{ key }}</option>
           </select>
         </td>
         <td>
@@ -67,6 +63,7 @@
 <script>
 import {defineComponent} from 'vue'
 import StepInformationCard from "@/components/card/StepInformationCard.vue";
+import {get} from "axios";
 
 export default defineComponent({
   name: 'PersonnelDetailedStep',
@@ -77,6 +74,8 @@ export default defineComponent({
       infoBlockTitle: '',
       infoBlockIcon: '',
       infoBlockHelpText: '',
+      transportMethod: '',
+      vehicleDropdownList: '',
       personnelDetailed: [{
         'persons': '',
         'transport-mode': '',
@@ -106,10 +105,30 @@ export default defineComponent({
     },
     removeRowItem(index) {
       this.personnelDetailed.splice(index, 1)
-    }
+    },
+    getTransportModeTypeData: function () {
+      return get('/static/transport-mode-input-data.json', {baseURL: window.location.origin})
+        .then((response) => {
+          this.transportMethod = response.data;
+        })
+        .catch((error) => {
+          throw error.response.data;
+        });
+    },
+    getVehicleEmissionData: function () {
+      return get('/static/vehicle-input-data.json', {baseURL: window.location.origin})
+        .then((response) => {
+          this.vehicleDropdownList = response.data;
+        })
+        .catch((error) => {
+          throw error.response.data;
+        });
+    },
   },
   mounted() {
     this.getInformationCardData();
+    this.getTransportModeTypeData();
+    this.getVehicleEmissionData();
   }
 })
 </script>
