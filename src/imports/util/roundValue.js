@@ -1,0 +1,1 @@
+export const roundValue = (value, fractionDigits = 2) => Math.round(value).toFixed(fractionDigits);
