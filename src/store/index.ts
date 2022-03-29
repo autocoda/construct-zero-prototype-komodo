@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
 
 const store = createStore({
   state: {
@@ -10,8 +10,7 @@ const store = createStore({
     projectTotalTravel: null,
     usedVehicleEmissions: '--',
     materialsStepEmissions: '--',
-    equipmentStepEmissions: null,
-    usedEquipment: [
+    equipment: [
       {
         "equipmentName": null,
         "poweredBy": null,
@@ -21,6 +20,14 @@ const store = createStore({
         "transportMode": null
       }
     ],
+    equipmentStepEmissions: null,
+    personnelStepEmissions: null,
+    personnel: [{
+      'vehicleCount': null,
+      'transportMode': null,
+      'transportModeEmissions': '--',
+      'transportDistance': null,
+    }],
     stepsCompleted: {
       'landing': false,
       'materials': false,
@@ -57,8 +64,14 @@ const store = createStore({
     getEquipmentStepEmissions(state) {
       return state.equipmentStepEmissions
     },
-    getUsedEquipment(state) {
-      return state.usedEquipment
+    getEquipment(state) {
+      return state.equipment
+    },
+    getPersonnel(state) {
+      return state.personnel
+    },
+    getPersonnelStepEmissions(state) {
+      return state.personnelStepEmissions
     },
     getStepsCompleted(state) {
       return state.stepsCompleted
@@ -92,23 +105,38 @@ const store = createStore({
     updateEquipmentStepEmissions(state, payload) {
       state.equipmentStepEmissions = payload;
     },
-    updateUsedEquipment(state, payload) {
-      state.usedEquipment.push(payload);
+    updateEquipment(state, payload) {
+      state.equipment.push(payload);
     },
-    updateUsedEquipmentUnitName(state, payload) {
+    updateEquipmentUnitName(state, payload) {
       const {index, name} = payload;
-
-      state.usedEquipment[index]['unitType'] = name;
+      state.equipment[index]['unitType'] = name;
     },
     updatedCompletedSteps(state, payload) {
       state.materialsStepEmissions = payload;
     },
     updateSingleEquipmentByKey(state, [index, value]) {
-      state.usedEquipment[index] = value;
+      state.equipment[index] = value;
     },
     removeSingleEquipmentByKey(state, payload) {
-      state.usedEquipment.splice(payload, 1);
+      state.equipment.splice(payload, 1);
     },
+    updatePersonnel(state, payload) {
+      state.personnel.push(payload);
+    },
+    updateSinglePersonnelByKey(state, [index, value]) {
+      state.personnel[index] = value;
+    },
+    updatePersonnelTransportModeName(state, payload) {
+      const {index, name} = payload;
+      state.personnel[index]['transportMode'] = name;
+    },
+    removeSinglePersonnelByKey(state, payload) {
+      state.personnel.splice(payload, 1);
+    },
+    updatePersonnelStepEmissions(state, payload) {
+      state.personnelStepEmissions = payload;
+    }
   },
 })
 

@@ -8,62 +8,81 @@
   <div class="card bg-white p-4">
     <div class="row">
       <div class="col-12"><h2 class="fw-lighter text-uppercase step-heading">Personnel</h2></div>
-      <div class="col-6">
-        <label for="personnel-count" class="form-label">How many workers will you have on site?</label>
-        <select id="personnel-count" class="form-select" v-model="personnel.count">
+      <div class="col-6 mb-3">
+        <label for="personnel" class="form-label">How many workers will you have on site?</label>
+        <select id="personnel" class="form-select" v-model="personnel.transportModeEmissions" @change="updatePersonnelData($event)">
           <option selected disabled="disabled">Please Select</option>
-          <option v-for="(value, key) in personnelDropdown" :key="key" :value="value">{{ key }}</option>
+          <option 
+            v-for="(value, key) in personnelDropdown" 
+            :key="key" 
+            :value="value"
+          >
+            {{ key }}</option>
         </select>
       </div>
-      <div class="col-12 my-3">
-        <hr>
-      </div>
-      <div class="col-12">
-        <h2 class="fw-lighter text-uppercase step-heading">Emissions</h2>
-      </div>
-      <div class="col-6">
-        <div class="row">
-          <div class="col-6">Embodied</div><div class="fw-bold col-6">--kg</div>
-          <div class="col-6">Transport</div><div class="fw-bold col-6">--kg</div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="row">
-          <div class="col-6">Total</div>
-          <div class="col-6 fw-bold text-end">-- tonnes</div>
-        </div>
-      </div>
-    </div>
 
+      <PersonnelEmissions
+        :display-separator-line="false"
+        :personnel-transport-emissions="personnel.transportModeEmissions"
+        :total-transport-emissions="personnelTransportEmissions"
+      />
+    </div>
   </div>
 </template>
 <script>
 import {defineComponent} from 'vue'
 import StepInformationCard from "@/components/card/StepInformationCard.vue";
+import PersonnelEmissions from "@/components/section/PersonnelEmissions";
 import {get} from "axios";
 
 export default defineComponent({
   name: 'PersonnelCompactStep',
-  components: {StepInformationCard},
+  components: {PersonnelEmissions, StepInformationCard},
   data() {
     return {
+      personnelTransportEmissions: '--',
       personnelDropdown: '',
       infoBlockContent: '',
       infoBlockTitle: '',
       infoBlockIcon: '',
       infoBlockHelpText: '',
-      personnel: [{
-        count: ''
-      }]
     }
   },
   computed: {
     step: function () {
       return (this.$route.params.step) ?? 'personnel'
-    }
+    },
+    personnel: {
+      get() {
+        return this.$store.getters.getPersonnel
+      },
+      set(value) {
+        this.$store.commit('updatePersonnel', value);
+      }
+    },
   },
   methods: {
-    getInformationCardData() {
+    updatePersonnelData: function (event) {
+      let options = event.target.options;
+
+      if (options.selectedIndex > -1) {
+        let value = Number(options[options.selectedIndex].value);
+        this.updatePersonnelTotals(value);
+        this.personnelTransportEmissions = value;
+        this.$store.commit('updateSinglePersonnelByKey', [0, {
+          'vehicleCount': 1,
+          'transportMode': 'Diesel Car / Small Van',
+          'transportModeEmissions': value,
+          'transportDistance': 400,
+        }]);
+      }
+    },
+    updatePersonnelTotals: function (value) {
+      const emissions = Number(value / 1000);
+      this.totalTransportEmissions = emissions;
+      this.$store.commit('updatePersonnelStepEmissions', emissions);
+    },
+    getInformationCardData: function ()  {
       this.infoBlockIcon = require('@/assets/images/calculator/steps/person.svg');
       this.infoBlockTitle = 'Personnel user for works';
       this.infoBlockContent = 'Enter the details of the personnel that will be involved in this project.';

@@ -92,10 +92,10 @@ export default defineComponent({
   computed: {
     equipment: {
       get() {
-        return this.$store.getters.getUsedEquipment
+        return this.$store.getters.getEquipment
       },
       set(value) {
-        this.$store.commit('updateUsedEquipment', value);
+        this.$store.commit('updateEquipment', value);
       }
     },
     step: function () {
@@ -111,7 +111,7 @@ export default defineComponent({
       let options = event.target.options;
       if (options.selectedIndex > -1) {
         let name = options[options.selectedIndex].getAttribute('name');
-        this.$store.commit('updateUsedEquipmentUnitName', {index, name});
+        this.$store.commit('updateEquipmentUnitName', {index, name});
       }
     },
     getEquipmentEmissionsData: function () {
@@ -163,7 +163,7 @@ export default defineComponent({
         });
     },
     addRowItem: function() {
-      this.$store.commit('updateUsedEquipment', {
+      this.$store.commit('updateEquipment', {
         "equipmentName": null,
         "poweredBy": null,
         "unitType": null,
