@@ -7,17 +7,17 @@
       <div class="col-6">
         <div class="row">
           <div class="col-6">Bricks</div>
-          <div class="fw-bold col-6">--kg</div>
+          <div class="fw-bold col-6">{{ bricksEmissions }}kg</div>
           <div class="col-6">Mortar</div>
-          <div class="fw-bold col-6">--kg</div>
+          <div class="fw-bold col-6">{{ mortarEmissions }}kg</div>
           <div class="col-6">Vehicles</div>
-          <div class="fw-bold col-6">--kg</div>
+          <div class="fw-bold col-6">{{ vehicleEmissions }}kg</div>
         </div>
       </div>
       <div class="col-6">
         <div class="row">
           <div class="col-6">Total</div>
-          <div class="col-6 fw-bold text-end">2 tonnes</div>
+          <div class="col-6 fw-bold text-end">{{ materialsStepEmissions }}tonnes</div>
         </div>
       </div>
 
@@ -28,17 +28,19 @@
         <h2 class="fw-lighter text-uppercase step-heading">Equipment</h2>
       </div>
       <div class="col-6">
-        <div class="row">
-          <div class="col-6">Equipment 1</div>
-          <div class="fw-bold col-6">--kg</div>
-          <div class="col-6">Equipment 2</div>
-          <div class="fw-bold col-6">--kg</div>
+        <div class="row" v-for="(item, index) in equipmentDetailedEmissions" :key="index">
+          <div class="col-12" v-if="item.completed">
+            <div class="row">
+              <div class="col-6">{{ item.equipmentName }}</div>
+              <div class="fw-bold col-6">{{ item.emissions }}kg</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-6">
         <div class="row">
           <div class="col-6">Total</div>
-          <div class="col-6 fw-bold text-end">2 tonnes</div>
+          <div class="col-6 fw-bold text-end">{{ equipmentStepEmissions }}tonnes</div>
         </div>
       </div>
 
@@ -59,7 +61,7 @@
       <div class="col-6">
         <div class="row">
           <div class="col-6">Total</div>
-          <div class="col-6 fw-bold text-end">2 tonnes</div>
+          <div class="col-6 fw-bold text-end">{{ personnelStepEmissions }}tonnes</div>
         </div>
       </div>
 
@@ -83,7 +85,7 @@
     </div>
   </div>
 </template>
-<script lang="ts">
+<script>
 import {defineComponent} from 'vue'
 
 export default defineComponent({
@@ -91,6 +93,27 @@ export default defineComponent({
   computed: {
     step: function () {
       return (this.$route.params.step) ?? 'summary'
+    },
+    mortarEmissions: function () {
+      return this.$store.getters.getUsedMortarEmissions
+    },
+    bricksEmissions: function () {
+      return this.$store.getters.getUsedMortarEmissions
+    },
+    vehicleEmissions: function () {
+      return this.$store.getters.getUsedVehicleEmissions
+    },
+    materialsStepEmissions: function () {
+      return this.$store.getters.materialsStepEmissions
+    },
+    equipmentDetailedEmissions: function () {
+      return this.$store.getters.getEquipment;
+    },
+    equipmentStepEmissions: function () {
+      return this.$store.getters.getEquipmentStepEmissions
+    },
+    personnelStepEmissions: function () {
+      return this.$store.getters.getPersonnelStepEmissions
     }
   }
 })
