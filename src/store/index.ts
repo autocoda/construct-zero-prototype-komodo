@@ -1,4 +1,5 @@
 import {createStore} from 'vuex'
+import {ICompletedSteps} from '@/imports/ICompletedSteps'
 
 const store = createStore({
   state: {
@@ -44,6 +45,9 @@ const store = createStore({
     },
   },
   getters: {
+    getStepsCompleted(state) {
+      return state.stepsCompleted
+    },
     getEntryStepDisplay(state) {
       return state.entryStepDisplay
     },
@@ -83,11 +87,13 @@ const store = createStore({
     getPersonnelStepEmissions(state) {
       return state.personnelStepEmissions
     },
-    getStepsCompleted(state) {
-      return state.stepsCompleted
-    }
   },
   mutations: {
+    updateStepsCompleted(state, payload) {
+      const [index, value] = payload;
+      const stepKey: keyof ICompletedSteps = index;
+      state.stepsCompleted[stepKey] = value;
+    },
     updateEntryStepDisplay(state, payload) {
       state.entryStepDisplay = payload;
     },
@@ -122,7 +128,7 @@ const store = createStore({
       state.equipment.push(payload);
     },
     updateEquipmentUnitName(state, payload) {
-      const {index, name} = payload;
+      const [index, name] = payload;
       state.equipment[index]['unitType'] = name;
     },
     updateEquipmentDataCompletion(state, payload) {
