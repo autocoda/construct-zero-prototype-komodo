@@ -123,7 +123,7 @@ export default defineComponent({
     bricksEmissions: function () {
       let bricksCount = parseFloat(this.bricks);
       let totals = (!Number.isNaN(bricksCount))
-        ? ((bricksCount * 2.34) * 0.240).toFixed(4)
+        ? parseFloat(((bricksCount * 2.34) * 0.240).toFixed(4))
         : '--';
       this.$store.commit('updateUsedBricksEmissions', totals);
 
@@ -133,7 +133,7 @@ export default defineComponent({
       let vehicleBaseEmissions = parseFloat(this.vehicle);
       let vehicleTravelDistance = parseFloat(this.projectTravel);
       let totals = (!Number.isNaN(vehicleBaseEmissions) && !Number.isNaN(vehicleTravelDistance))
-        ? ((vehicleBaseEmissions * vehicleTravelDistance) / 0.62137).toFixed(3)
+        ? parseFloat(((vehicleBaseEmissions * vehicleTravelDistance) / 0.62137).toFixed(3))
         : '--';
       this.$store.commit('updateUsedVehicleEmissions', totals);
 
@@ -145,7 +145,7 @@ export default defineComponent({
       let vehicleBaseEmissions = parseFloat(this.$store.getters.getUsedVehicleEmissions);
 
       if ((!Number.isNaN(vehicleBaseEmissions) && !Number.isNaN(mortarEmissions) && !Number.isNaN(vehicleBaseEmissions))) {
-        let totals = (bricksEmissions + mortarEmissions + vehicleBaseEmissions / 1000).toFixed(4);
+        let totals = parseFloat((bricksEmissions + mortarEmissions + vehicleBaseEmissions / 1000).toFixed(4));
         this.$store.commit('updateMaterialsStepEmissions', totals);
 
         return totals
