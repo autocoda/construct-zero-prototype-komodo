@@ -36,10 +36,10 @@
           <input class="form-control readonly" type="text" v-model="item.unitType" disabled>
         </td>
         <td>
-          <input class="form-control" type="number" v-model="item.totalValue" @input="commitValueChange(index, item)">
+          <input class="form-control input-number" type="number" v-model="item.totalValue" @input="commitValueChange(index, item)">
         </td>
         <td>
-          <input class="form-control" type="number" v-model="item.transportDistance" @input="commitValueChange(index, item)">
+          <input class="form-control input-number" type="number" v-model="item.transportDistance" @input="commitValueChange(index, item)">
         </td>
         <td>
           <select id="transport-mode" class="form-select" v-model="item.transportMode" @change="commitValueChange(index, item)">
@@ -100,7 +100,7 @@ export default defineComponent({
     },
     step: function () {
       return (this.$route.params.step) ?? 'equipment';
-    }
+    },
   },
   methods: {
     commitValueChange: function (index, payload) {
@@ -114,27 +114,32 @@ export default defineComponent({
         this.$store.commit('updateEquipmentUnitName', {index, name});
       }
     },
+    getItemEmissions: function (emissionsByPowerType, emissionByTransportMode, itemCount, transportDistance) {
+      if (emissionsByPowerType && emissionByTransportMode && itemCount && transportDistance) {
+        const vehicleEmissions = (emissionByTransportMode * transportDistance) / 0.62137;
+        const equipmentEmission = emissionsByPowerType * itemCount;
+        return (vehicleEmissions + equipmentEmission) / 1000;
+      }
+
+      return 0;
+    },
     getEquipmentEmissionsData: function () {
-      const savedEquipment = this.equipment;
       let totalEquipmentEmissions = 0;
 
-      savedEquipment.forEach(equipment => {
-        const baseEmissionsByPowerType = equipment.poweredBy;
-        const baseEmissionsByTransportMode = equipment.transportMode;
-        const totalValue = equipment.totalValue;
-        const transportDistance = equipment.transportDistance;
+      this.equipment.forEach((item, index) => {
+        let itemEmissions = this.getItemEmissions(
+          item.poweredBy,
+          item.transportMode,
+          item.totalValue,
+          item.transportDistance
+        );
 
-        if (
-          (baseEmissionsByPowerType && !Number.isNaN(baseEmissionsByPowerType) )
-          && (baseEmissionsByTransportMode && !Number.isNaN(baseEmissionsByTransportMode))
-          && (totalValue && !Number.isNaN(totalValue) )
-          && (transportDistance && !Number.isNaN(transportDistance))
-        ) {
-          const vehicleEmissions = (baseEmissionsByTransportMode * transportDistance) / 0.62137;
-          const equipmentEmission = baseEmissionsByPowerType * totalValue;
-          const equipmentEmissions = (vehicleEmissions + equipmentEmission) / 1000;
-          totalEquipmentEmissions += equipmentEmissions;
+        if (itemEmissions !== 0) {
+          this.$store.commit('updateEquipmentEmissions', [index, itemEmissions]);
+          this.$store.commit('updateEquipmentDataCompletion', [index, true]);
         }
+
+        totalEquipmentEmissions += itemEmissions
       });
 
       this.$store.commit('updateEquipmentStepEmissions', totalEquipmentEmissions);
@@ -162,17 +167,19 @@ export default defineComponent({
           throw error.response.data;
         });
     },
-    addRowItem: function() {
+    addRowItem: function () {
       this.$store.commit('updateEquipment', {
         "equipmentName": null,
         "poweredBy": null,
         "unitType": null,
         "totalValue": null,
         "transportDistance": null,
-        "transportMode": null
+        "transportMode": null,
+        "emissions": null,
+        "completed": false
       });
     },
-    removeRowItem: function(index) {
+    removeRowItem: function (index) {
       this.$store.commit('removeSingleEquipmentByKey', index);
       this.getEquipmentEmissionsData();
     }
