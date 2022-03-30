@@ -123,9 +123,12 @@ export default defineComponent({
       if ((!Number.isNaN(vehicleBaseEmissions) && !Number.isNaN(mortarEmissions) && !Number.isNaN(vehicleBaseEmissions))) {
         let totals = parseFloat((bricksEmissions + mortarEmissions + vehicleBaseEmissions / 1000).toFixed(4));
         this.$store.commit('updateMaterialsStepEmissions', totals);
+        this.$store.commit('updateStepsCompleted', ['materials', true]);
 
         return totals;
       }
+
+      this.$store.commit('updateStepsCompleted', ['materials', false]);
 
       return '--';
     }

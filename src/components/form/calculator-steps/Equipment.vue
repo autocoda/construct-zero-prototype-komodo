@@ -111,7 +111,7 @@ export default defineComponent({
       let options = event.target.options;
       if (options.selectedIndex > -1) {
         let name = options[options.selectedIndex].getAttribute('name');
-        this.$store.commit('updateEquipmentUnitName', {index, name});
+        this.$store.commit('updateEquipmentUnitName', [index, name]);
       }
     },
     getItemEmissions: function (emissionsByPowerType, emissionByTransportMode, itemCount, transportDistance) {
@@ -137,6 +137,7 @@ export default defineComponent({
         if (itemEmissions !== 0) {
           this.$store.commit('updateEquipmentEmissions', [index, itemEmissions]);
           this.$store.commit('updateEquipmentDataCompletion', [index, true]);
+          this.$store.commit('updateStepsCompleted', ['equipment', true]);
         }
 
         totalEquipmentEmissions += itemEmissions

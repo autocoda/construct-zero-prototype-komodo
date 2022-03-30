@@ -145,6 +145,7 @@ export default defineComponent({
         if (rowTransportModeEmissions !== 0) {
           this.$store.commit('updatePersonnelRowEmissions', [index, rowTransportModeEmissions]);
           this.$store.commit('updatePersonnelRowDataCompletion', [index, true]);
+          this.$store.commit('updateStepsCompleted', ['personnel-detailed', true]);
 
           personnelTransportMethodEmissions += this.getTransportMethodEmissions(vehicleCount, transportModeEmissions);
           totalTransportEmissions += this.getTotalVehicleEmissions(vehicleCount, transportModeEmissions, transportDistance);

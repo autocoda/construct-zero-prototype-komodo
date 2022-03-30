@@ -21,11 +21,11 @@
           <div class="col-6">
             <div class="row">
               <div class="col-6">Bricks</div>
-              <div class="fw-bold col-6">{{ bricksEmissions }} kg</div>
+              <div class="fw-bold col-6">{{ materialsEmissions.bricksEmissions }} kg</div>
               <div class="col-6">Mortar</div>
-              <div class="fw-bold col-6">{{ mortarEmissions }} kg</div>
+              <div class="fw-bold col-6">{{ materialsEmissions.mortarEmissions }} kg</div>
               <div class="col-6">Vehicles</div>
-              <div class="fw-bold col-6">{{ vehicleEmissions }} kg</div>
+              <div class="fw-bold col-6">{{ materialsEmissions.vehicleEmissions }} kg</div>
             </div>
           </div>
           <div class="col-6">
@@ -120,14 +120,8 @@ export default defineComponent({
     step: function () {
       return (this.$route.params.step) ?? 'summary';
     },
-    mortarEmissions: function () {
-      return this.$store.getters.getUsedMortarEmissions;
-    },
-    bricksEmissions: function () {
-      return this.$store.getters.getUsedMortarEmissions;
-    },
-    vehicleEmissions: function () {
-      return this.$store.getters.getUsedVehicleEmissions;
+    materialsEmissions: function () {
+      return this.$store.getters.getMaterials;
     },
     materialsStepEmissions: function () {
       return this.$store.getters.getMaterialsStepEmissions;
