@@ -1,16 +1,18 @@
 import {createStore} from 'vuex'
-import {ICompletedSteps} from '@/imports/ICompletedSteps'
+import {ICompletedSteps} from '@/imports/interfaces/store/ICompletedSteps'
+import {IMaterialStep} from '@/imports/interfaces/store/IMaterialStep'
 
 const store = createStore({
   state: {
-    entryStepDisplay: true,
-    usedMortar: null,
-    usedMortarEmissions: '--',
-    usedBricks: null,
-    usedBricksEmissions: '--',
-    usedVehicleType: null,
-    projectTotalTravel: null,
-    usedVehicleEmissions: '--',
+    materials: {
+      mortar: null,
+      mortarEmissions: null,
+      bricks: null,
+      bricksEmissions: null,
+      vehicleType: null,
+      vehicleTotalTravel: null,
+      vehicleEmissions: null,
+    },
     materialsStepEmissions: '--',
     equipment: [
       {
@@ -48,26 +50,8 @@ const store = createStore({
     getStepsCompleted(state) {
       return state.stepsCompleted
     },
-    getUsedMortar(state) {
-      return state.usedMortar
-    },
-    getUsedMortarEmissions(state) {
-      return state.usedMortarEmissions
-    },
-    getUsedBricks(state) {
-      return state.usedBricks
-    },
-    getUsedBricksEmissions(state) {
-      return state.usedBricksEmissions
-    },
-    getUsedVehicleType(state) {
-      return state.usedVehicleType
-    },
-    getProjectTotalTravel(state) {
-      return state.projectTotalTravel
-    },
-    getUsedVehicleEmissions(state) {
-      return state.usedVehicleEmissions
+    getMaterials(state) {
+      return state.materials
     },
     getMaterialsStepEmissions(state) {
       return state.materialsStepEmissions
@@ -91,26 +75,10 @@ const store = createStore({
       const stepKey: keyof ICompletedSteps = index;
       state.stepsCompleted[stepKey] = value;
     },
-    updateUsedMortar(state, payload) {
-      state.usedMortar = payload;
-    },
-    updateUsedMortarEmissions(state, payload) {
-      state.usedMortarEmissions = payload;
-    },
-    updateUsedBricks(state, payload) {
-      state.usedBricks = payload
-    },
-    updateUsedBricksEmissions(state, payload) {
-      state.usedBricksEmissions = payload;
-    },
-    updateUsedVehicleType(state, payload) {
-      state.usedVehicleType = payload;
-    },
-    updateProjectTotalTravel(state, payload) {
-      state.projectTotalTravel = payload;
-    },
-    updateUsedVehicleEmissions(state, payload) {
-      state.usedVehicleEmissions = payload;
+    updateMaterials(state, payload) {
+      const [index, value] = payload;
+      const materialKey: keyof IMaterialStep = index;
+      state.materials[materialKey] = value;
     },
     updateMaterialsStepEmissions(state, payload) {
       state.materialsStepEmissions = payload;
