@@ -3,5 +3,7 @@ export interface ICompletedSteps {
     materials: boolean,
     equipment: boolean,
     personnel: boolean,
+    'personnel-compact': boolean,
+    'personnel-detailed': boolean,
     summary: boolean,
 }

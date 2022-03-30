@@ -13,7 +13,7 @@ const store = createStore({
       vehicleTotalTravel: null,
       vehicleEmissions: null,
     },
-    materialsStepEmissions: '--',
+    materialsStepEmissions: null,
     equipment: [
       {
         "equipmentName": null,
@@ -27,7 +27,6 @@ const store = createStore({
       }
     ],
     equipmentStepEmissions: null,
-    personnelStepEmissions: null,
     personnel: [
       {
         'vehicleCount': null,
@@ -38,11 +37,14 @@ const store = createStore({
         "completed": false
       }
     ],
+    personnelStepEmissions: null,
     stepsCompleted: {
       'landing': false,
       'materials': false,
       'equipment': false,
       'personnel': false,
+      'personnel-compact': false,
+      'personnel-detailed': false,
       'summary': false,
     },
   },
