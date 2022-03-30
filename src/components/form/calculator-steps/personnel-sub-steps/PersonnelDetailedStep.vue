@@ -152,8 +152,8 @@ export default defineComponent({
         }
       });
 
-      this.personnelTransportEmissions = personnelTransportMethodEmissions;
-      this.personnelTotalTransportEmissions = totalTransportEmissions;
+      this.personnelTransportEmissions = personnelTransportMethodEmissions.toFixed(6);
+      this.personnelTotalTransportEmissions = totalTransportEmissions.toFixed(6);
 
       this.$store.commit('updatePersonnelStepEmissions', totalTransportEmissions);
     },
