@@ -106,39 +106,52 @@ export default defineComponent({
     },
     addRowItem() {
       this.$store.commit('updatePersonnel', {
-        'vehicleCount': '',
-        'transportMode': '',
-        'transportModeEmissions': '',
-        'transportDistance': '',
+        'vehicleCount': null,
+        'transportMode': null,
+        'transportModeEmissions': null,
+        'transportDistance': null,
+        "emissions": null,
+        "completed": false
       });
     },
     removeRowItem(index) {
       this.$store.commit('removeSinglePersonnelByKey', index);
       this.updatePersonnelTotals();
     },
+    getTotalVehicleEmissions: function (vehicleCount, transportModeEmissions, transportDistance) {
+      if (vehicleCount && transportModeEmissions && transportDistance) {
+        return ((transportModeEmissions * transportDistance) / 0.62137) / 1000000 * vehicleCount
+      }
+      return 0;
+    },
+    getTransportMethodEmissions: function (vehicleCount, transportModeEmissions) {
+      if (vehicleCount && transportModeEmissions) {
+        return (transportModeEmissions * vehicleCount) / 1000000;
+      }
+      return 0;
+    },
     updatePersonnelTotals: function () {
-      const personnel = this.personnel;
       let totalTransportEmissions = 0;
       let personnelTransportMethodEmissions = 0;
 
-      personnel.forEach(equipment => {
-        const vehicleCount = equipment.vehicleCount;
-        const transportModeEmissions = equipment.transportModeEmissions;
-        const transportDistance = equipment.transportDistance;
+      this.personnel.forEach((row, index) => {
+        const vehicleCount = row.vehicleCount;
+        const transportModeEmissions = row.transportModeEmissions;
+        const transportDistance = row.transportDistance;
 
-        if (
-          (vehicleCount && !Number.isNaN(vehicleCount) )
-          && (transportModeEmissions && !Number.isNaN(transportModeEmissions))
-          && (transportDistance && !Number.isNaN(transportDistance) )
-        ) {
+        let rowTransportModeEmissions = this.getTotalVehicleEmissions(vehicleCount, transportModeEmissions, transportDistance);
+        if (rowTransportModeEmissions !== 0) {
+          this.$store.commit('updatePersonnelRowEmissions', [index, rowTransportModeEmissions]);
+          this.$store.commit('updatePersonnelRowDataCompletion', [index, true]);
 
-          personnelTransportMethodEmissions += (transportModeEmissions * vehicleCount) / 1000000;
-          totalTransportEmissions += ((transportModeEmissions * transportDistance) / 0.62137) / 1000000 * vehicleCount;
+          personnelTransportMethodEmissions += this.getTransportMethodEmissions(vehicleCount, transportModeEmissions);
+          totalTransportEmissions += this.getTotalVehicleEmissions(vehicleCount, transportModeEmissions, transportDistance);
         }
       });
 
-      this.personnelTransportEmissions = personnelTransportMethodEmissions.toFixed(8);
-      this.personnelTotalTransportEmissions = totalTransportEmissions.toFixed(8);
+      this.personnelTransportEmissions = personnelTransportMethodEmissions;
+      this.personnelTotalTransportEmissions = totalTransportEmissions;
+
       this.$store.commit('updatePersonnelStepEmissions', totalTransportEmissions);
     },
     commitValueChange: function (index, payload) {
