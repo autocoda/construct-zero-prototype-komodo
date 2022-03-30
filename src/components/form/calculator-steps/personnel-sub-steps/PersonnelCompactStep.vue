@@ -68,12 +68,15 @@ export default defineComponent({
       if (options.selectedIndex > -1) {
         let value = Number(options[options.selectedIndex].value);
         this.updatePersonnelTotals(value);
-        this.personnelTransportEmissions = value;
+        this.personnelTransportEmissions = Number(value / 1000);
+
         this.$store.commit('updateSinglePersonnelByKey', [0, {
           'vehicleCount': 1,
           'transportMode': 'Diesel Car / Small Van',
           'transportModeEmissions': value,
           'transportDistance': 400,
+          "emissions": this.personnelTransportEmissions,
+          "completed": true
         }]);
       }
     },
