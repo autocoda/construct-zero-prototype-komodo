@@ -68,7 +68,6 @@ import {defineComponent} from 'vue'
 import StepInformationCard from "@/components/card/StepInformationCard.vue";
 import PersonnelEmissions from "@/components/section/PersonnelEmissions";
 import {get} from "axios";
-import {roundValue} from "@/imports/util/roundValue";
 
 export default defineComponent({
   name: 'PersonnelDetailedStep',
