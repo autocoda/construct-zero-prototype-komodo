@@ -118,37 +118,37 @@ export default defineComponent({
   name: 'SummaryStep',
   computed: {
     step: function () {
-      return (this.$route.params.step) ?? 'summary'
+      return (this.$route.params.step) ?? 'summary';
     },
     mortarEmissions: function () {
-      return this.$store.getters.getUsedMortarEmissions
+      return this.$store.getters.getUsedMortarEmissions;
     },
     bricksEmissions: function () {
-      return this.$store.getters.getUsedMortarEmissions
+      return this.$store.getters.getUsedMortarEmissions;
     },
     vehicleEmissions: function () {
-      return this.$store.getters.getUsedVehicleEmissions
+      return this.$store.getters.getUsedVehicleEmissions;
     },
     materialsStepEmissions: function () {
-      return this.$store.getters.getMaterialsStepEmissions
+      return this.$store.getters.getMaterialsStepEmissions;
     },
     equipmentDetailedEmissions: function () {
       return this.$store.getters.getEquipment;
     },
     equipmentStepEmissions: function () {
-      return this.$store.getters.getEquipmentStepEmissions
+      return this.$store.getters.getEquipmentStepEmissions;
     },
     personnelDetailedEmissions: function () {
-      return this.$store.getters.getPersonnel
+      return this.$store.getters.getPersonnel;
     },
     personnelStepEmissions: function () {
-      return this.$store.getters.getPersonnelStepEmissions
+      return this.$store.getters.getPersonnelStepEmissions;
     },
     summaryStepTotals: function () {
       if (this.materialsStepEmissions && this.equipmentStepEmissions && this.personnelStepEmissions) {
         return parseFloat((this.materialsStepEmissions + this.equipmentStepEmissions + this.personnelStepEmissions).toFixed(2));
       }
-      return '--'
+      return '--';
     }
   }
 })

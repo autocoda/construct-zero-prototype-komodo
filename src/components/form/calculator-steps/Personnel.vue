@@ -73,10 +73,10 @@ export default defineComponent({
       this.infoBlockContent = 'Please choose the amount of detail you’d like to supply on the personnel involved in this project. ';
     },
     displayCompactStep() {
-      this.$router.push({'name': 'calculator-steps', 'params': {step: 'personnel-compact'}})
+      this.$router.push({'name': 'calculator-steps', 'params': {step: 'personnel-compact'}});
     },
     displayDetailedStep() {
-      this.$router.push({'name': 'calculator-steps', 'params': {step: 'personnel-detailed'}})
+      this.$router.push({'name': 'calculator-steps', 'params': {step: 'personnel-detailed'}});
     }
   },
   mounted() {

@@ -86,11 +86,11 @@ export default defineComponent({
   },
   computed: {
     step: function () {
-      return (this.$route.params.step) ?? 'personnel'
+      return (this.$route.params.step) ?? 'personnel';
     },
     personnel: {
       get() {
-        return this.$store.getters.getPersonnel
+        return this.$store.getters.getPersonnel;
       },
       set(value) {
         this.$store.commit('updatePersonnel', value);

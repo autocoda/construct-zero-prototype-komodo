@@ -81,7 +81,7 @@ export default defineComponent({
     },
     mortar: {
       get() {
-        return this.$store.getters.getUsedMortar
+        return this.$store.getters.getUsedMortar;
       },
       set(value) {
         this.$store.commit('updateUsedMortar', value);
@@ -89,7 +89,7 @@ export default defineComponent({
     },
     bricks: {
       get() {
-        return this.$store.getters.getUsedBricks
+        return this.$store.getters.getUsedBricks;
       },
       set(value) {
         this.$store.commit('updateUsedBricks', value);
@@ -97,7 +97,7 @@ export default defineComponent({
     },
     vehicle: {
       get() {
-        return this.$store.getters.getUsedVehicleType
+        return this.$store.getters.getUsedVehicleType;
       },
       set(value) {
         this.$store.commit('updateUsedVehicleType', value)
@@ -105,7 +105,7 @@ export default defineComponent({
     },
     projectTravel: {
       get() {
-        return this.$store.getters.getProjectTotalTravel
+        return this.$store.getters.getProjectTotalTravel;
       },
       set(value) {
         this.$store.commit('updateProjectTotalTravel', value)
@@ -148,7 +148,7 @@ export default defineComponent({
         let totals = parseFloat((bricksEmissions + mortarEmissions + vehicleBaseEmissions / 1000).toFixed(4));
         this.$store.commit('updateMaterialsStepEmissions', totals);
 
-        return totals
+        return totals;
       }
 
       return '--';
