@@ -31,7 +31,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-6">Total</div>
-              <div class="col-6 fw-bold text-end">{{ materialsStepEmissions }}tonnes</div>
+              <div class="col-6 fw-bold text-end">{{ materialsStepEmissions }} tonnes</div>
             </div>
           </div>
         </div>
