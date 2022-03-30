@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <FormEntryPointCard
-      v-if="isFormEntryPoint"
+      v-if="entryStep"
       @displayCarbonCalculator="displayCarbonCalculator"
       :title="formEntryPointTitle"
       :sub-title="formEntryPointSubTitle"
@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import {Options, Vue} from 'vue-class-component';
 import FormEntryPointCard from '@/components/card/FormEntryPointCard.vue';
 import FormBaseLayout from "@/components/container/FormBaseLayout.vue";
@@ -25,7 +25,6 @@ import FormBaseLayout from "@/components/container/FormBaseLayout.vue";
   },
   data() {
     return {
-      isFormEntryPoint: true,
       formEntryPointTitle: '',
       formEntryPointSubTitle: '',
       formEntryPointParagraph: '',
@@ -41,9 +40,19 @@ import FormBaseLayout from "@/components/container/FormBaseLayout.vue";
       },
     }
   },
+  computed: {
+    entryStep: {
+      get() {
+        return this.$store.getters.getEntryStepDisplay
+      },
+      set(value) {
+        this.$store.commit('updateEntryStepDisplay', value);
+      }
+    },
+  },
   methods: {
     displayCarbonCalculator() {
-      this.isFormEntryPoint = false;
+      this.$store.commit('updateEntryStepDisplay', false);
       this.$router.push({'name': 'calculator-steps', 'params': {step: 'materials'}});
     },
     getFormEntryPointCardContent() {

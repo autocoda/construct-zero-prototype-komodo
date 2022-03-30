@@ -2,6 +2,7 @@ import {createStore} from 'vuex'
 
 const store = createStore({
   state: {
+    entryStepDisplay: true,
     usedMortar: null,
     usedMortarEmissions: '--',
     usedBricks: null,
@@ -43,6 +44,9 @@ const store = createStore({
     },
   },
   getters: {
+    getEntryStepDisplay(state) {
+      return state.entryStepDisplay
+    },
     getUsedMortar(state) {
       return state.usedMortar
     },
@@ -84,6 +88,9 @@ const store = createStore({
     }
   },
   mutations: {
+    updateEntryStepDisplay(state, payload) {
+      state.entryStepDisplay = payload;
+    },
     updateUsedMortar(state, payload) {
       state.usedMortar = payload;
     },
