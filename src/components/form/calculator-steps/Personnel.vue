@@ -19,7 +19,7 @@
         </div>
         <div class="card-footer bg-white border-0">
           <button
-            @click="this.$router.push({'name': 'calculator-steps', params: {step: 'personnel-compact'}})"
+            @click="displayCompactStep"
             class="btn btn-primary text-white float-end"
           >Select</button>
         </div>
@@ -38,7 +38,7 @@
         </div>
         <div class="card-footer bg-white border-0">
           <button
-            @click="this.$router.push({'name': 'calculator-steps', params: {step: 'personnel-detailed'}})"
+            @click="displayDetailedStep"
             class="btn btn-primary text-white float-end"
           >Select</button>
         </div>
@@ -72,6 +72,12 @@ export default defineComponent({
       this.infoBlockTitle = 'Personnel options';
       this.infoBlockContent = 'Please choose the amount of detail you’d like to supply on the personnel involved in this project. ';
     },
+    displayCompactStep() {
+      this.$router.push({'name': 'calculator-steps', 'params': {step: 'personnel-compact'}})
+    },
+    displayDetailedStep() {
+      this.$router.push({'name': 'calculator-steps', 'params': {step: 'personnel-detailed'}})
+    }
   },
   mounted() {
     this.getInformationCardData();
