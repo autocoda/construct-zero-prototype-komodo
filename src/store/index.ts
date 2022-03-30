@@ -17,17 +17,23 @@ const store = createStore({
         "unitType": null,
         "totalValue": null,
         "transportDistance": null,
-        "transportMode": null
+        "transportMode": null,
+        "emissions": null,
+        "completed": false
       }
     ],
     equipmentStepEmissions: null,
     personnelStepEmissions: null,
-    personnel: [{
-      'vehicleCount': null,
-      'transportMode': null,
-      'transportModeEmissions': '--',
-      'transportDistance': null,
-    }],
+    personnel: [
+      {
+        'vehicleCount': null,
+        'transportMode': null,
+        'transportModeEmissions': null,
+        'transportDistance': null,
+        "emissions": null,
+        "completed": false
+      }
+    ],
     stepsCompleted: {
       'landing': false,
       'materials': false,
@@ -112,6 +118,14 @@ const store = createStore({
       const {index, name} = payload;
       state.equipment[index]['unitType'] = name;
     },
+    updateEquipmentDataCompletion(state, payload) {
+      const [index, value] = payload;
+      state.equipment[index]['completed'] = value;
+    },
+    updateEquipmentEmissions(state, payload) {
+      const [index, value] = payload;
+      state.equipment[index]['emissions'] = value;
+    },
     updatedCompletedSteps(state, payload) {
       state.materialsStepEmissions = payload;
     },
@@ -136,7 +150,15 @@ const store = createStore({
     },
     updatePersonnelStepEmissions(state, payload) {
       state.personnelStepEmissions = payload;
-    }
+    },
+    updatePersonnelRowEmissions(state, payload) {
+      const [index, value] = payload;
+      state.personnel[index]['emissions'] = value;
+    },
+    updatePersonnelRowDataCompletion(state, payload) {
+      const [index, value] = payload;
+      state.personnel[index]['completed'] = value;
+    },
   },
 })
 
