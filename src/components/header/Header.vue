@@ -9,14 +9,19 @@
     </div>
   </header>
 </template>
-<script lang="ts">
+<script>
 import {defineComponent} from 'vue'
 
 export default defineComponent({
   name: 'MainHeader',
   methods: {
     updateRoute: function () {
-      this.$router.push({'name': 'calculator-steps', 'params': {step: 'materials'}});
+      let entryStepState = this.$store.getters.getEntryStepDisplay;
+      if (!entryStepState) {
+        this.$router.push({'name': 'calculator-steps', 'params': {step: 'materials'}});
+      } else {
+        this.$router.push({'name': 'home'});
+      }
     }
   }
 })
