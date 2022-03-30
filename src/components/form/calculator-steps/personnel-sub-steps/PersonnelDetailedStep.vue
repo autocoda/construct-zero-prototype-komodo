@@ -120,13 +120,16 @@ export default defineComponent({
     },
     getTotalVehicleEmissions: function (vehicleCount, transportModeEmissions, transportDistance) {
       if (vehicleCount && transportModeEmissions && transportDistance) {
-        return ((transportModeEmissions * transportDistance) / 0.62137) / 1000000 * vehicleCount
+        let milesConvertedToKmValue = transportDistance * 1.609344;
+        let perItemsEmissions = milesConvertedToKmValue * transportModeEmissions / 1000000;
+
+        return perItemsEmissions * vehicleCount;
       }
       return 0;
     },
     getTransportMethodEmissions: function (vehicleCount, transportModeEmissions) {
       if (vehicleCount && transportModeEmissions) {
-        return (transportModeEmissions * vehicleCount) / 1000000;
+        return transportModeEmissions * vehicleCount / 1000000;
       }
       return 0;
     },
@@ -166,7 +169,7 @@ export default defineComponent({
       }
     },
     getTransportModeTypeData: function () {
-      return get('/static/transport-methods-input-data.json', {baseURL: window.location.origin})
+      return get('/static/transport-methods-input-data.json')
         .then((response) => {
           this.transportMethod = response.data;
         })

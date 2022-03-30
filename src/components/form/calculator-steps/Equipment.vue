@@ -150,7 +150,7 @@ export default defineComponent({
       this.infoBlockContent = 'List any materials you will directly use to complete your works for this project.';
     },
     getFuelTypeData: function () {
-      return get('/static/fuel-emissions-input-data.json', {baseURL: window.location.origin})
+      return get('/static/fuel-emissions-input-data.json')
         .then((response) => {
           this.poweredBy = response.data;
         })
@@ -159,7 +159,7 @@ export default defineComponent({
         });
     },
     getTransportModeTypeData: function () {
-      return get('/static/transport-mode-input-data.json', {baseURL: window.location.origin})
+      return get('/static/transport-mode-input-data.json')
         .then((response) => {
           this.transportMethod = response.data;
         })

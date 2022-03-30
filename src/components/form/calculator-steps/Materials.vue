@@ -156,7 +156,7 @@ export default defineComponent({
   },
   methods: {
     getVehicleEmissionData: function () {
-      return get('/static/vehicle-input-data.json', {baseURL: window.location.origin})
+      return get('/static/vehicle-input-data.json')
         .then((response) => {
           this.vehicleDropdownList = response.data;
         })

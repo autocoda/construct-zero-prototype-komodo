@@ -68,7 +68,7 @@ export default defineComponent({
       if (options.selectedIndex > -1) {
         let value = Number(options[options.selectedIndex].value);
         this.updatePersonnelTotals(value);
-        this.personnelTransportEmissions = Number(value / 1000);
+        this.personnelTransportEmissions = value / 1000;
 
         this.$store.commit('updateSinglePersonnelByKey', [0, {
           'vehicleCount': 1,
@@ -81,7 +81,7 @@ export default defineComponent({
       }
     },
     updatePersonnelTotals: function (value) {
-      const emissions = Number(value / 1000);
+      const emissions = value / 1000;
       this.totalTransportEmissions = emissions;
       this.$store.commit('updatePersonnelStepEmissions', emissions);
     },
@@ -91,7 +91,7 @@ export default defineComponent({
       this.infoBlockContent = 'Enter the details of the personnel that will be involved in this project.';
     },
     getTransportModeTypeData: function () {
-      return get('/static/personnel-input-data.json', {baseURL: window.location.origin})
+      return get('/static/personnel-input-data.json')
         .then((response) => {
           this.personnelDropdown = response.data;
         })
