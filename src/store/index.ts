@@ -48,9 +48,6 @@ const store = createStore({
     getStepsCompleted(state) {
       return state.stepsCompleted
     },
-    getEntryStepDisplay(state) {
-      return state.entryStepDisplay
-    },
     getUsedMortar(state) {
       return state.usedMortar
     },
@@ -93,9 +90,6 @@ const store = createStore({
       const [index, value] = payload;
       const stepKey: keyof ICompletedSteps = index;
       state.stepsCompleted[stepKey] = value;
-    },
-    updateEntryStepDisplay(state, payload) {
-      state.entryStepDisplay = payload;
     },
     updateUsedMortar(state, payload) {
       state.usedMortar = payload;
