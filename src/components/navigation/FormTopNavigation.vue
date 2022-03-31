@@ -37,6 +37,9 @@
       <span :class="[badgeDefaultClass]">4</span> <span class="title">Summary</span>
     </a>
   </div>
+  <div class="cancel d-flex">
+    <a @click="resetApplicationState()" class="cursor-pointer text-decoration-underline">Cancel</a>
+  </div>
 </template>
 
 <script>
@@ -75,6 +78,9 @@ export default defineComponent({
       }
 
       return completedStepsMapping[step] === true;
+    },
+    resetApplicationState: function () {
+      this.$store.dispatch('resetState');
     }
   },
 })

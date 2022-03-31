@@ -2,8 +2,7 @@ import {createStore} from 'vuex'
 import {ICompletedSteps} from '@/imports/interfaces/store/ICompletedSteps'
 import {IMaterialStep} from '@/imports/interfaces/store/IMaterialStep'
 
-const store = createStore({
-  state: {
+const initialState = () => ({
     materials: {
       mortar: null,
       mortarEmissions: null,
@@ -47,7 +46,10 @@ const store = createStore({
       'personnel-detailed': false,
       'summary': false,
     },
-  },
+})
+
+const store = createStore({
+  state: initialState(),
   getters: {
     getStepsCompleted(state) {
       return state.stepsCompleted
@@ -72,6 +74,9 @@ const store = createStore({
     },
   },
   mutations: {
+    resetStoreState(state) {
+      Object.assign(state, initialState())
+    },
     updateStepsCompleted(state, payload) {
       const [index, value] = payload;
       const stepKey: keyof ICompletedSteps = index;
@@ -137,6 +142,11 @@ const store = createStore({
       state.personnel[index]['completed'] = value;
     },
   },
+  actions: {
+    resetState({ commit }) {
+      commit('resetStoreState')
+    },
+  }
 })
 
 export default store;
