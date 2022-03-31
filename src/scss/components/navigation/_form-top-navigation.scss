@@ -15,6 +15,7 @@
     .form-step {
       z-index: 1;
       padding: 0 20px;
+      font-family: $font-family-sans-serif-secondary;
       background-color: $body-bg;
 
       &:first-child {
@@ -28,6 +29,10 @@
       &:hover {
         cursor: pointer;
       }
+
+      .title {
+        width: 70px;
+      }
     }
 
     .badge {
@@ -40,7 +45,7 @@
   }
 
   &-anchor {
-    font-weight: 300;
+    font-weight: 400;
     transition: all .5s ease-in-out;
 
     &.incomplete {
@@ -51,10 +56,30 @@
     &.complete {
       font-weight: 400;
       color: rgba(0 0 0 / .87);
+
+      .badge {
+        position: relative;
+        color: $complete;
+        background-color: $complete;
+        transition: all .5s ease-in-out;
+
+        &::before {
+          position: absolute;
+          width: 10px;
+          height: 8px;
+          content: "\200C";
+          background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M3.5 6.08594L8.79688 0.789062L9.5 1.49219L3.5 7.49219L0.710938 4.70312L1.41406 4L3.5 6.08594Z' fill='white'%3E%3C/path%3E%3C/svg%3E");
+        }
+      }
     }
 
     &.active {
       font-weight: 700;
+
+      .badge::before {
+        opacity: 0;
+        transition: all .5s ease-in-out;
+      }
     }
 
     &.active,
@@ -65,6 +90,11 @@
       .badge {
         color: $white;
         background-color: $primary;
+
+        &::before {
+          opacity: 0;
+          transition: all .5s ease-in-out;
+        }
       }
     }
   }

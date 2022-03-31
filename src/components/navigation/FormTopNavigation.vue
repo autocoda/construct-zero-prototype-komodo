@@ -7,7 +7,7 @@
       ]"
       @click="switchStep('materials')"
     >
-      <span :class="[badgeDefaultClass]">1</span> Materials
+      <span :class="[badgeDefaultClass]">1</span> <span class="title">Materials</span>
     </a>
     <a
       :class="[
@@ -16,7 +16,7 @@
       ]"
       @click="switchStep('equipment')"
     >
-      <span :class="[badgeDefaultClass]">2</span> Equipment
+      <span :class="[badgeDefaultClass]">2</span> <span class="title">Equipment</span>
     </a>
     <a
       :class="[
@@ -26,7 +26,7 @@
       ]"
       @click="switchStep('personnel')"
     >
-      <span :class="[badgeDefaultClass]">3</span> Personnel
+      <span :class="[badgeDefaultClass]">3</span> <span class="title">Personnel</span>
     </a>
     <a :class="[
          anchorClass, isStepComplete('summary')  ? 'complete': 'incomplete',
@@ -34,7 +34,7 @@
        ]"
        @click="switchStep('summary')"
     >
-      <span :class="[badgeDefaultClass]">4</span> Summary
+      <span :class="[badgeDefaultClass]">4</span> <span class="title">Summary</span>
     </a>
   </div>
 </template>
