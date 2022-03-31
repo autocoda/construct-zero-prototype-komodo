@@ -32,7 +32,7 @@
             </option>
           </select>
         </td>
-        <td>
+        <td class="readonly-column">
           <input class="form-control readonly" type="text" v-model="item.unitType" disabled>
         </td>
         <td>
