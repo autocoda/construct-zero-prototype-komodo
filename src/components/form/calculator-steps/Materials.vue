@@ -120,7 +120,7 @@ export default defineComponent({
       let mortarEmissions = parseFloat(this.materials.mortarEmissions);
       let vehicleBaseEmissions = parseFloat(this.materials.vehicleEmissions);
 
-      if ((!Number.isNaN(vehicleBaseEmissions) && !Number.isNaN(mortarEmissions) && !Number.isNaN(vehicleBaseEmissions))) {
+      if ((!Number.isNaN(bricksEmissions) && !Number.isNaN(mortarEmissions) && !Number.isNaN(vehicleBaseEmissions))) {
         let totals = parseFloat((bricksEmissions + mortarEmissions + vehicleBaseEmissions / 1000).toFixed(4));
         this.$store.commit('updateMaterialsStepEmissions', totals);
         this.$store.commit('updateStepsCompleted', ['materials', true]);
