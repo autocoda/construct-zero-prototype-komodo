@@ -1,6 +1,6 @@
 <template>
   <div class="mx-auto form-entry-card d-flex flex-column justify-content-center">
-    <h2 class="fw-bold text-center">{{ title }}</h2>
+    <h2 class="fw-bold font-usual text-center">{{ title }}</h2>
     <img
       v-if="image.length !== 0"
       class="img-fluid mx-auto my-2"
@@ -10,11 +10,11 @@
       :src="image.src"
       :alt="image.alt"
     >
-    <h3 class="fw-bold text-center">{{ subTitle }}</h3>
+    <h3 class="fw-bold font-usual text-center">{{ subTitle }}</h3>
     <div class="content my-3 text-center">
       {{ paragraph }}
     </div>
-    <button class="btn btn-primary btn-form mx-auto" @click="displayCarbonCalculator">{{ button.text }}</button>
+    <button class="btn btn-primary btn-form mt-4 mx-auto" @click="displayCarbonCalculator">{{ button.text }}</button>
   </div>
 </template>
 

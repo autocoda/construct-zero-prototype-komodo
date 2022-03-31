@@ -4,7 +4,7 @@
       <div class="col-12 mb-4">
         <div class="row">
           <div class="col-7">
-            <h2 class="fw-bold">Your Project's Carbon Footprint</h2>
+            <h2 class="fw-bold  font-usual">Your Project's Carbon Footprint</h2>
             <p>Here's a summary of the likely carbon emissions from your project according to the materials, equipment and personnel you've added.</p>
           </div>
           <div class="col-5 d-flex justify-content-end align-items-baseline">
@@ -31,7 +31,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-6">Total</div>
-              <div class="col-6 fw-bold text-end">{{ materialsStepEmissions }} tonnes</div>
+              <div class="col-6 fw-bold font-usual text-end">{{ materialsStepEmissions }} tonnes</div>
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-6">Total</div>
-              <div class="col-6 fw-bold text-end">{{ equipmentStepEmissions.toFixed(4) }} tonnes</div>
+              <div class="col-6 fw-bold font-usual text-end">{{ equipmentStepEmissions.toFixed(4) }} tonnes</div>
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-6">Total</div>
-              <div class="col-6 fw-bold text-end">{{ personnelStepEmissions.toFixed(2) }} tonnes</div>
+              <div class="col-6 fw-bold font-usual text-end">{{ personnelStepEmissions.toFixed(2) }} tonnes</div>
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@
       <div class="col-6">
         <div class="row">
           <div class="col-3">Total</div>
-          <div class="col-9 fw-bold text-end h2 my-0">{{ summaryStepTotals }} tonnes</div>
+          <div class="col-9 fw-bold font-usual text-end h2 my-0">{{ summaryStepTotals }} tonnes</div>
         </div>
       </div>
     </div>
@@ -140,13 +140,11 @@ export default defineComponent({
     },
     summaryStepTotals: function () {
       if (this.materialsStepEmissions && this.equipmentStepEmissions && this.personnelStepEmissions) {
+        this.$store.commit('updateStepsCompleted', ['summary', true]);
         return parseFloat((this.materialsStepEmissions + this.equipmentStepEmissions + this.personnelStepEmissions).toFixed(2));
       }
       return '--';
     }
   },
-  mounted() {
-    this.$store.commit('updateStepsCompleted', ['summary', true]);
-  }
 })
 </script>

@@ -10,7 +10,7 @@
       <div class="card card-personnel bg-white p-3">
         <div class="card-body d-flex">
           <div class="card-text">
-            <h2>Option 1</h2>
+            <h2 class="font-usual fw-bold">Option 1</h2>
             <p>This form requires less detail and takes less time to complete, however it is less accurate and can cost you more.</p>
           </div>
           <div class="card-icon">
@@ -29,7 +29,7 @@
       <div class="card card-personnel bg-white p-3">
         <div class="card-body d-flex">
           <div class="card-text">
-            <h2>Option 2</h2>
+            <h2 class="font-usual fw-bold">Option 2</h2>
             <p>This form requires more detail and takes more time to complete, however it is more accurate and cost effective.</p>
           </div>
           <div class="card-icon">
