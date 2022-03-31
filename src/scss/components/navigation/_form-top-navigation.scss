@@ -101,10 +101,22 @@
 }
 
 .cancel-progress {
+
   .cancel-anchor {
     position: absolute;
     top: 35px;
-    right: -150px;
     color: $cancel-anchor-colour;
+
+    @include media-breakpoint-between(md, xl) {
+      top: 25px;
+      right: -50px;
+    }
+
+    @include media-breakpoint-between(xl, xxl) {
+      right: -100px;
+    }
+    @include media-breakpoint-up(xxl) {
+      right: -150px;
+    }
   }
 }
