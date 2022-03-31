@@ -111,7 +111,10 @@
           <div class="col-8 offset-4">
             <div class="align-items-baseline d-flex flex-row">
               <img class="me-1" src="@/assets/images/calculator/steps/error.svg" alt="Error Icon">
-              <p>Sorry, something went wrong with this calculation, please try again.</p>
+              <p>
+                Sorry, something went wrong with this calculation,
+                <a @click="resetApplicationState()" class="cursor-pointer text-danger text-decoration-underline">please try again</a>.
+              </p>
             </div>
           </div>
         </div>
@@ -152,9 +155,14 @@ export default defineComponent({
         return parseFloat((this.materialsStepEmissions + this.equipmentStepEmissions + this.personnelStepEmissions).toFixed(2));
       }
 
-
       return '--';
-    }
+    },
   },
+  methods: {
+    resetApplicationState: function () {
+      this.$store.dispatch('resetState');
+      this.$router.push({name: 'home'});
+    }
+  }
 })
 </script>
