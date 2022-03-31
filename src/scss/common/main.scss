@@ -16,3 +16,7 @@ p {
   font-size: 14px;
   line-height: 21px;
 }
+
+.main-container {
+  min-height: calc(100vh - (74px + 94px + 48px));
+}
