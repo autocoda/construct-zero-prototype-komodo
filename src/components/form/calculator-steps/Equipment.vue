@@ -143,6 +143,10 @@ export default defineComponent({
         totalEquipmentEmissions += itemEmissions
       });
 
+      if (this.equipment.length === 0) {
+        this.$store.commit('updateStepsCompleted', ['equipment', false]);
+      }
+
       this.$store.commit('updateEquipmentStepEmissions', totalEquipmentEmissions);
     },
     getInformationCardData: function () {
