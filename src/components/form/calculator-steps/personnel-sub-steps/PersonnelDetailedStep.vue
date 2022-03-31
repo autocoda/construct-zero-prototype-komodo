@@ -151,7 +151,7 @@ export default defineComponent({
           totalTransportEmissions += this.getTotalVehicleEmissions(vehicleCount, transportModeEmissions, transportDistance);
         }
       });
-      
+
       if (this.personnel.length === 0) {
         this.$store.commit('updateStepsCompleted', ['personnel-detailed', false]);
       }
@@ -170,6 +170,7 @@ export default defineComponent({
       if (options.selectedIndex > -1) {
         let name = options[options.selectedIndex].getAttribute('name');
         this.$store.commit('updatePersonnelTransportModeName', {index, name});
+        this.updatePersonnelTotals();
       }
     },
     getTransportModeTypeData: function () {
