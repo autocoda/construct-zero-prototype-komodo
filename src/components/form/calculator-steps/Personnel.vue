@@ -81,6 +81,8 @@ export default defineComponent({
   },
   mounted() {
     this.$store.commit('updateStepsCompleted', ['personnel', true]);
+    this.$store.commit('updateStepsCompleted', ['personnel-compact', false]);
+    this.$store.commit('updateStepsCompleted', ['personnel-detailed', false]);
     this.getInformationCardData();
   }
 })
