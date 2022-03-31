@@ -73,15 +73,14 @@ export default defineComponent({
       this.infoBlockContent = 'Please choose the amount of detail you’d like to supply on the personnel involved in this project. ';
     },
     displayCompactStep() {
-      this.$store.commit('updateStepsCompleted', ['personnel', true]);
       this.$router.push({'name': 'calculator-steps', 'params': {step: 'personnel-compact'}});
     },
     displayDetailedStep() {
-      this.$store.commit('updateStepsCompleted', ['personnel', true]);
       this.$router.push({'name': 'calculator-steps', 'params': {step: 'personnel-detailed'}});
     }
   },
   mounted() {
+    this.$store.commit('updateStepsCompleted', ['personnel', true]);
     this.getInformationCardData();
   }
 })

@@ -104,8 +104,8 @@
 
       <div class="col-6">
         <div class="row">
-          <div class="col-6">Total</div>
-          <div class="col-6 fw-bold text-end h2 my-0">{{ summaryStepTotals }} tonnes</div>
+          <div class="col-3">Total</div>
+          <div class="col-9 fw-bold text-end h2 my-0">{{ summaryStepTotals }} tonnes</div>
         </div>
       </div>
     </div>
@@ -144,6 +144,9 @@ export default defineComponent({
       }
       return '--';
     }
+  },
+  mounted() {
+    this.$store.commit('updateStepsCompleted', ['summary', true]);
   }
 })
 </script>
