@@ -21,11 +21,11 @@
           <div class="col-6">
             <div class="row">
               <div class="col-6">Bricks</div>
-              <div class="fw-bold col-6">{{ materialsEmissions.bricksEmissions }} kg</div>
+              <div class="fw-bold col-6 text-end">{{ materialsEmissions.bricksEmissions }} kg</div>
               <div class="col-6">Mortar</div>
-              <div class="fw-bold col-6">{{ materialsEmissions.mortarEmissions }} kg</div>
+              <div class="fw-bold col-6 text-end">{{ materialsEmissions.mortarEmissions }} kg</div>
               <div class="col-6">Vehicles</div>
-              <div class="fw-bold col-6">{{ materialsEmissions.vehicleEmissions }} kg</div>
+              <div class="fw-bold col-6 text-end">{{ materialsEmissions.vehicleEmissions }} kg</div>
             </div>
           </div>
           <div class="col-6">
@@ -50,7 +50,7 @@
               <div class="col-12" v-if="item.completed === true">
                 <div class="row">
                   <div class="col-6">{{ item.equipmentName }}</div>
-                  <div class="fw-bold col-6">{{ item.emissions.toFixed(4) }} kg</div>
+                  <div class="fw-bold col-6 text-end">{{ item.emissions.toFixed(4) }} kg</div>
                 </div>
               </div>
             </div>
@@ -77,7 +77,7 @@
               <div class="col-12" v-if="item.completed">
                 <div class="row">
                   <div class="col-6">Transport</div>
-                  <div class="fw-bold col-6">{{ item.emissions.toFixed(2) }} kg</div>
+                  <div class="fw-bold col-6 text-end">{{ item.emissions.toFixed(2) }} kg</div>
                 </div>
               </div>
             </div>
