@@ -151,6 +151,10 @@ export default defineComponent({
           totalTransportEmissions += this.getTotalVehicleEmissions(vehicleCount, transportModeEmissions, transportDistance);
         }
       });
+      
+      if (this.personnel.length === 0) {
+        this.$store.commit('updateStepsCompleted', ['personnel-detailed', false]);
+      }
 
       this.personnelTransportEmissions = personnelTransportMethodEmissions.toFixed(6);
       this.personnelTotalTransportEmissions = totalTransportEmissions.toFixed(6);
