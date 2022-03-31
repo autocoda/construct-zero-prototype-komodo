@@ -7,7 +7,7 @@
   />
   <div class="row">
     <div class="col-12 col-sm-6">
-      <div class="card card-personnel bg-white p-3">
+      <div class="card card-personnel bg-white py-2 px-3">
         <div class="card-body d-flex">
           <div class="card-text">
             <h2 class="font-usual fw-bold">Option 1</h2>
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="col-12 col-sm-6">
-      <div class="card card-personnel bg-white p-3">
+      <div class="card card-personnel bg-white py-2 px-3">
         <div class="card-body d-flex">
           <div class="card-text">
             <h2 class="font-usual fw-bold">Option 2</h2>
