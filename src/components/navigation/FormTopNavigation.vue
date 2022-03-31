@@ -81,6 +81,7 @@ export default defineComponent({
     },
     resetApplicationState: function () {
       this.$store.dispatch('resetState');
+      this.$router.push({name: 'home'});
     }
   },
 })
