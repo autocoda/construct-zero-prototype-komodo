@@ -40,11 +40,27 @@
   }
 
   &-anchor {
+    font-weight: 300;
     transition: all .5s ease-in-out;
+
+    &.incomplete {
+      color: rgba(0 0 0 / .38);
+      pointer-events: none;
+    }
+
+    &.complete {
+      font-weight: 400;
+      color: rgba(0 0 0 / .87);
+    }
+
+    &.active {
+      font-weight: 700;
+    }
 
     &.active,
     &:focus,
     &:hover {
+      color: rgba(0 0 0 / .87);
 
       .badge {
         color: $white;
