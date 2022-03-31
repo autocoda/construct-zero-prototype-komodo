@@ -27,7 +27,6 @@
           <title>Next Icon</title>
           <path class="path"  d="M9 0.34375L8.0625 1.28125L11.125 4.34375H0.34375V5.65625H11.125L8.0625 8.71875L9 9.65625L13.6562 5L9 0.34375Z" fill="#FFFFFF" />
         </svg>
-
       </button>
     </div>
   </div>
