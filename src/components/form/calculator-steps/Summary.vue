@@ -20,17 +20,17 @@
           </div>
           <div class="col-6">
             <div class="row">
-              <div class="col-6">Bricks</div>
+              <div class="col-6">Bricks:</div>
               <div class="fw-bold col-6 text-end">{{ materialsEmissions.bricksEmissions }} kg</div>
-              <div class="col-6">Mortar</div>
+              <div class="col-6">Mortar:</div>
               <div class="fw-bold col-6 text-end">{{ materialsEmissions.mortarEmissions }} kg</div>
-              <div class="col-6">Vehicles</div>
+              <div class="col-6">Vehicles:</div>
               <div class="fw-bold col-6 text-end">{{ materialsEmissions.vehicleEmissions }} kg</div>
             </div>
           </div>
           <div class="col-6">
             <div class="row">
-              <div class="col-6">Total</div>
+              <div class="col-6">Total:</div>
               <div class="col-6 fw-bold font-usual text-end">{{ materialsStepEmissions }} tonnes</div>
             </div>
           </div>
@@ -57,7 +57,7 @@
           </div>
           <div class="col-6">
             <div class="row">
-              <div class="col-6">Total</div>
+              <div class="col-6">Total:</div>
               <div class="col-6 fw-bold font-usual text-end">{{ equipmentStepEmissions.toFixed(4) }} tonnes</div>
             </div>
           </div>
@@ -76,7 +76,7 @@
             <div class="row" v-for="(item, index) in personnelDetailedEmissions" :key="index">
               <div class="col-12" v-if="item.completed">
                 <div class="row">
-                  <div class="col-6">Transport</div>
+                  <div class="col-6">Transport:</div>
                   <div class="fw-bold col-6 text-end">{{ item.emissions.toFixed(2) }} kg</div>
                 </div>
               </div>
@@ -84,7 +84,7 @@
           </div>
           <div class="col-6">
             <div class="row">
-              <div class="col-6">Total</div>
+              <div class="col-6">Total:</div>
               <div class="col-6 fw-bold font-usual text-end">{{ personnelStepEmissions.toFixed(2) }} tonnes</div>
             </div>
           </div>
@@ -104,7 +104,7 @@
 
       <div class="col-6">
         <div class="row">
-          <div class="col-3">Total</div>
+          <div class="col-3">Total:</div>
           <div class="col-9 fw-bold font-usual text-end h2 my-0">{{ summaryStepTotals }} tonnes</div>
         </div>
       </div>

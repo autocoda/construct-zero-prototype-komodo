@@ -41,17 +41,17 @@
       </div>
       <div class="col-6">
         <div class="row">
-          <div class="col-6">from Mortar</div>
+          <div class="col-6">from Mortar:</div>
           <div class="fw-bold col-6">{{ mortarCalculatedEmissions }}kg</div>
-          <div class="col-6">from Bricks</div>
+          <div class="col-6">from Bricks:</div>
           <div class="fw-bold col-6">{{ bricksCalculatedEmissions }}kg</div>
-          <div class="col-6">from Vehicles</div>
+          <div class="col-6">from Vehicles:</div>
           <div class="fw-bold col-6">{{ vehicleCalculatedEmissions }}kg</div>
         </div>
       </div>
       <div class="col-6">
         <div class="row">
-          <div class="col-6">Total</div>
+          <div class="col-6">Total:</div>
           <div class="col-6 fw-bold text-end">{{ materialsEmission }} tonnes</div>
         </div>
       </div>
