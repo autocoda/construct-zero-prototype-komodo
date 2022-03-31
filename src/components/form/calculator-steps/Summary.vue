@@ -103,9 +103,17 @@
       </div>
 
       <div class="col-6">
-        <div class="row">
+        <div class="row" v-if="summaryStepTotals !== '--'">
           <div class="col-3">Total:</div>
           <div class="col-9 fw-bold font-usual text-end h2 my-0">{{ summaryStepTotals }} tonnes</div>
+        </div>
+        <div class="row text-danger" v-else>
+          <div class="col-8 offset-4">
+            <div class="align-items-baseline d-flex flex-row">
+              <img class="me-1" src="@/assets/images/calculator/steps/error.svg" alt="Error Icon">
+              <p>Sorry, something went wrong with this calculation, please try again.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -143,6 +151,8 @@ export default defineComponent({
         this.$store.commit('updateStepsCompleted', ['summary', true]);
         return parseFloat((this.materialsStepEmissions + this.equipmentStepEmissions + this.personnelStepEmissions).toFixed(2));
       }
+
+
       return '--';
     }
   },
