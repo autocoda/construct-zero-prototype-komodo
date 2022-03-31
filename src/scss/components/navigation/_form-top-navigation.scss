@@ -99,3 +99,12 @@
     }
   }
 }
+
+.cancel-progress {
+  .cancel-anchor {
+    position: absolute;
+    top: 35px;
+    right: -150px;
+    color: $cancel-anchor-colour;
+  }
+}

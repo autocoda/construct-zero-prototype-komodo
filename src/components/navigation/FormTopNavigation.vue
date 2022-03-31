@@ -1,4 +1,7 @@
 <template>
+  <div class="cancel-progress d-flex position-relative">
+    <a @click="resetApplicationState()" class="cursor-pointer cancel-anchor text-decoration-underline">Cancel</a>
+  </div>
   <div class="form-top-navigation position-relative d-flex flex-row justify-content-between align-items-center col-auto col-12">
     <a
       :class="[
@@ -36,9 +39,6 @@
     >
       <span :class="[badgeDefaultClass]">4</span> <span class="title">Summary</span>
     </a>
-  </div>
-  <div class="cancel d-flex">
-    <a @click="resetApplicationState()" class="cursor-pointer text-decoration-underline">Cancel</a>
   </div>
 </template>
 
