@@ -25,10 +25,10 @@
           </select>
         </td>
         <td>
-          <input class="form-control" type="number" v-model="item.vehicleCount" @input="commitValueChange(index, item)">
+          <input class="form-control input-number" type="number" v-model="item.vehicleCount" @input="commitValueChange(index, item)">
         </td>
         <td>
-          <input class="form-control" type="number" v-model="item.transportDistance" @input="commitValueChange(index, item)">
+          <input class="form-control input-number" type="number" v-model="item.transportDistance" @input="commitValueChange(index, item)">
           <input class="form-control" type="hidden" v-model="item.transportMode">
         </td>
         <td>
@@ -140,8 +140,8 @@ export default defineComponent({
         const vehicleCount = row.vehicleCount;
         const transportModeEmissions = row.transportModeEmissions;
         const transportDistance = row.transportDistance;
-
         let rowTransportModeEmissions = this.getTotalVehicleEmissions(vehicleCount, transportModeEmissions, transportDistance);
+
         if (rowTransportModeEmissions !== 0) {
           this.$store.commit('updatePersonnelRowEmissions', [index, rowTransportModeEmissions]);
           this.$store.commit('updatePersonnelRowDataCompletion', [index, true]);
@@ -149,6 +149,10 @@ export default defineComponent({
 
           personnelTransportMethodEmissions += this.getTransportMethodEmissions(vehicleCount, transportModeEmissions);
           totalTransportEmissions += this.getTotalVehicleEmissions(vehicleCount, transportModeEmissions, transportDistance);
+        }
+
+        if (row.completed === false) {
+          this.$store.commit('updateStepsCompleted', ['personnel-detailed', false]);
         }
       });
 

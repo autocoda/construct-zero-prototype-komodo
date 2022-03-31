@@ -140,6 +140,10 @@ export default defineComponent({
           this.$store.commit('updateStepsCompleted', ['equipment', true]);
         }
 
+        if (item.commit === false) {
+          this.$store.commit('updateStepsCompleted', ['equipment', false]);
+        }
+
         totalEquipmentEmissions += itemEmissions
       });
 
