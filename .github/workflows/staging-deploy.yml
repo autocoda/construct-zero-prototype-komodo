@@ -2,7 +2,7 @@ name: Staging deploy
 on:
   push:
     branches:
-      - feature/PP-5-enable-route-step-guards
+      - develop
 jobs:
   deploy:
     runs-on: ubuntu-latest
