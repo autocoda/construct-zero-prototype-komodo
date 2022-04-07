@@ -7,13 +7,13 @@
   </div>
   <div class="col-6">
     <div class="row" v-if="personnelTransportEmissions !== ''">
-      <div class="col-6">Transport</div>
+      <div class="col-6">Transport:</div>
       <div class="fw-bold col-6">{{ personnelTransportEmissions }}kg</div>
     </div>
   </div>
   <div class="col-6">
     <div class="row">
-      <div class="col-6">Total</div>
+      <div class="col-6">Total:</div>
       <div class="col-6 fw-bold text-end">{{ totalTransportEmissions }} tonnes</div>
     </div>
   </div>

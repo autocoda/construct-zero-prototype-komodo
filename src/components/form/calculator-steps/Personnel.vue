@@ -7,10 +7,10 @@
   />
   <div class="row">
     <div class="col-12 col-sm-6">
-      <div class="card card-personnel bg-white p-3">
+      <div class="card card-personnel bg-white py-2 px-3">
         <div class="card-body d-flex">
           <div class="card-text">
-            <h2>Option 1</h2>
+            <h2 class="font-usual fw-bold">Option 1</h2>
             <p>This form requires less detail and takes less time to complete, however it is less accurate and can cost you more.</p>
           </div>
           <div class="card-icon">
@@ -26,10 +26,10 @@
       </div>
     </div>
     <div class="col-12 col-sm-6">
-      <div class="card card-personnel bg-white p-3">
+      <div class="card card-personnel bg-white py-2 px-3">
         <div class="card-body d-flex">
           <div class="card-text">
-            <h2>Option 2</h2>
+            <h2 class="font-usual fw-bold">Option 2</h2>
             <p>This form requires more detail and takes more time to complete, however it is more accurate and cost effective.</p>
           </div>
           <div class="card-icon">
@@ -46,7 +46,7 @@
     </div>
   </div>
 </template>
-<script lang="ts">
+<script>
 import {defineComponent} from 'vue'
 import StepInformationCard from "@/components/card/StepInformationCard.vue";
 
@@ -80,6 +80,9 @@ export default defineComponent({
     }
   },
   mounted() {
+    this.$store.commit('updateStepsCompleted', ['personnel', true]);
+    this.$store.commit('updateStepsCompleted', ['personnel-compact', false]);
+    this.$store.commit('updateStepsCompleted', ['personnel-detailed', false]);
     this.getInformationCardData();
   }
 })

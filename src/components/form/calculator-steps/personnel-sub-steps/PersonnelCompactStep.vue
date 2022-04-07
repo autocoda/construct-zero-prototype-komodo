@@ -83,6 +83,7 @@ export default defineComponent({
     updatePersonnelTotals: function (value) {
       const emissions = value / 1000;
       this.totalTransportEmissions = emissions;
+      this.$store.commit('updateStepsCompleted', ['personnel-compact', true]);
       this.$store.commit('updatePersonnelStepEmissions', emissions);
     },
     getInformationCardData: function ()  {

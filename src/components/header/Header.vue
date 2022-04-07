@@ -16,8 +16,9 @@ export default defineComponent({
   name: 'MainHeader',
   methods: {
     updateRoute: function () {
-      let entryStepState = this.$store.getters.getEntryStepDisplay;
-      if (!entryStepState) {
+      let entryStepState = this.$store.getters.getStepsCompleted;
+      
+      if (entryStepState['landing']) {
         this.$router.push({'name': 'calculator-steps', 'params': {step: 'materials'}});
       } else {
         this.$router.push({'name': 'home'});

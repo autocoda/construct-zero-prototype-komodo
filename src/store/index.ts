@@ -1,16 +1,18 @@
 import {createStore} from 'vuex'
+import {ICompletedSteps} from '@/imports/interfaces/store/ICompletedSteps'
+import {IMaterialStep} from '@/imports/interfaces/store/IMaterialStep'
 
-const store = createStore({
-  state: {
-    entryStepDisplay: true,
-    usedMortar: null,
-    usedMortarEmissions: '--',
-    usedBricks: null,
-    usedBricksEmissions: '--',
-    usedVehicleType: null,
-    projectTotalTravel: null,
-    usedVehicleEmissions: '--',
-    materialsStepEmissions: '--',
+const initialState = () => ({
+    materials: {
+      mortar: null,
+      mortarEmissions: null,
+      bricks: null,
+      bricksEmissions: null,
+      vehicleType: null,
+      vehicleTotalTravel: null,
+      vehicleEmissions: null,
+    },
+    materialsStepEmissions: null,
     equipment: [
       {
         "equipmentName": null,
@@ -24,7 +26,6 @@ const store = createStore({
       }
     ],
     equipmentStepEmissions: null,
-    personnelStepEmissions: null,
     personnel: [
       {
         'vehicleCount': null,
@@ -35,38 +36,26 @@ const store = createStore({
         "completed": false
       }
     ],
+    personnelStepEmissions: null,
     stepsCompleted: {
       'landing': false,
       'materials': false,
       'equipment': false,
       'personnel': false,
+      'personnel-compact': false,
+      'personnel-detailed': false,
       'summary': false,
     },
-  },
+})
+
+const store = createStore({
+  state: initialState(),
   getters: {
-    getEntryStepDisplay(state) {
-      return state.entryStepDisplay
+    getStepsCompleted(state) {
+      return state.stepsCompleted
     },
-    getUsedMortar(state) {
-      return state.usedMortar
-    },
-    getUsedMortarEmissions(state) {
-      return state.usedMortarEmissions
-    },
-    getUsedBricks(state) {
-      return state.usedBricks
-    },
-    getUsedBricksEmissions(state) {
-      return state.usedBricksEmissions
-    },
-    getUsedVehicleType(state) {
-      return state.usedVehicleType
-    },
-    getProjectTotalTravel(state) {
-      return state.projectTotalTravel
-    },
-    getUsedVehicleEmissions(state) {
-      return state.usedVehicleEmissions
+    getMaterials(state) {
+      return state.materials
     },
     getMaterialsStepEmissions(state) {
       return state.materialsStepEmissions
@@ -83,34 +72,20 @@ const store = createStore({
     getPersonnelStepEmissions(state) {
       return state.personnelStepEmissions
     },
-    getStepsCompleted(state) {
-      return state.stepsCompleted
-    }
   },
   mutations: {
-    updateEntryStepDisplay(state, payload) {
-      state.entryStepDisplay = payload;
+    resetStoreState(state) {
+      Object.assign(state, initialState())
     },
-    updateUsedMortar(state, payload) {
-      state.usedMortar = payload;
+    updateStepsCompleted(state, payload) {
+      const [index, value] = payload;
+      const stepKey: keyof ICompletedSteps = index;
+      state.stepsCompleted[stepKey] = value;
     },
-    updateUsedMortarEmissions(state, payload) {
-      state.usedMortarEmissions = payload;
-    },
-    updateUsedBricks(state, payload) {
-      state.usedBricks = payload
-    },
-    updateUsedBricksEmissions(state, payload) {
-      state.usedBricksEmissions = payload;
-    },
-    updateUsedVehicleType(state, payload) {
-      state.usedVehicleType = payload;
-    },
-    updateProjectTotalTravel(state, payload) {
-      state.projectTotalTravel = payload;
-    },
-    updateUsedVehicleEmissions(state, payload) {
-      state.usedVehicleEmissions = payload;
+    updateMaterials(state, payload) {
+      const [index, value] = payload;
+      const materialKey: keyof IMaterialStep = index;
+      state.materials[materialKey] = value;
     },
     updateMaterialsStepEmissions(state, payload) {
       state.materialsStepEmissions = payload;
@@ -122,7 +97,7 @@ const store = createStore({
       state.equipment.push(payload);
     },
     updateEquipmentUnitName(state, payload) {
-      const {index, name} = payload;
+      const [index, name] = payload;
       state.equipment[index]['unitType'] = name;
     },
     updateEquipmentDataCompletion(state, payload) {
@@ -167,6 +142,11 @@ const store = createStore({
       state.personnel[index]['completed'] = value;
     },
   },
+  actions: {
+    resetState({ commit }) {
+      commit('resetStoreState')
+    },
+  }
 })
 
 export default store;

@@ -3,6 +3,7 @@
   line-height: 24px;
 
   .step-heading {
+    font-family: $font-family-sans-serif-secondary;
     font-size: 14px;
     line-height: 24px;
   }
@@ -16,3 +17,15 @@ p {
   font-size: 14px;
   line-height: 21px;
 }
+
+.main-container {
+  min-height: calc(100vh - (74px + 94px + 48px));
+}
+
+// stylelint-disable declaration-no-important
+
+.font-usual {
+  font-family: $font-family-sans-serif-secondary !important;
+}
+
+// stylelint-enable declaration-no-important

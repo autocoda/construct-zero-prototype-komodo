@@ -32,7 +32,7 @@
             </option>
           </select>
         </td>
-        <td>
+        <td class="readonly-column">
           <input class="form-control readonly" type="text" v-model="item.unitType" disabled>
         </td>
         <td>
@@ -111,7 +111,7 @@ export default defineComponent({
       let options = event.target.options;
       if (options.selectedIndex > -1) {
         let name = options[options.selectedIndex].getAttribute('name');
-        this.$store.commit('updateEquipmentUnitName', {index, name});
+        this.$store.commit('updateEquipmentUnitName', [index, name]);
       }
     },
     getItemEmissions: function (emissionsByPowerType, emissionByTransportMode, itemCount, transportDistance) {
@@ -137,10 +137,19 @@ export default defineComponent({
         if (itemEmissions !== 0) {
           this.$store.commit('updateEquipmentEmissions', [index, itemEmissions]);
           this.$store.commit('updateEquipmentDataCompletion', [index, true]);
+          this.$store.commit('updateStepsCompleted', ['equipment', true]);
+        }
+
+        if (item.commit === false) {
+          this.$store.commit('updateStepsCompleted', ['equipment', false]);
         }
 
         totalEquipmentEmissions += itemEmissions
       });
+
+      if (this.equipment.length === 0) {
+        this.$store.commit('updateStepsCompleted', ['equipment', false]);
+      }
 
       this.$store.commit('updateEquipmentStepEmissions', totalEquipmentEmissions);
     },

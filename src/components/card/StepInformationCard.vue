@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12 d-flex justify-content-between form-step-information mb-3">
       <div class="d-flex flex-column form-step-text">
-        <div class="d-flex flex-row fw-bold">
+        <div class="d-flex flex-row fw-bold ">
           <img width="21" height="21" class="me-2" :src="infoBlockIcon" :alt="infoBlockTitle + 'image'">
           {{ infoBlockTitle }}
         </div>

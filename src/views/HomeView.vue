@@ -1,8 +1,8 @@
 <template>
   <div class="row">
     <FormEntryPointCard
-      v-if="entryStep"
-      @displayCarbonCalculator="displayCarbonCalculator"
+      v-if="landingStepIncomplete"
+      @click="openCalculator"
       :title="formEntryPointTitle"
       :sub-title="formEntryPointSubTitle"
       :paragraph="formEntryPointParagraph"
@@ -41,18 +41,14 @@ import FormBaseLayout from "@/components/container/FormBaseLayout.vue";
     }
   },
   computed: {
-    entryStep: {
-      get() {
-        return this.$store.getters.getEntryStepDisplay
-      },
-      set(value) {
-        this.$store.commit('updateEntryStepDisplay', value);
-      }
+    landingStepIncomplete: function () {
+      const completedStepsMapping = this.$store.getters.getStepsCompleted;
+      return completedStepsMapping.landing === false;
     },
   },
   methods: {
-    displayCarbonCalculator() {
-      this.$store.commit('updateEntryStepDisplay', false);
+    openCalculator() {
+      this.$store.commit('updateStepsCompleted', ['landing', true]);
       this.$router.push({'name': 'calculator-steps', 'params': {step: 'materials'}});
     },
     getFormEntryPointCardContent() {

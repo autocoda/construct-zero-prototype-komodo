@@ -1,32 +1,43 @@
 <template>
+  <div class="cancel-progress d-flex position-relative">
+    <a @click="resetApplicationState()" class="cursor-pointer cancel-anchor text-decoration-underline">Cancel</a>
+  </div>
   <div class="form-top-navigation position-relative d-flex flex-row justify-content-between align-items-center col-auto col-12">
     <a
-      :class="[anchorClass, {'active': isActiveStep('materials')}]"
-      @click="switchTab({name: 'calculator-steps', params: {step: 'materials'}})"
+      :class="[
+        anchorClass, isStepComplete('materials') ? 'complete': 'incomplete',
+        {'active': isActiveStep('materials')}
+      ]"
+      @click="switchStep('materials')"
     >
-      <span :class="[badgeDefaultClass]">1</span> Materials
+      <span :class="[badgeDefaultClass]">1</span> <span class="title">Materials</span>
     </a>
     <a
-      :class="[anchorClass, {'active': isActiveStep('equipment') }]"
-      @click="switchTab({name: 'calculator-steps', params: {step: 'equipment'}})"
+      :class="[
+        anchorClass, isStepComplete('equipment') ? 'complete': 'incomplete',
+        {'active': isActiveStep('equipment')  }
+      ]"
+      @click="switchStep('equipment')"
     >
-      <span :class="[badgeDefaultClass]">2</span> Equipment
+      <span :class="[badgeDefaultClass]">2</span> <span class="title">Equipment</span>
     </a>
     <a
       :class="[
         anchorClass,
-        {'active': isActiveStep('personnel')},
-        {'active': isActiveStep('personnel-compact')},
-        {'active': isActiveStep('personnel-detailed')}
+        isStepComplete(['personnel', 'personnel-compact', 'personnel-detailed'],  2) ? 'complete': 'incomplete',
+        {'active': isActiveStep('personnel') || isActiveStep('personnel-compact') || isActiveStep('personnel-detailed') },
       ]"
-      @click="switchTab({name: 'calculator-steps', params: {step: 'personnel'}})"
+      @click="switchStep('personnel')"
     >
-      <span :class="[badgeDefaultClass]">3</span> Personnel
+      <span :class="[badgeDefaultClass]">3</span> <span class="title">Personnel</span>
     </a>
-    <a :class="[anchorClass, {'active': isActiveStep('summary') }]"
-       @click="switchTab({name: 'calculator-steps', params: {step: 'summary'}})"
+    <a :class="[
+         anchorClass, isStepComplete('summary')  ? 'complete': 'incomplete',
+         {'active': isActiveStep('summary')}
+       ]"
+       @click="switchStep('summary')"
     >
-      <span :class="[badgeDefaultClass]">4</span> Summary
+      <span :class="[badgeDefaultClass]">4</span> <span class="title">Summary</span>
     </a>
   </div>
 </template>
@@ -43,11 +54,34 @@ export default defineComponent({
     }
   },
   methods: {
-    switchTab: function (route) {
-      this.$router.push(route);
+    switchStep: function (activeStep) {
+      if (this.isStepComplete(activeStep)) {
+        this.$router.push({name: 'calculator-steps', params: {step: activeStep}});
+      }
     },
     isActiveStep: function (step) {
       return this.$route.params.step === step;
+    },
+    isStepComplete: function (step, howMany = 0) {
+      const completedStepsMapping = this.$store.getters.getStepsCompleted;
+
+      if (Array.isArray(step)) {
+        let count = 0;
+
+        step.forEach(item => {
+          if (completedStepsMapping[item] === true) {
+            count++;
+          }
+        })
+
+        return (count === howMany);
+      }
+
+      return completedStepsMapping[step] === true;
+    },
+    resetApplicationState: function () {
+      this.$store.dispatch('resetState');
+      this.$router.push({name: 'home'});
     }
   },
 })

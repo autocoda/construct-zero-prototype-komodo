@@ -1,14 +1,14 @@
 <template>
   <div class="col-12">
     <div :class="[
-      {'justify-content-end': disableBack},
-      {'justify-content-between': !disableBack && !disableNext},
+      {'justify-content-end': hasBack},
+      {'justify-content-between': !hasBack && !hasNext},
       'd-flex button-navigation mt-3'
     ]"
     >
       <button
-        v-if="!disableBack"
-        class="btn btn-outline-dark back"
+        v-if="!hasBack"
+        :class="['btn btn-outline-dark back', {'disabled': disableBack}]"
         @click="$emit('back')"
       >
         <svg class="icon" width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,8 +18,8 @@
         Previous
       </button>
       <button
-        v-if="!disableNext"
-        class="btn btn-primary next"
+        v-if="!hasNext"
+        :class="['btn btn-primary next', {'disabled': disableNext}]"
         @click="$emit('next')"
       >
         Next
@@ -27,7 +27,6 @@
           <title>Next Icon</title>
           <path class="path"  d="M9 0.34375L8.0625 1.28125L11.125 4.34375H0.34375V5.65625H11.125L8.0625 8.71875L9 9.65625L13.6562 5L9 0.34375Z" fill="#FFFFFF" />
         </svg>
-
       </button>
     </div>
   </div>
@@ -39,7 +38,9 @@ export default defineComponent({
   name: 'FormBottomNavigation',
   props: {
     'disableNext': {type: Boolean, required: false},
+    'hasNext': {type: Boolean, required: false},
     'disableBack': {type: Boolean, required: false},
+    'hasBack': {type: Boolean, required: false},
     'back': {type: Boolean},
     'next': {type: Boolean}
   },
