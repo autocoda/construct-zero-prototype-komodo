@@ -43,6 +43,6 @@ export default defineComponent({
     'back': {type: Boolean},
     'next': {type: Boolean}
   },
-  emits: ["next", "back"]
+  emits: ["next", "back"],
 })
 </script>

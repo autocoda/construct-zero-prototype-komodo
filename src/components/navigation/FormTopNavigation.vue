@@ -47,7 +47,7 @@ export default defineComponent({
       this.$router.push(route);
     },
     isActiveStep: function (step) {
-      return this.$route.params.step === step
+      return this.$route.params.step === step;
     }
   },
 })
