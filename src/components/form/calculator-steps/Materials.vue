@@ -23,7 +23,7 @@
       <div class="col-6 mb-3">
         <label for="vehicles-types-used" class="form-label">What type of vehicle will you be primarily using to travel to and from site?</label>
         <select id="vehicles-types-used" class="form-select" v-model="vehicle">
-          <option selected>Please select vehicle type</option>
+          <option selected disabled="disabled">Please select vehicle type</option>
           <option v-for="(value, key) in vehicleDropdownList" :key="key" :value="value">{{ key }}</option>
         </select>
       </div>
@@ -62,7 +62,6 @@
 import {defineComponent} from 'vue'
 import StepInformationCard from "@/components/card/StepInformationCard.vue";
 import {get} from "axios";
-import {roundValue} from "@/imports/util/roundValue";
 
 export default defineComponent({
   name: 'MaterialsStep',
@@ -115,7 +114,7 @@ export default defineComponent({
     mortarEmissions: function () {
       let mortarWeight = parseFloat(this.mortar);
       let totals = (!Number.isNaN(mortarWeight))
-        ? parseFloat(roundValue(mortarWeight * 0.22))
+        ? mortarWeight * 0.22
         : '--';
       this.$store.commit('updateUsedMortarEmissions', totals);
 
@@ -124,7 +123,7 @@ export default defineComponent({
     bricksEmissions: function () {
       let bricksCount = parseFloat(this.bricks);
       let totals = (!Number.isNaN(bricksCount))
-        ? parseFloat(roundValue((bricksCount * 2.34) * 0.240))
+        ? ((bricksCount * 2.34) * 0.240).toFixed(4)
         : '--';
       this.$store.commit('updateUsedBricksEmissions', totals);
 
@@ -134,7 +133,7 @@ export default defineComponent({
       let vehicleBaseEmissions = parseFloat(this.vehicle);
       let vehicleTravelDistance = parseFloat(this.projectTravel);
       let totals = (!Number.isNaN(vehicleBaseEmissions) && !Number.isNaN(vehicleTravelDistance))
-        ? parseFloat(roundValue((vehicleBaseEmissions * vehicleTravelDistance) / 0.62137))
+        ? ((vehicleBaseEmissions * vehicleTravelDistance) / 0.62137).toFixed(3)
         : '--';
       this.$store.commit('updateUsedVehicleEmissions', totals);
 
@@ -144,8 +143,9 @@ export default defineComponent({
       let bricksEmissions = parseFloat(this.$store.getters.getUsedBricksEmissions);
       let mortarEmissions = parseFloat(this.$store.getters.getUsedMortarEmissions);
       let vehicleBaseEmissions = parseFloat(this.$store.getters.getUsedVehicleEmissions);
+
       if ((!Number.isNaN(vehicleBaseEmissions) && !Number.isNaN(mortarEmissions) && !Number.isNaN(vehicleBaseEmissions))) {
-        let totals =  parseFloat((bricksEmissions + mortarEmissions + vehicleBaseEmissions) / 1000);
+        let totals = (bricksEmissions + mortarEmissions + vehicleBaseEmissions / 1000).toFixed(4);
         this.$store.commit('updateMaterialsStepEmissions', totals);
 
         return totals
@@ -156,7 +156,7 @@ export default defineComponent({
   },
   methods: {
     getVehicleEmissionData: function () {
-      return get('/static/vehicle-input-data.json', {baseURL: window.location.origin})
+      return get('/static/vehicle-input-data.json')
         .then((response) => {
           this.vehicleDropdownList = response.data;
         })

@@ -5,40 +5,31 @@
     :info-block-content="infoBlockContent"
     :info-block-help-text="infoBlockHelpText"
   />
+
   <table class="table table-responsive equipment-table">
     <caption class="visually-hidden">Detailed Personnel Table</caption>
     <thead class="thead">
       <tr>
-        <th class="first-column">Person(s)</th>
-        <th>Model of transportation</th>
-        <th>Powered by</th>
+        <th class="first-column">Vehicle(s)</th>
+        <th>Mode of transportation</th>
         <th>Total distance covered (miles)</th>
         <th>&nbsp;</th>
       </tr>
     </thead>
     <tbody class="tbody">
-      <tr v-for="(item, index) in personnelDetailed" :key="index">
+      <tr v-for="(item, index) in personnel" :key="index">
         <td class="first-column">
-          <input class="form-control" type="text" v-model="item.persons">
+          <input class="form-control" type="number" v-model="item.vehicleCount" @input="commitValueChange(index, item)">
         </td>
         <td>
-          <select id="vehicles-types-used" class="form-select" v-model="item['transport-mode']">
-            <option selected>Please Select</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <select id="vehicles-types-used" class="form-select" v-model="item.transportModeEmissions" @change="setTransportModeValue(index, $event)">
+            <option selected disabled="disabled">Please select transport mode</option>
+            <option v-for="(value, key) in transportMethod" :key="key" :value="value" :name="key">{{ key }}</option>
           </select>
         </td>
         <td>
-          <select id="powered-by" class="form-select" v-model="item['powered-by']">
-            <option selected>Please Select</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </td>
-        <td>
-          <input class="form-control" type="text" v-model="item['distance-covered']">
+          <input class="form-control" type="number" v-model="item.transportDistance" @input="commitValueChange(index, item)">
+          <input class="form-control" type="hidden" v-model="item.transportMode">
         </td>
         <td>
           <img
@@ -63,32 +54,48 @@
       </tr>
     </tfoot>
   </table>
+
+  <div class="row">
+    <PersonnelEmissions
+      :display-separator-line="false"
+      :personnel-transport-emissions="personnelTransportEmissions"
+      :total-transport-emissions="personnelTotalTransportEmissions"
+    />
+  </div>
 </template>
 <script>
 import {defineComponent} from 'vue'
 import StepInformationCard from "@/components/card/StepInformationCard.vue";
+import PersonnelEmissions from "@/components/section/PersonnelEmissions";
+import {get} from "axios";
 
 export default defineComponent({
   name: 'PersonnelDetailedStep',
-  components: {StepInformationCard},
+  components: {PersonnelEmissions, StepInformationCard},
   data() {
     return {
+      personnelTransportEmissions: '--',
+      personnelTotalTransportEmissions: '--',
       infoBlockContent: '',
       infoBlockTitle: '',
       infoBlockIcon: '',
       infoBlockHelpText: '',
-      personnelDetailed: [{
-        'persons': '',
-        'transport-mode': '',
-        'powered-by': '',
-        'distance-covered': '',
-      }]
+      transportMethod: '',
+      vehicleDropdownList: '',
     }
   },
   computed: {
     step: function () {
       return (this.$route.params.step) ?? 'personnel'
-    }
+    },
+    personnel: {
+      get() {
+        return this.$store.getters.getPersonnel
+      },
+      set(value) {
+        this.$store.commit('updatePersonnel', value);
+      }
+    },
   },
   methods: {
     getInformationCardData() {
@@ -97,19 +104,82 @@ export default defineComponent({
       this.infoBlockContent = 'List the number of workers and their mode of transport to site. If any workers are sharing transportation, enter them into the same line.';
     },
     addRowItem() {
-      this.personnelDetailed.push({
-        'persons': '',
-        'transport-mode': '',
-        'powered-by': '',
-        'distance-covered': '',
-      })
+      this.$store.commit('updatePersonnel', {
+        'vehicleCount': null,
+        'transportMode': null,
+        'transportModeEmissions': null,
+        'transportDistance': null,
+        "emissions": null,
+        "completed": false
+      });
     },
     removeRowItem(index) {
-      this.personnelDetailed.splice(index, 1)
-    }
+      this.$store.commit('removeSinglePersonnelByKey', index);
+      this.updatePersonnelTotals();
+    },
+    getTotalVehicleEmissions: function (vehicleCount, transportModeEmissions, transportDistance) {
+      if (vehicleCount && transportModeEmissions && transportDistance) {
+        let milesConvertedToKmValue = transportDistance * 1.609344;
+        let perItemsEmissions = milesConvertedToKmValue * transportModeEmissions / 1000000;
+
+        return perItemsEmissions * vehicleCount;
+      }
+      return 0;
+    },
+    getTransportMethodEmissions: function (vehicleCount, transportModeEmissions) {
+      if (vehicleCount && transportModeEmissions) {
+        return transportModeEmissions * vehicleCount / 1000000;
+      }
+      return 0;
+    },
+    updatePersonnelTotals: function () {
+      let totalTransportEmissions = 0;
+      let personnelTransportMethodEmissions = 0;
+
+      this.personnel.forEach((row, index) => {
+        const vehicleCount = row.vehicleCount;
+        const transportModeEmissions = row.transportModeEmissions;
+        const transportDistance = row.transportDistance;
+
+        let rowTransportModeEmissions = this.getTotalVehicleEmissions(vehicleCount, transportModeEmissions, transportDistance);
+        if (rowTransportModeEmissions !== 0) {
+          this.$store.commit('updatePersonnelRowEmissions', [index, rowTransportModeEmissions]);
+          this.$store.commit('updatePersonnelRowDataCompletion', [index, true]);
+
+          personnelTransportMethodEmissions += this.getTransportMethodEmissions(vehicleCount, transportModeEmissions);
+          totalTransportEmissions += this.getTotalVehicleEmissions(vehicleCount, transportModeEmissions, transportDistance);
+        }
+      });
+
+      this.personnelTransportEmissions = personnelTransportMethodEmissions.toFixed(6);
+      this.personnelTotalTransportEmissions = totalTransportEmissions.toFixed(6);
+
+      this.$store.commit('updatePersonnelStepEmissions', totalTransportEmissions);
+    },
+    commitValueChange: function (index, payload) {
+      this.$store.commit('updateSinglePersonnelByKey', [index, payload]);
+      this.updatePersonnelTotals();
+    },
+    setTransportModeValue: function (index, event) {
+      let options = event.target.options;
+      if (options.selectedIndex > -1) {
+        let name = options[options.selectedIndex].getAttribute('name');
+        this.$store.commit('updatePersonnelTransportModeName', {index, name});
+      }
+    },
+    getTransportModeTypeData: function () {
+      return get('/static/transport-methods-input-data.json')
+        .then((response) => {
+          this.transportMethod = response.data;
+        })
+        .catch((error) => {
+          throw error.response.data;
+        });
+    },
   },
   mounted() {
     this.getInformationCardData();
+    this.getTransportModeTypeData();
   }
 })
 </script>
