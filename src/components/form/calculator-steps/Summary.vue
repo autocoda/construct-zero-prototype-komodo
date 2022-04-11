@@ -21,11 +21,11 @@
           <div class="col-6">
             <div class="row">
               <div class="col-6">Bricks:</div>
-              <div class="fw-bold col-6 text-end">{{ materialsEmissions.bricksEmissions }} kg</div>
+              <div class="fw-bold col-6 text-end">{{ materialsEmissions.bricksEmissions.toFixed(1) }} kg</div>
               <div class="col-6">Mortar:</div>
-              <div class="fw-bold col-6 text-end">{{ materialsEmissions.mortarEmissions }} kg</div>
+              <div class="fw-bold col-6 text-end">{{ materialsEmissions.mortarEmissions.toFixed(1) }} kg</div>
               <div class="col-6">Vehicles:</div>
-              <div class="fw-bold col-6 text-end">{{ materialsEmissions.vehicleEmissions }} kg</div>
+              <div class="fw-bold col-6 text-end">{{ materialsEmissions.vehicleEmissions.toFixed(1) }} kg</div>
             </div>
           </div>
           <div class="col-6">
@@ -50,7 +50,7 @@
               <div class="col-12" v-if="item.completed === true">
                 <div class="row">
                   <div class="col-6">{{ item.equipmentName }}</div>
-                  <div class="fw-bold col-6 text-end">{{ item.emissions.toFixed(4) }} kg</div>
+                  <div class="fw-bold col-6 text-end">{{ item.emissions.toFixed(6) }} kg</div>
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-6">Total:</div>
-              <div class="col-6 fw-bold font-usual text-end">{{ equipmentStepEmissions.toFixed(4) }} tonnes</div>
+              <div class="col-6 fw-bold font-usual text-end">{{ equipmentStepEmissions }} tonnes</div>
             </div>
           </div>
         </div>
@@ -77,7 +77,7 @@
               <div class="col-12" v-if="item.completed">
                 <div class="row">
                   <div class="col-6">Transport:</div>
-                  <div class="fw-bold col-6 text-end">{{ item.emissions.toFixed(2) }} kg</div>
+                  <div class="fw-bold col-6 text-end">{{ item.emissions }} kg</div>
                 </div>
               </div>
             </div>
@@ -85,7 +85,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-6">Total:</div>
-              <div class="col-6 fw-bold font-usual text-end">{{ personnelStepEmissions.toFixed(2) }} tonnes</div>
+              <div class="col-6 fw-bold font-usual text-end">{{ personnelStepEmissions }} tonnes</div>
             </div>
           </div>
         </div>
@@ -124,6 +124,7 @@
 </template>
 <script>
 import {defineComponent} from 'vue'
+import {toFixedNotation} from "@/imports/util/toFixedNotation";
 
 export default defineComponent({
   name: 'SummaryStep',
@@ -135,24 +136,28 @@ export default defineComponent({
       return this.$store.getters.getMaterials;
     },
     materialsStepEmissions: function () {
-      return this.$store.getters.getMaterialsStepEmissions;
+      return toFixedNotation(this.$store.getters.getMaterialsStepEmissions);
     },
     equipmentDetailedEmissions: function () {
       return this.$store.getters.getEquipment;
     },
     equipmentStepEmissions: function () {
-      return this.$store.getters.getEquipmentStepEmissions;
+      return toFixedNotation(this.$store.getters.getEquipmentStepEmissions);
     },
     personnelDetailedEmissions: function () {
       return this.$store.getters.getPersonnel;
     },
     personnelStepEmissions: function () {
-      return this.$store.getters.getPersonnelStepEmissions;
+      return toFixedNotation(this.$store.getters.getPersonnelStepEmissions);
     },
     summaryStepTotals: function () {
-      if (this.materialsStepEmissions && this.equipmentStepEmissions && this.personnelStepEmissions) {
+      if (
+        typeof this.$store.getters.getMaterialsStepEmissions === "number"
+        && typeof this.$store.getters.getEquipmentStepEmissions  === "number"
+        && typeof this.$store.getters.getPersonnelStepEmissions  === "number"
+      ) {
         this.$store.commit('updateStepsCompleted', ['summary', true]);
-        return parseFloat((this.materialsStepEmissions + this.equipmentStepEmissions + this.personnelStepEmissions).toFixed(2));
+        return toFixedNotation(this.$store.getters.getMaterialsStepEmissions + this.$store.getters.getEquipmentStepEmissions + this.$store.getters.getPersonnelStepEmissions);
       }
 
       return '--';

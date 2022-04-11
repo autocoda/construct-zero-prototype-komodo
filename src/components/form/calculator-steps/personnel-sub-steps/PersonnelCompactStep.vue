@@ -23,6 +23,7 @@
 
       <PersonnelEmissions
         :display-separator-line="false"
+        :personnel-transport-emissions="personnel.transportModeEmissions"
         :total-transport-emissions="personnelTransportEmissions"
       />
     </div>
@@ -66,15 +67,16 @@ export default defineComponent({
 
       if (options.selectedIndex > -1) {
         let value = Number(options[options.selectedIndex].value);
+        let transportEmissions = value / 1000;
         this.updatePersonnelTotals(value);
-        this.personnelTransportEmissions = value / 1000;
+        this.personnelTransportEmissions = transportEmissions.toFixed(1);
 
         this.$store.commit('updateSinglePersonnelByKey', [0, {
           'vehicleCount': 1,
           'transportMode': 'Diesel Car / Small Van',
           'transportModeEmissions': value,
           'transportDistance': 400,
-          "emissions": this.personnelTransportEmissions,
+          "emissions": transportEmissions,
           "completed": true
         }]);
       }

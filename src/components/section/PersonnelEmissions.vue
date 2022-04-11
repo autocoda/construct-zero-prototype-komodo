@@ -5,7 +5,7 @@
   <div class="col-12">
     <h2 class="fw-lighter text-uppercase step-heading">Emissions</h2>
   </div>
-  <div class="col-6">
+  <div class="col-6 d-none">
     <div class="row" v-if="personnelTransportEmissions !== ''">
       <div class="col-6">Transport:</div>
       <div class="fw-bold col-6">{{ personnelTransportEmissions }}kg</div>
