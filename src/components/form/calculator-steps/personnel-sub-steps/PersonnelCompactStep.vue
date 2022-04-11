@@ -23,7 +23,6 @@
 
       <PersonnelEmissions
         :display-separator-line="false"
-        :personnel-transport-emissions="personnel.transportModeEmissions"
         :total-transport-emissions="personnelTransportEmissions"
       />
     </div>

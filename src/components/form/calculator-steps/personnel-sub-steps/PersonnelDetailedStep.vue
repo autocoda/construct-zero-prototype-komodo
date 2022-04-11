@@ -58,7 +58,6 @@
   <div class="row">
     <PersonnelEmissions
       :display-separator-line="false"
-      :personnel-transport-emissions="personnelTransportEmissions"
       :total-transport-emissions="personnelTotalTransportEmissions"
     />
   </div>
