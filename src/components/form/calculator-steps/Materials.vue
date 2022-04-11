@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-12"><h2 class="fw-lighter text-uppercase step-heading">Materials</h2></div>
       <div class="col-6 mb-4">
-        <label for="mortar-weight" class="form-label">Approximately how many kilograms of mortar will be used in this project?</label>
+        <label for="mortar-weight" class="form-label">What is the approximate total travel distance for all materials from merchant to site?</label>
         <span class="mortar-weight input-type-container position-relative">
           <input type="number" class="input-number form-control" id="mortar-weight" required v-model="materials.mortar">
         </span>
@@ -21,7 +21,7 @@
         </span>
       </div>
       <div class="col-6 mb-4">
-        <label for="vehicles-types-used" class="form-label">What type of vehicle will you be primarily using to travel to and from site?</label>
+        <label for="vehicles-types-used" class="form-label">What type of vehicle will you be primarily using to transport materials to and from site?</label>
         <select id="vehicles-types-used" class="form-select" v-model="materials.vehicleType">
           <option selected disabled="disabled">Please select vehicle type</option>
           <option v-for="(value, key) in vehicleDropdownList" :key="key" :value="value">{{ key }}</option>
