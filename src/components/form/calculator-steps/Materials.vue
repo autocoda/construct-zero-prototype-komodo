@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-12"><h2 class="fw-lighter text-uppercase step-heading">Materials</h2></div>
       <div class="col-6 mb-4">
-        <label for="mortar-weight" class="form-label">What is the approximate total travel distance for all materials from merchant to site?</label>
+        <label for="mortar-weight" class="form-label">Approximately how many kilograms of mortar will be used in this project?</label>
         <span class="mortar-weight input-type-container position-relative">
           <input type="number" class="input-number form-control" id="mortar-weight" required v-model="materials.mortar">
         </span>
@@ -28,7 +28,7 @@
         </select>
       </div>
       <div class="col-6 mb-4">
-        <label for="miles-travelled" class="form-label">Approximately how many miles in total will you travel during this project?</label>
+        <label for="miles-travelled" class="form-label">What is the approximate total travel distance for all materials from merchant to site?</label>
         <span class="miles-travelled input-type-container position-relative">
           <input type="number" class="input-number form-control travel-distance" id="miles-travelled" required v-model="materials.vehicleTotalTravel">
         </span>
