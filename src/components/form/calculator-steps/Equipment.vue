@@ -156,7 +156,7 @@ export default defineComponent({
     getInformationCardData: function () {
       this.infoBlockIcon = require('@/assets/images/calculator/steps/wrench.svg');
       this.infoBlockTitle = 'Equipment used for works';
-      this.infoBlockContent = 'List any materials you will directly use to complete your works for this project.';
+      this.infoBlockContent = 'List any equipment you will directly use to complete your works for this project.';
     },
     getFuelTypeData: function () {
       return get('/static/fuel-emissions-input-data.json')
