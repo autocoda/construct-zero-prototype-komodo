@@ -62,6 +62,7 @@
 import {defineComponent} from 'vue'
 import StepInformationCard from "@/components/card/StepInformationCard.vue";
 import {get} from "axios";
+import {toFixedNotation} from "@/imports/util/toFixedNotation";
 
 export default defineComponent({
   name: 'MaterialsStep',
@@ -89,29 +90,39 @@ export default defineComponent({
     },
     mortarCalculatedEmissions: function () {
       let mortarWeight = parseFloat(this.materials.mortar);
-      let totals = (!Number.isNaN(mortarWeight))
-        ? mortarWeight * 0.22
-        : '--';
-      this.$store.commit('updateMaterials', ['mortarEmissions', totals]);
+      let totals = '--';
+      if (!Number.isNaN(mortarWeight)) {
+        totals = mortarWeight * 0.22;
+        this.$store.commit('updateMaterials', ['mortarEmissions', totals]);
+
+        return totals.toFixed(1);
+      }
 
       return totals;
     },
     bricksCalculatedEmissions: function () {
       let bricksCount = parseFloat(this.materials.bricks);
-      let totals = (!Number.isNaN(bricksCount))
-        ? parseFloat(((bricksCount * 2.34) * 0.240).toFixed(4))
-        : '--';
-      this.$store.commit('updateMaterials',  ['bricksEmissions', totals]);
+      let totals = '--';
+      if (!Number.isNaN(bricksCount)) {
+        totals = (bricksCount * 2.34) * 0.240;
+        this.$store.commit('updateMaterials', ['bricksEmissions', totals]);
+
+        return totals.toFixed(1);
+      }
 
       return totals;
     },
     vehicleCalculatedEmissions: function () {
       let vehicleBaseEmissions = parseFloat(this.materials.vehicleType);
       let vehicleTravelDistance = parseFloat(this.materials.vehicleTotalTravel);
-      let totals = (!Number.isNaN(vehicleBaseEmissions) && !Number.isNaN(vehicleTravelDistance))
-        ? parseFloat(((vehicleBaseEmissions * vehicleTravelDistance) / 0.62137).toFixed(3))
-        : '--';
-      this.$store.commit('updateMaterials',  ['vehicleEmissions', totals]);
+      let totals = '--';
+
+      if (!Number.isNaN(vehicleBaseEmissions) && !Number.isNaN(vehicleTravelDistance)) {
+        totals = (vehicleBaseEmissions * vehicleTravelDistance) / 0.62137;
+        this.$store.commit('updateMaterials',  ['vehicleEmissions', totals]);
+
+        return totals.toFixed(1);
+      }
 
       return totals;
     },
@@ -121,11 +132,11 @@ export default defineComponent({
       let vehicleBaseEmissions = parseFloat(this.materials.vehicleEmissions);
 
       if ((!Number.isNaN(bricksEmissions) && !Number.isNaN(mortarEmissions) && !Number.isNaN(vehicleBaseEmissions))) {
-        let totals = parseFloat((bricksEmissions + mortarEmissions + vehicleBaseEmissions / 1000).toFixed(4));
+        let totals = (bricksEmissions + mortarEmissions + vehicleBaseEmissions) / 1000;
         this.$store.commit('updateMaterialsStepEmissions', totals);
         this.$store.commit('updateStepsCompleted', ['materials', true]);
 
-        return totals;
+        return toFixedNotation(totals);
       }
 
       this.$store.commit('updateStepsCompleted', ['materials', false]);
