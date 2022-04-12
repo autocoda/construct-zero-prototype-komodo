@@ -85,8 +85,10 @@ export default defineComponent({
       const emissions = value / 1000;
       this.totalTransportEmissions = emissions;
       this.$store.commit('updateStepsCompleted', ['personnel-compact', true]);
+      this.$store.commit('updateStepsCompleted', ['personnel-detailed', false]);
       this.$store.commit('updatePersonnelStepEmissions', emissions);
     },
+
     getInformationCardData: function ()  {
       this.infoBlockIcon = require('@/assets/images/calculator/steps/person.svg');
       this.infoBlockTitle = 'Personnel user for works';

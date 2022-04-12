@@ -68,6 +68,7 @@ import {defineComponent} from 'vue'
 import StepInformationCard from "@/components/card/StepInformationCard.vue";
 import PersonnelEmissions from "@/components/section/PersonnelEmissions";
 import {get} from "axios";
+import {toFixedNotation} from "@/imports/util/toFixedNotation";
 
 export default defineComponent({
   name: 'PersonnelDetailedStep',
@@ -146,6 +147,7 @@ export default defineComponent({
           this.$store.commit('updatePersonnelRowEmissions', [index, rowTransportModeEmissions]);
           this.$store.commit('updatePersonnelRowDataCompletion', [index, true]);
           this.$store.commit('updateStepsCompleted', ['personnel-detailed', true]);
+          this.$store.commit('updateStepsCompleted', ['personnel-compact', false]);
 
           personnelTransportMethodEmissions += this.getTransportMethodEmissions(vehicleCount, transportModeEmissions);
           totalTransportEmissions += this.getTotalVehicleEmissions(vehicleCount, transportModeEmissions, transportDistance);
@@ -160,8 +162,8 @@ export default defineComponent({
         this.$store.commit('updateStepsCompleted', ['personnel-detailed', false]);
       }
 
-      this.personnelTransportEmissions = personnelTransportMethodEmissions.toFixed(6);
-      this.personnelTotalTransportEmissions = totalTransportEmissions.toFixed(6);
+      this.personnelTransportEmissions = toFixedNotation(personnelTransportMethodEmissions);
+      this.personnelTotalTransportEmissions = toFixedNotation(totalTransportEmissions);
 
       this.$store.commit('updatePersonnelStepEmissions', totalTransportEmissions);
     },
