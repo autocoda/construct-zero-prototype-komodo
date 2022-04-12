@@ -62,6 +62,15 @@ export default defineComponent({
     },
   },
   methods: {
+    resetDetailedData: function () {
+      const stepsState = this.$store.getters.getStepsCompleted;
+      const personnelData = this.personnel;
+    
+      let hasDetailedData = (personnelData.length > 1);
+      if (hasDetailedData || stepsState['personnel-details'] === true) {
+        this.$store.dispatch('resetPersonnelState');
+      }
+    },
     updatePersonnelData: function (event) {
       let options = event.target.options;
 
@@ -107,6 +116,9 @@ export default defineComponent({
   mounted() {
     this.getInformationCardData();
     this.getTransportModeTypeData();
+  },
+  created() {
+    this.resetDetailedData();
   }
 })
 </script>
