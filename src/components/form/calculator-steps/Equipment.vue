@@ -116,9 +116,11 @@ export default defineComponent({
     },
     getItemEmissions: function (emissionsByPowerType, emissionByTransportMode, itemCount, transportDistance) {
       if (emissionsByPowerType && emissionByTransportMode && itemCount && transportDistance) {
-        const vehicleEmissions = (emissionByTransportMode * transportDistance) / 0.62137;
+        const transportDistanceInKm = transportDistance * 1.6;
+        const vehicleEmissions = (transportDistanceInKm * emissionByTransportMode * itemCount);
         const equipmentEmission = emissionsByPowerType * itemCount;
-        return (vehicleEmissions + equipmentEmission) / 1000;
+
+        return (vehicleEmissions + equipmentEmission);
       }
 
       return 0;
@@ -151,7 +153,7 @@ export default defineComponent({
         this.$store.commit('updateStepsCompleted', ['equipment', false]);
       }
 
-      this.$store.commit('updateEquipmentStepEmissions', totalEquipmentEmissions);
+      this.$store.commit('updateEquipmentStepEmissions', (totalEquipmentEmissions / 1000));
     },
     getInformationCardData: function () {
       this.infoBlockIcon = require('@/assets/images/calculator/steps/wrench.svg');

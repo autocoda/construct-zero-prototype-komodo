@@ -77,6 +77,18 @@ const store = createStore({
     resetStoreState(state) {
       Object.assign(state, initialState())
     },
+    resetPersonnelState(state) {
+      state.personnel = [
+        {
+          'vehicleCount': null,
+          'transportMode': null,
+          'transportModeEmissions': null,
+          'transportDistance': null,
+          "emissions": null,
+          "completed": false
+        }
+      ]
+    },
     updateStepsCompleted(state, payload) {
       const [index, value] = payload;
       const stepKey: keyof ICompletedSteps = index;
@@ -145,6 +157,9 @@ const store = createStore({
   actions: {
     resetState({ commit }) {
       commit('resetStoreState')
+    },
+    resetPersonnelState({ commit }) {
+      commit('resetPersonnelState')
     },
   }
 })
