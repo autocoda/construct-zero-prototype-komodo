@@ -21,11 +21,17 @@
           <div class="col-6">
             <div class="row">
               <div class="col-6">Bricks:</div>
-              <div class="fw-bold col-6 text-end">{{ materialsEmissions.bricksEmissions.toFixed(1) }} kg</div>
+              <div class="fw-bold col-6 text-end">
+                {{ typeof materialsEmissions.bricksEmissions === 'number' ? materialsEmissions.bricksEmissions.toFixed(1) : '--' }} kg
+              </div>
               <div class="col-6">Mortar:</div>
-              <div class="fw-bold col-6 text-end">{{ materialsEmissions.mortarEmissions.toFixed(1) }} kg</div>
+              <div class="fw-bold col-6 text-end">
+                {{ typeof materialsEmissions.mortarEmissions === 'number' ? materialsEmissions.mortarEmissions.toFixed(1) : '--' }} kg
+              </div>
               <div class="col-6">Vehicles:</div>
-              <div class="fw-bold col-6 text-end">{{ materialsEmissions.vehicleEmissions.toFixed(1) }} kg</div>
+              <div class="fw-bold col-6 text-end">
+                {{ typeof materialsEmissions.vehicleEmissions === 'number' ? materialsEmissions.vehicleEmissions.toFixed(1) : '--' }} kg
+              </div>
             </div>
           </div>
           <div class="col-6">
@@ -50,7 +56,9 @@
               <div class="col-12" v-if="item.completed === true">
                 <div class="row">
                   <div class="col-6">{{ item.equipmentName }}</div>
-                  <div class="fw-bold col-6 text-end">{{ item.emissions.toFixed(6) }} kg</div>
+                  <div class="fw-bold col-6 text-end" v-if="typeof item.emissions === 'number'">
+                    {{ toFixedDecimalNotation(item.emissions) }} kg
+                  </div>
                 </div>
               </div>
             </div>
@@ -74,10 +82,12 @@
           </div>
           <div class="col-6">
             <div class="row" v-for="(item, index) in personnelDetailedEmissions" :key="index">
-              <div class="col-12" v-if="item.completed">
+              <div class="col-12" v-if="item.completed === true">
                 <div class="row">
                   <div class="col-6">Transport:</div>
-                  <div class="fw-bold col-6 text-end">{{ item.emissions }} kg</div>
+                  <div class="fw-bold col-6 text-end" v-if="typeof item.emissions === 'number'">
+                    {{ measureUnitConvert(item.emissions) }} kg
+                  </div>
                 </div>
               </div>
             </div>
@@ -136,34 +146,64 @@ export default defineComponent({
       return this.$store.getters.getMaterials;
     },
     materialsStepEmissions: function () {
-      return toFixedNotation(this.$store.getters.getMaterialsStepEmissions);
+      if (typeof this.$store.getters.getMaterialsStepEmissions === "number") {
+        return toFixedNotation(this.$store.getters.getMaterialsStepEmissions);
+      }
+
+      return this.$store.getters.getMaterialsStepEmissions;
     },
     equipmentDetailedEmissions: function () {
       return this.$store.getters.getEquipment;
     },
     equipmentStepEmissions: function () {
-      return toFixedNotation(this.$store.getters.getEquipmentStepEmissions);
+      if (typeof this.$store.getters.getEquipmentStepEmissions === "number") {
+        return toFixedNotation(this.$store.getters.getEquipmentStepEmissions);
+      }
+
+      return this.$store.getters.getEquipmentStepEmissions;
     },
     personnelDetailedEmissions: function () {
       return this.$store.getters.getPersonnel;
     },
     personnelStepEmissions: function () {
-      return toFixedNotation(this.$store.getters.getPersonnelStepEmissions);
+      if (typeof this.$store.getters.getPersonnelStepEmissions === "number") {
+        return toFixedNotation(this.$store.getters.getPersonnelStepEmissions);
+      }
+
+      return this.$store.getters.getPersonnelStepEmissions;
     },
     summaryStepTotals: function () {
       if (
         typeof this.$store.getters.getMaterialsStepEmissions === "number"
-        && typeof this.$store.getters.getEquipmentStepEmissions  === "number"
-        && typeof this.$store.getters.getPersonnelStepEmissions  === "number"
+        && typeof this.$store.getters.getEquipmentStepEmissions === "number"
+        && typeof this.$store.getters.getPersonnelStepEmissions === "number"
       ) {
         this.$store.commit('updateStepsCompleted', ['summary', true]);
-        return toFixedNotation(this.$store.getters.getMaterialsStepEmissions + this.$store.getters.getEquipmentStepEmissions + this.$store.getters.getPersonnelStepEmissions);
+        let stepTotal = (
+          this.$store.getters.getMaterialsStepEmissions
+          + this.$store.getters.getEquipmentStepEmissions
+          + this.$store.getters.getPersonnelStepEmissions
+        );
+
+        return toFixedNotation(stepTotal);
       }
 
       return '--';
     },
   },
   methods: {
+    toFixedDecimalNotation: function (value) {
+      return toFixedNotation(value);
+    },
+    measureUnitConvert: function (value) {
+      const stepsState = this.$store.getters.getStepsCompleted;
+
+      if (stepsState['personnel-compact'] === true) {
+        return value
+      }
+
+      return toFixedNotation(value * 1000);
+    },
     resetApplicationState: function () {
       this.$store.dispatch('resetState');
       this.$router.push({name: 'home'});
