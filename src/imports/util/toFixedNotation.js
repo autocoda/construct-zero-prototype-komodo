@@ -1,17 +1,23 @@
-export const toFixedNotation = (value, modifier = 1000) => {
+export const toFixedNotation = (value, modifier = 1000, operation = 'multiply') => {
 
-  if (typeof value !== "number") {
+  if (typeof value !== "number" || typeof modifier !== "number") {
     return '--';
   }
-  let tonnesTotalToKg = value * modifier
 
-  if (tonnesTotalToKg <= 0.1 ) {
+  let totals;
+  if (operation === 'multiply') {
+    totals = value * modifier
+  } else if (operation === 'division') {
+    totals = value / modifier
+  }
+
+  if (totals <= 0.1) {
     return value.toFixed(6)
-  } else if (tonnesTotalToKg <= 1 ) {
+  } else if (totals <= 1) {
     return value.toFixed(4)
-  } else if (tonnesTotalToKg <= 10) {
+  } else if (totals <= 10) {
     return value.toFixed(3)
-  } else if (tonnesTotalToKg <= 100) {
+  } else if (totals <= 100) {
     return value.toFixed(2)
   } else {
     return value.toFixed(1)

@@ -57,7 +57,7 @@
                 <div class="row">
                   <div class="col-6">{{ item.equipmentName }}</div>
                   <div class="fw-bold col-6 text-end" v-if="typeof item.emissions === 'number'">
-                    {{ toFixedDecimalNotation(item.emissions) }} kg
+                    {{ toFixedDecimalNotation(item.emissions * 1000) }} kg
                   </div>
                 </div>
               </div>
@@ -157,7 +157,7 @@ export default defineComponent({
     },
     equipmentStepEmissions: function () {
       if (typeof this.$store.getters.getEquipmentStepEmissions === "number") {
-        return toFixedNotation(this.$store.getters.getEquipmentStepEmissions);
+        return toFixedNotation(this.$store.getters.getEquipmentStepEmissions, 1000, 'divide');
       }
 
       return this.$store.getters.getEquipmentStepEmissions;
