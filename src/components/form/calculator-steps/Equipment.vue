@@ -145,14 +145,11 @@ export default defineComponent({
       let excludesTransportEmissions = this.hasTransportExcluded(item.powerType);
 
       //-- Item requires transport data
-      if (!excludesTransportEmissions && item.transportDistance === '') {
-        this.$store.commit('updateEquipmentDataCompletion', [index, false]);
-
-        return 0;
-      }
-
       //-- Item requires count data
-      if (excludesTransportEmissions && item.itemCount === '') {
+      //-- Item values are incomplete - powered by required transport data, this marks items as unusable for emission calculation
+      if (!excludesTransportEmissions && item.transportDistance === ''
+        || !excludesTransportEmissions && !item.transportDistance && !item.transportModeEmissions
+        || item.itemCount === '') {
         this.$store.commit('updateEquipmentDataCompletion', [index, false]);
 
         return 0;
@@ -161,13 +158,6 @@ export default defineComponent({
       //-- Item does not require transport data
       if (excludesTransportEmissions && item.itemCount && item.powerTypeEmissions) {
         return item.itemCount * item.powerTypeEmissions.toPrecision(12);
-      }
-
-      //-- Incomplete - powered by required transport data, thi marks items as unusable for emission calculation
-      if (!excludesTransportEmissions && !item.transportDistance && !item.transportModeEmissions) {
-        this.$store.commit('updateEquipmentDataCompletion', [index, false]);
-
-        return 0;
       }
 
       //-- Item has all fields filled
