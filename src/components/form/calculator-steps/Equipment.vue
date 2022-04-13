@@ -151,6 +151,13 @@ export default defineComponent({
         return 0;
       }
 
+      //-- Item requires count data
+      if (excludesTransportEmissions && item.itemCount === '') {
+        this.$store.commit('updateEquipmentDataCompletion', [index, false]);
+
+        return 0;
+      }
+
       //-- Item does not require transport data
       if (excludesTransportEmissions && item.itemCount && item.powerTypeEmissions) {
         return item.itemCount * item.powerTypeEmissions.toPrecision(12);
