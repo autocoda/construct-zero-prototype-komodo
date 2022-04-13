@@ -25,24 +25,40 @@
           <input class="form-control" type="text" v-model="item.equipmentName" @input="commitValueChange(index, item)">
         </td>
         <td>
-          <select class="form-select" v-model="item.poweredBy" @change="getEquipmentUnitValue(index, $event)">
+          <select class="form-select" v-model="item.poweredBy" @change="getEquipmentUnitValue(index, item, $event)">
             <option selected disabled="disabled">Please select fuel type</option>
-            <option v-for="(key) in poweredBy" :key="key.fuelType" :value="key.tco2e" :name="key.inputUnit">
+            <option v-for="(key) in poweredBy" :key="key.fuelType" :value="key.tco2e" :name="key.inputUnit" :data-power-type="key.fuelTypeId">
               {{ key.fuelType }}
             </option>
           </select>
         </td>
         <td class="readonly-column">
-          <input class="form-control readonly" type="text" v-model="item.unitType" disabled>
+          <input class="form-control readonly" type="text" v-model="item.measureUnitType" disabled>
         </td>
         <td>
-          <input class="form-control input-number" type="number" v-model="item.totalValue" @input="commitValueChange(index, item)">
+          <input class="form-control input-number" type="number" v-model="item.itemCount" @input="commitValueChange(index, item)">
         </td>
         <td>
-          <input class="form-control input-number" type="number" v-model="item.transportDistance" @input="commitValueChange(index, item)">
+          <input
+            :class="[
+              'form-control input-number',
+              {'invisible' : hasTransportExcluded(item.powerType) }
+            ]"
+            type="number"
+            v-model="item.transportDistance"
+            @input="commitValueChange(index, item)"
+          >
         </td>
         <td>
-          <select id="transport-mode" class="form-select" v-model="item.transportMode" @change="commitValueChange(index, item)">
+          <select
+            id="transport-mode"
+            :class="[
+              'form-select',
+              {'invisible' : hasTransportExcluded(item.powerType) }
+            ]"
+            v-model="item.transportModeEmissions"
+            @click="commitValueChange(index, item)"
+          >
             <option selected disabled="disabled">Please select transport mode</option>
             <option v-for="(value, key) in transportMethod" :key="key" :value="value">{{ key }}</option>
           </select>
@@ -81,6 +97,7 @@ export default defineComponent({
   components: {StepInformationCard},
   data() {
     return {
+      powerTypesWithTransportExcluded: ['gas', 'water', 'grid-electricity'],
       poweredBy: '',
       transportMethod: '',
       infoBlockContent: '',
@@ -103,22 +120,51 @@ export default defineComponent({
     },
   },
   methods: {
+    hasTransportExcluded: function (powerType) {
+      return this.powerTypesWithTransportExcluded.includes(powerType);
+    },
     commitValueChange: function (index, payload) {
       this.$store.commit('updateSingleEquipmentByKey', [index, payload]);
       this.getEquipmentEmissionsData();
     },
-    getEquipmentUnitValue: function (index, event) {
+    getEquipmentUnitValue: function (index, item, event) {
       let options = event.target.options;
       if (options.selectedIndex > -1) {
         let name = options[options.selectedIndex].getAttribute('name');
-        this.$store.commit('updateEquipmentUnitName', [index, name]);
+        let itemEmissions = options[options.selectedIndex].getAttribute('value');
+        let powerType = options[options.selectedIndex].getAttribute('data-power-type');
+
+        this.$store.commit('updateEquipmentPowerUnitName', [index, name]);
+        this.$store.commit('updateEquipmentPowerType', [index, powerType]);
+        this.$store.commit('updateEquipmentPowerTypeEmissions', [index, Number(itemEmissions)]);
+
+        this.commitValueChange(index, item);
       }
     },
-    getItemEmissions: function (emissionsByPowerType, emissionByTransportMode, itemCount, transportDistance) {
-      if (emissionsByPowerType && emissionByTransportMode && itemCount && transportDistance) {
-        const transportDistanceInKm = transportDistance * 1.609344;
-        const vehicleEmissions = (transportDistanceInKm.toPrecision(12) * emissionByTransportMode.toPrecision(12) * itemCount);
-        const equipmentEmission = itemCount * emissionsByPowerType.toPrecision(12);
+    getItemEmissions: function (index, item) {
+      let excludesTransportEmissions = this.hasTransportExcluded(item.powerType);
+
+      //-- Item requires transport data
+      //-- Item requires count data
+      //-- Item values are incomplete - powered by required transport data, this marks items as unusable for emission calculation
+      if (!excludesTransportEmissions && item.transportDistance === ''
+        || !excludesTransportEmissions && !item.transportDistance && !item.transportModeEmissions
+        || item.itemCount === '') {
+        this.$store.commit('updateEquipmentDataCompletion', [index, false]);
+
+        return 0;
+      }
+
+      //-- Item does not require transport data
+      if (excludesTransportEmissions && item.itemCount && item.powerTypeEmissions) {
+        return item.itemCount * item.powerTypeEmissions.toPrecision(12);
+      }
+
+      //-- Item has all fields filled
+      if (!excludesTransportEmissions && item.powerTypeEmissions && item.itemCount && item.transportDistance && item.transportModeEmissions) {
+        const transportDistanceInKm = item.transportDistance * 1.609344;
+        const vehicleEmissions = (transportDistanceInKm.toPrecision(12) * item.transportModeEmissions.toPrecision(12) * item.itemCount);
+        const equipmentEmission = item.itemCount * item.powerTypeEmissions.toPrecision(12);
 
         return (vehicleEmissions + equipmentEmission);
       }
@@ -129,12 +175,7 @@ export default defineComponent({
       let totalEquipmentEmissions = 0;
 
       this.equipment.forEach((item, index) => {
-        let itemEmissions = this.getItemEmissions(
-          item.poweredBy,
-          item.transportMode,
-          item.totalValue,
-          item.transportDistance
-        );
+        let itemEmissions = this.getItemEmissions(index, item);
 
         if (itemEmissions !== 0) {
           this.$store.commit('updateEquipmentEmissions', [index, itemEmissions]);
@@ -142,7 +183,7 @@ export default defineComponent({
           this.$store.commit('updateStepsCompleted', ['equipment', true]);
         }
 
-        if (item.commit === false) {
+        if (item.completed === false) {
           this.$store.commit('updateStepsCompleted', ['equipment', false]);
         }
 
@@ -181,11 +222,12 @@ export default defineComponent({
     addRowItem: function () {
       this.$store.commit('updateEquipment', {
         "equipmentName": null,
-        "poweredBy": null,
-        "unitType": null,
-        "totalValue": null,
+        "powerTypeEmissions": null,
+        "powerType": null,
+        "measureUnitType": null,
+        "itemCount": null,
         "transportDistance": null,
-        "transportMode": null,
+        "transportModeEmissions": null,
         "emissions": null,
         "completed": false
       });
