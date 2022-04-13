@@ -16,11 +16,12 @@ const initialState = () => ({
     equipment: [
       {
         "equipmentName": null,
-        "poweredBy": null,
-        "unitType": null,
-        "totalValue": null,
+        "powerTypeEmissions": null,
+        "powerType": null,
+        "measureUnitType": null,
+        "itemCount": null,
         "transportDistance": null,
-        "transportMode": null,
+        "transportModeEmissions": null,
         "emissions": null,
         "completed": false
       }
@@ -108,17 +109,25 @@ const store = createStore({
     updateEquipment(state, payload) {
       state.equipment.push(payload);
     },
-    updateEquipmentUnitName(state, payload) {
+    updateEquipmentPowerType(state, payload) {
       const [index, name] = payload;
-      state.equipment[index]['unitType'] = name;
+      state.equipment[index]['powerType'] = name;
     },
-    updateEquipmentDataCompletion(state, payload) {
-      const [index, value] = payload;
-      state.equipment[index]['completed'] = value;
+    updateEquipmentPowerTypeEmissions(state, payload) {
+      const [index, name] = payload;
+      state.equipment[index]['powerTypeEmissions'] = name;
+    },
+    updateEquipmentPowerUnitName(state, payload) {
+      const [index, name] = payload;
+      state.equipment[index]['measureUnitType'] = name;
     },
     updateEquipmentEmissions(state, payload) {
       const [index, value] = payload;
       state.equipment[index]['emissions'] = value;
+    },
+    updateEquipmentDataCompletion(state, payload) {
+      const [index, value] = payload;
+      state.equipment[index]['completed'] = value;
     },
     updatedCompletedSteps(state, payload) {
       state.materialsStepEmissions = payload;
